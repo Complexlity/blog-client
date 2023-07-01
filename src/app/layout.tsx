@@ -38,10 +38,10 @@ export default async function RootLayout({
 
 const user = await getUser()
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <Providers user={user}>
-      <body className={inter.className}>{children}</body>
+        <body className={inter.className}>{children}</body>
       </Providers>
     </html>
-  )
+  );
 }

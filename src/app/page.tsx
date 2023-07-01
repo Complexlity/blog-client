@@ -20,7 +20,7 @@ export default async function Home() {
         return (
           <div key={post._id}>
             {post.title}
-            <LikeButton id={post._id} />
+            <LikeButton id={post._id} likes={post.likes} likeCount={post.likeCount} />
           </div>
         );
       })}
