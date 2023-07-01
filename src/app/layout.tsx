@@ -3,6 +3,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { User } from '@/lib/types'
 import {headers} from 'next/headers'
+import { Toaster } from '@/Components/ui/toaster'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -41,6 +42,7 @@ const user = await getUser()
     <html lang="en" suppressHydrationWarning={true}>
       <Providers user={user}>
         <body className={inter.className}>{children}</body>
+        <Toaster />
       </Providers>
     </html>
   );

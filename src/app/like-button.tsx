@@ -1,14 +1,15 @@
 "use client";
 
 import { Heart } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useUserContext } from "@/Contexts/SessionProvider";
-import useSession from "@/hooks/useSession";
+import { useState } from "react";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/Components/ui/hover-card";
+import useSession from "@/hooks/useSession";
+import axios from 'axios'
+import {useQuery} from 'react-query'
 
 
 const LikeButton = ({ id, likes, likeCount }: { id: string, likes: string[], likeCount: number }) => {
@@ -23,7 +24,7 @@ const LikeButton = ({ id, likes, likeCount }: { id: string, likes: string[], lik
       method: "PUT",
       credentials: "include"
     })
-    
+
   }
 
   return (
