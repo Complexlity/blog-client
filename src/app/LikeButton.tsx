@@ -8,23 +8,29 @@ import {
   HoverCardTrigger,
 } from "@/Components/ui/hover-card";
 import useSession from "@/hooks/useSession";
-import axios, { AxiosError } from 'axios'
-import {useMutation, useQuery} from 'react-query'
+import axios from 'axios'
+import {useMutation} from 'react-query'
 import { toast } from "@/Components/ui/use-toast";
 
+interface Props {
+  id: string;
+  likes: string[];
+  likeCount: number;
+  type: 'posts' | 'comments'
+}
 
-const LikeButton = ({ id, likes, likeCount }: { id: string, likes: string[], likeCount: number }) => {
+
+const LikeButton = ({ id, likes, likeCount, type }: Props) => {
   const user = useSession()
   const [likedByMe, setLikedByMe] = useState<boolean>(user ? likes.includes(user?._id) : false);
   const [likeNumber, setLikeNumber] = useState(likeCount)
 
   const {mutate: likePost, isLoading: isLiking} = useMutation({
     mutationFn: async () => {
-        console.log({ likedByMe, likeNumber });
       setLikeNumber(likedByMe ? likeNumber - 1 : likeNumber + 1)
       setLikedByMe(!likedByMe)
          await axios.put(
-           `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts/${id}`,
+           `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/${type}/${id}`,
            null,
            {
              withCredentials: true,
@@ -48,7 +54,8 @@ const LikeButton = ({ id, likes, likeCount }: { id: string, likes: string[], lik
   return (
       <div className="flex gap-2 items-center">
       {user ? <HeartWithUser isLiking={isLiking} likePost={likePost} likedByMe={likedByMe} />: <HeartWithoutUser />}
-    <p>{likeNumber}</p>
+      <p>{likeNumber}</p>
+      <p>{user? user.name : null}</p>
       </div>
   )
 };
@@ -57,7 +64,7 @@ function HeartWithUser({ isLiking, likePost, likedByMe }: { likePost: () => void
   if (isLiking) likePost = () => {
     return
   }
-  return <Heart className={"hover:fill-rose-400"} color={"black"} fill={ likedByMe ? "red" : 'none' } onClick={likePost}/>
+  return <Heart className={"hover:text-rose-600 cursor-pointer"} fill={ likedByMe ? "red" : 'none' } onClick={likePost}/>
 }
 
 function HeartWithoutUser() {
