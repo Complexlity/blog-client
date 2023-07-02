@@ -52,21 +52,44 @@ const SinglePost = ({ post }: { post: Post }) => {
 
   return (
     <div key={post._id}>
-      {post.title}
-      <LikeButton id={post._id} likes={post.likes} likeCount={post.likeCount} type={'posts'} />
-      {comments.map((comment) => {
+      <p>{user ? user.name : null}</p>
+      <p>
+        {post.title} - by <span className="italic text-sm text-green-600">{post.author.name}</span>
+      </p>
 
+      <LikeButton
+        id={post._id}
+        likes={post.likes}
+        likeCount={post.likeCount}
+        type={"posts"}
+      />
+      {comments.map((comment) => {
         return (
           <>
             <p>
               {comment.comment} - {comment.user.name}
             </p>
-            <LikeButton id={comment._id} likes={comment.likes} likeCount={comment.likeCount}  type="comments"/>
+            <LikeButton
+              id={comment._id}
+              likes={comment.likes}
+              likeCount={comment.likeCount}
+              type="comments"
+            />
           </>
         );
       })}
-      <form onSubmit={handleSubmit} className="flex w-full max-w-sm items-center space-x-2">
-        <Input type="text" placeholder="comment here" onChange={(e) => { setComment(e.target.value)}} value={comment}/>
+      <form
+        onSubmit={handleSubmit}
+        className="flex w-full max-w-sm items-center space-x-2"
+      >
+        <Input
+          type="text"
+          placeholder="comment here"
+          onChange={(e) => {
+            setComment(e.target.value);
+          }}
+          value={comment}
+        />
         <Button type="submit">Comment</Button>
       </form>
     </div>

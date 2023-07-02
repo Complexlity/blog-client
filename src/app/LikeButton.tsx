@@ -55,7 +55,6 @@ const LikeButton = ({ id, likes, likeCount, type }: Props) => {
       <div className="flex gap-2 items-center">
       {user ? <HeartWithUser isLiking={isLiking} likePost={likePost} likedByMe={likedByMe} />: <HeartWithoutUser />}
       <p>{likeNumber}</p>
-      <p>{user? user.name : null}</p>
       </div>
   )
 };
