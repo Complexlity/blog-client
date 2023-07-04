@@ -23,7 +23,7 @@ export async function getUser() {
 
 export async function getPosts()  {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts`,
+    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts?published=true`,
     {
       cache: "no-store",
     }
