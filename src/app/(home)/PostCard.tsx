@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import defaultImg from '../../public/default.svg'
+import defaultImg from '../../../public/default.svg'
 import { Badge } from "@/components/ui/badge";
 import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/button';
