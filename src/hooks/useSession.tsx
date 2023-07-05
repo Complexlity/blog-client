@@ -1,31 +1,33 @@
-'use client'
+"use client";
 
-import { useUserContext } from "@/Contexts/SessionProvider";
+import { useUserContext } from "@/contexts/SessionProvider";
 import { User } from "@/lib/types";
 import { useEffect } from "react";
 
 const useSession = () => {
-  const store = useUserContext()
+  const store = useUserContext();
   async function refetchUser() {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/me`, {
-        credentials: 'include'
-      })
-      const user = await response.json() as unknown as User
-      if (!response.ok) throw new Error('user not found')
-      store.setCurrentUser(user)
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/me`,
+        {
+          credentials: "include",
+        }
+      );
+      const user = (await response.json()) as unknown as User;
+      if (!response.ok) throw new Error("user not found");
+      store.setCurrentUser(user);
     } catch (error) {
-      store.setCurrentUser(null)
+      store.setCurrentUser(null);
     }
   }
 
   useEffect(() => {
     if (!store.user) {
-      refetchUser()
+      refetchUser();
     }
-  }, [])
-  return store.user
-}
+  }, []);
+  return store.user;
+};
 
-
-export default useSession ;
+export default useSession;
