@@ -1,15 +1,16 @@
 import { getPosts } from "@/lib/serverFunctions";
 import SinglePost from "./SinglePost";
-import Header from "@/components/Header";
+import Header from "@/app/Header";
+import Posts from "./Posts";
+import WriteForUs from "./WriteForUs";
 
 export default async function Home() {
-  // const posts = await getPosts();
-  // if (posts === null) return <p>Something Went Wrong Please</p>;
-  // if (posts.length === 0) return <p> No Posts In The Database </p>;
   return (
     <>
       <Header />
-      {/* <Posts/> */}
+      <Posts />
+      <WriteForUs />
+      {/* <Footer /> */}
       {/* {posts.map((post) => {
         return <SinglePost post={post} />;
       })} */}
