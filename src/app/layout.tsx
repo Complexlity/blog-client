@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { Toaster } from "@/components/ui/toaster";
-import { getUser } from "@/lib/serverFunctions";
+// import { getUser } from "@/lib/serverFunctions";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +17,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getUser();
+  // const user = await getUser();
+  const user = null
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <Providers user={user}>
