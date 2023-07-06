@@ -1,0 +1,890 @@
+diff --git a/package-lock.json b/package-lock.json
+index 301f585..e4a02ae 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -8,7 +8,6 @@
+       "name": "client",
+       "version": "0.1.0",
+       "dependencies": {
+-        "@radix-ui/react-dropdown-menu": "^2.0.5",
+         "@radix-ui/react-hover-card": "^1.0.6",
+         "@radix-ui/react-navigation-menu": "^1.1.3",
+         "@radix-ui/react-progress": "^1.0.3",
+@@ -558,77 +557,6 @@
+         }
+       }
+     },
+-    "node_modules/@radix-ui/react-dropdown-menu": {
+-      "version": "2.0.5",
+-      "resolved": "https://registry.npmjs.org/@radix-ui/react-dropdown-menu/-/react-dropdown-menu-2.0.5.tgz",
+-      "integrity": "sha512-xdOrZzOTocqqkCkYo8yRPCib5OkTkqN7lqNCdxwPOdE466DOaNl4N8PkUIlsXthQvW5Wwkd+aEmWpfWlBoDPEw==",
+-      "dependencies": {
+-        "@babel/runtime": "^7.13.10",
+-        "@radix-ui/primitive": "1.0.1",
+-        "@radix-ui/react-compose-refs": "1.0.1",
+-        "@radix-ui/react-context": "1.0.1",
+-        "@radix-ui/react-id": "1.0.1",
+-        "@radix-ui/react-menu": "2.0.5",
+-        "@radix-ui/react-primitive": "1.0.3",
+-        "@radix-ui/react-use-controllable-state": "1.0.1"
+-      },
+-      "peerDependencies": {
+-        "@types/react": "*",
+-        "@types/react-dom": "*",
+-        "react": "^16.8 || ^17.0 || ^18.0",
+-        "react-dom": "^16.8 || ^17.0 || ^18.0"
+-      },
+-      "peerDependenciesMeta": {
+-        "@types/react": {
+-          "optional": true
+-        },
+-        "@types/react-dom": {
+-          "optional": true
+-        }
+-      }
+-    },
+-    "node_modules/@radix-ui/react-focus-guards": {
+-      "version": "1.0.1",
+-      "resolved": "https://registry.npmjs.org/@radix-ui/react-focus-guards/-/react-focus-guards-1.0.1.tgz",
+-      "integrity": "sha512-Rect2dWbQ8waGzhMavsIbmSVCgYxkXLxxR3ZvCX79JOglzdEy4JXMb98lq4hPxUbLr77nP0UOGf4rcMU+s1pUA==",
+-      "dependencies": {
+-        "@babel/runtime": "^7.13.10"
+-      },
+-      "peerDependencies": {
+-        "@types/react": "*",
+-        "react": "^16.8 || ^17.0 || ^18.0"
+-      },
+-      "peerDependenciesMeta": {
+-        "@types/react": {
+-          "optional": true
+-        }
+-      }
+-    },
+-    "node_modules/@radix-ui/react-focus-scope": {
+-      "version": "1.0.3",
+-      "resolved": "https://registry.npmjs.org/@radix-ui/react-focus-scope/-/react-focus-scope-1.0.3.tgz",
+-      "integrity": "sha512-upXdPfqI4islj2CslyfUBNlaJCPybbqRHAi1KER7Isel9Q2AtSJ0zRBZv8mWQiFXD2nyAJ4BhC3yXgZ6kMBSrQ==",
+-      "dependencies": {
+-        "@babel/runtime": "^7.13.10",
+-        "@radix-ui/react-compose-refs": "1.0.1",
+-        "@radix-ui/react-primitive": "1.0.3",
+-        "@radix-ui/react-use-callback-ref": "1.0.1"
+-      },
+-      "peerDependencies": {
+-        "@types/react": "*",
+-        "@types/react-dom": "*",
+-        "react": "^16.8 || ^17.0 || ^18.0",
+-        "react-dom": "^16.8 || ^17.0 || ^18.0"
+-      },
+-      "peerDependenciesMeta": {
+-        "@types/react": {
+-          "optional": true
+-        },
+-        "@types/react-dom": {
+-          "optional": true
+-        }
+-      }
+-    },
+     "node_modules/@radix-ui/react-hover-card": {
+       "version": "1.0.6",
+       "resolved": "https://registry.npmjs.org/@radix-ui/react-hover-card/-/react-hover-card-1.0.6.tgz",
+@@ -678,46 +606,6 @@
+         }
+       }
+     },
+-    "node_modules/@radix-ui/react-menu": {
+-      "version": "2.0.5",
+-      "resolved": "https://registry.npmjs.org/@radix-ui/react-menu/-/react-menu-2.0.5.tgz",
+-      "integrity": "sha512-Gw4f9pwdH+w5w+49k0gLjN0PfRDHvxmAgG16AbyJZ7zhwZ6PBHKtWohvnSwfusfnK3L68dpBREHpVkj8wEM7ZA==",
+-      "dependencies": {
+-        "@babel/runtime": "^7.13.10",
+-        "@radix-ui/primitive": "1.0.1",
+-        "@radix-ui/react-collection": "1.0.3",
+-        "@radix-ui/react-compose-refs": "1.0.1",
+-        "@radix-ui/react-context": "1.0.1",
+-        "@radix-ui/react-direction": "1.0.1",
+-        "@radix-ui/react-dismissable-layer": "1.0.4",
+-        "@radix-ui/react-focus-guards": "1.0.1",
+-        "@radix-ui/react-focus-scope": "1.0.3",
+-        "@radix-ui/react-id": "1.0.1",
+-        "@radix-ui/react-popper": "1.1.2",
+-        "@radix-ui/react-portal": "1.0.3",
+-        "@radix-ui/react-presence": "1.0.1",
+-        "@radix-ui/react-primitive": "1.0.3",
+-        "@radix-ui/react-roving-focus": "1.0.4",
+-        "@radix-ui/react-slot": "1.0.2",
+-        "@radix-ui/react-use-callback-ref": "1.0.1",
+-        "aria-hidden": "^1.1.1",
+-        "react-remove-scroll": "2.5.5"
+-      },
+-      "peerDependencies": {
+-        "@types/react": "*",
+-        "@types/react-dom": "*",
+-        "react": "^16.8 || ^17.0 || ^18.0",
+-        "react-dom": "^16.8 || ^17.0 || ^18.0"
+-      },
+-      "peerDependenciesMeta": {
+-        "@types/react": {
+-          "optional": true
+-        },
+-        "@types/react-dom": {
+-          "optional": true
+-        }
+-      }
+-    },
+     "node_modules/@radix-ui/react-navigation-menu": {
+       "version": "1.1.3",
+       "resolved": "https://registry.npmjs.org/@radix-ui/react-navigation-menu/-/react-navigation-menu-1.1.3.tgz",
+@@ -880,37 +768,6 @@
+         }
+       }
+     },
+-    "node_modules/@radix-ui/react-roving-focus": {
+-      "version": "1.0.4",
+-      "resolved": "https://registry.npmjs.org/@radix-ui/react-roving-focus/-/react-roving-focus-1.0.4.tgz",
+-      "integrity": "sha512-2mUg5Mgcu001VkGy+FfzZyzbmuUWzgWkj3rvv4yu+mLw03+mTzbxZHvfcGyFp2b8EkQeMkpRQ5FiA2Vr2O6TeQ==",
+-      "dependencies": {
+-        "@babel/runtime": "^7.13.10",
+-        "@radix-ui/primitive": "1.0.1",
+-        "@radix-ui/react-collection": "1.0.3",
+-        "@radix-ui/react-compose-refs": "1.0.1",
+-        "@radix-ui/react-context": "1.0.1",
+-        "@radix-ui/react-direction": "1.0.1",
+-        "@radix-ui/react-id": "1.0.1",
+-        "@radix-ui/react-primitive": "1.0.3",
+-        "@radix-ui/react-use-callback-ref": "1.0.1",
+-        "@radix-ui/react-use-controllable-state": "1.0.1"
+-      },
+-      "peerDependencies": {
+-        "@types/react": "*",
+-        "@types/react-dom": "*",
+-        "react": "^16.8 || ^17.0 || ^18.0",
+-        "react-dom": "^16.8 || ^17.0 || ^18.0"
+-      },
+-      "peerDependenciesMeta": {
+-        "@types/react": {
+-          "optional": true
+-        },
+-        "@types/react-dom": {
+-          "optional": true
+-        }
+-      }
+-    },
+     "node_modules/@radix-ui/react-slot": {
+       "version": "1.0.2",
+       "resolved": "https://registry.npmjs.org/@radix-ui/react-slot/-/react-slot-1.0.2.tgz",
+@@ -1375,17 +1232,6 @@
+       "resolved": "https://registry.npmjs.org/argparse/-/argparse-2.0.1.tgz",
+       "integrity": "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="
+     },
+-    "node_modules/aria-hidden": {
+-      "version": "1.2.3",
+-      "resolved": "https://registry.npmjs.org/aria-hidden/-/aria-hidden-1.2.3.tgz",
+-      "integrity": "sha512-xcLxITLe2HYa1cnYnwCjkOO1PqUHQpozB8x9AR0OgWN2woOBi5kSDVxKfd0b7sb1hw5qFeJhXm9H1nu3xSfLeQ==",
+-      "dependencies": {
+-        "tslib": "^2.0.0"
+-      },
+-      "engines": {
+-        "node": ">=10"
+-      }
+-    },
+     "node_modules/aria-query": {
+       "version": "5.3.0",
+       "resolved": "https://registry.npmjs.org/aria-query/-/aria-query-5.3.0.tgz",
+@@ -2015,11 +1861,6 @@
+       "resolved": "https://registry.npmjs.org/detect-node/-/detect-node-2.1.0.tgz",
+       "integrity": "sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g=="
+     },
+-    "node_modules/detect-node-es": {
+-      "version": "1.1.0",
+-      "resolved": "https://registry.npmjs.org/detect-node-es/-/detect-node-es-1.1.0.tgz",
+-      "integrity": "sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ=="
+-    },
+     "node_modules/didyoumean": {
+       "version": "1.2.2",
+       "resolved": "https://registry.npmjs.org/didyoumean/-/didyoumean-1.2.2.tgz",
+@@ -2844,14 +2685,6 @@
+         "url": "https://github.com/sponsors/ljharb"
+       }
+     },
+-    "node_modules/get-nonce": {
+-      "version": "1.0.1",
+-      "resolved": "https://registry.npmjs.org/get-nonce/-/get-nonce-1.0.1.tgz",
+-      "integrity": "sha512-FJhYRoDaiatfEkUK8HKlicmu/3SGFD51q3itKDGoSTysQJBnfOcxU5GxnhE1E6soB76MbT0MBtnKJuXyAx+96Q==",
+-      "engines": {
+-        "node": ">=6"
+-      }
+-    },
+     "node_modules/get-stream": {
+       "version": "6.0.1",
+       "resolved": "https://registry.npmjs.org/get-stream/-/get-stream-6.0.1.tgz",
+@@ -3132,14 +2965,6 @@
+         "node": ">= 0.4"
+       }
+     },
+-    "node_modules/invariant": {
+-      "version": "2.2.4",
+-      "resolved": "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz",
+-      "integrity": "sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==",
+-      "dependencies": {
+-        "loose-envify": "^1.0.0"
+-      }
+-    },
+     "node_modules/is-array-buffer": {
+       "version": "3.0.2",
+       "resolved": "https://registry.npmjs.org/is-array-buffer/-/is-array-buffer-3.0.2.tgz",
+@@ -4357,73 +4182,6 @@
+         }
+       }
+     },
+-    "node_modules/react-remove-scroll": {
+-      "version": "2.5.5",
+-      "resolved": "https://registry.npmjs.org/react-remove-scroll/-/react-remove-scroll-2.5.5.tgz",
+-      "integrity": "sha512-ImKhrzJJsyXJfBZ4bzu8Bwpka14c/fQt0k+cyFp/PBhTfyDnU5hjOtM4AG/0AMyy8oKzOTR0lDgJIM7pYXI0kw==",
+-      "dependencies": {
+-        "react-remove-scroll-bar": "^2.3.3",
+-        "react-style-singleton": "^2.2.1",
+-        "tslib": "^2.1.0",
+-        "use-callback-ref": "^1.3.0",
+-        "use-sidecar": "^1.1.2"
+-      },
+-      "engines": {
+-        "node": ">=10"
+-      },
+-      "peerDependencies": {
+-        "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+-        "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+-      },
+-      "peerDependenciesMeta": {
+-        "@types/react": {
+-          "optional": true
+-        }
+-      }
+-    },
+-    "node_modules/react-remove-scroll-bar": {
+-      "version": "2.3.4",
+-      "resolved": "https://registry.npmjs.org/react-remove-scroll-bar/-/react-remove-scroll-bar-2.3.4.tgz",
+-      "integrity": "sha512-63C4YQBUt0m6ALadE9XV56hV8BgJWDmmTPY758iIJjfQKt2nYwoUrPk0LXRXcB/yIj82T1/Ixfdpdk68LwIB0A==",
+-      "dependencies": {
+-        "react-style-singleton": "^2.2.1",
+-        "tslib": "^2.0.0"
+-      },
+-      "engines": {
+-        "node": ">=10"
+-      },
+-      "peerDependencies": {
+-        "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+-        "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+-      },
+-      "peerDependenciesMeta": {
+-        "@types/react": {
+-          "optional": true
+-        }
+-      }
+-    },
+-    "node_modules/react-style-singleton": {
+-      "version": "2.2.1",
+-      "resolved": "https://registry.npmjs.org/react-style-singleton/-/react-style-singleton-2.2.1.tgz",
+-      "integrity": "sha512-ZWj0fHEMyWkHzKYUr2Bs/4zU6XLmq9HsgBURm7g5pAVfyn49DgUiNgY2d4lXRlYSiCif9YBGpQleewkcqddc7g==",
+-      "dependencies": {
+-        "get-nonce": "^1.0.0",
+-        "invariant": "^2.2.4",
+-        "tslib": "^2.0.0"
+-      },
+-      "engines": {
+-        "node": ">=10"
+-      },
+-      "peerDependencies": {
+-        "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+-        "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+-      },
+-      "peerDependenciesMeta": {
+-        "@types/react": {
+-          "optional": true
+-        }
+-      }
+-    },
+     "node_modules/read-cache": {
+       "version": "1.0.0",
+       "resolved": "https://registry.npmjs.org/read-cache/-/read-cache-1.0.0.tgz",
+@@ -5201,47 +4959,6 @@
+         "punycode": "^2.1.0"
+       }
+     },
+-    "node_modules/use-callback-ref": {
+-      "version": "1.3.0",
+-      "resolved": "https://registry.npmjs.org/use-callback-ref/-/use-callback-ref-1.3.0.tgz",
+-      "integrity": "sha512-3FT9PRuRdbB9HfXhEq35u4oZkvpJ5kuYbpqhCfmiZyReuRgpnhDlbr2ZEnnuS0RrJAPn6l23xjFg9kpDM+Ms7w==",
+-      "dependencies": {
+-        "tslib": "^2.0.0"
+-      },
+-      "engines": {
+-        "node": ">=10"
+-      },
+-      "peerDependencies": {
+-        "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+-        "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+-      },
+-      "peerDependenciesMeta": {
+-        "@types/react": {
+-          "optional": true
+-        }
+-      }
+-    },
+-    "node_modules/use-sidecar": {
+-      "version": "1.1.2",
+-      "resolved": "https://registry.npmjs.org/use-sidecar/-/use-sidecar-1.1.2.tgz",
+-      "integrity": "sha512-epTbsLuzZ7lPClpz2TyryBfztm7m+28DlEv2ZCQ3MDr5ssiwyOwGH/e5F9CkfWjJ1t4clvI58yF822/GUkjjhw==",
+-      "dependencies": {
+-        "detect-node-es": "^1.1.0",
+-        "tslib": "^2.0.0"
+-      },
+-      "engines": {
+-        "node": ">=10"
+-      },
+-      "peerDependencies": {
+-        "@types/react": "^16.9.0 || ^17.0.0 || ^18.0.0",
+-        "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+-      },
+-      "peerDependenciesMeta": {
+-        "@types/react": {
+-          "optional": true
+-        }
+-      }
+-    },
+     "node_modules/util-deprecate": {
+       "version": "1.0.2",
+       "resolved": "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz",
+@@ -5649,40 +5366,6 @@
+         "@radix-ui/react-use-escape-keydown": "1.0.3"
+       }
+     },
+-    "@radix-ui/react-dropdown-menu": {
+-      "version": "2.0.5",
+-      "resolved": "https://registry.npmjs.org/@radix-ui/react-dropdown-menu/-/react-dropdown-menu-2.0.5.tgz",
+-      "integrity": "sha512-xdOrZzOTocqqkCkYo8yRPCib5OkTkqN7lqNCdxwPOdE466DOaNl4N8PkUIlsXthQvW5Wwkd+aEmWpfWlBoDPEw==",
+-      "requires": {
+-        "@babel/runtime": "^7.13.10",
+-        "@radix-ui/primitive": "1.0.1",
+-        "@radix-ui/react-compose-refs": "1.0.1",
+-        "@radix-ui/react-context": "1.0.1",
+-        "@radix-ui/react-id": "1.0.1",
+-        "@radix-ui/react-menu": "2.0.5",
+-        "@radix-ui/react-primitive": "1.0.3",
+-        "@radix-ui/react-use-controllable-state": "1.0.1"
+-      }
+-    },
+-    "@radix-ui/react-focus-guards": {
+-      "version": "1.0.1",
+-      "resolved": "https://registry.npmjs.org/@radix-ui/react-focus-guards/-/react-focus-guards-1.0.1.tgz",
+-      "integrity": "sha512-Rect2dWbQ8waGzhMavsIbmSVCgYxkXLxxR3ZvCX79JOglzdEy4JXMb98lq4hPxUbLr77nP0UOGf4rcMU+s1pUA==",
+-      "requires": {
+-        "@babel/runtime": "^7.13.10"
+-      }
+-    },
+-    "@radix-ui/react-focus-scope": {
+-      "version": "1.0.3",
+-      "resolved": "https://registry.npmjs.org/@radix-ui/react-focus-scope/-/react-focus-scope-1.0.3.tgz",
+-      "integrity": "sha512-upXdPfqI4islj2CslyfUBNlaJCPybbqRHAi1KER7Isel9Q2AtSJ0zRBZv8mWQiFXD2nyAJ4BhC3yXgZ6kMBSrQ==",
+-      "requires": {
+-        "@babel/runtime": "^7.13.10",
+-        "@radix-ui/react-compose-refs": "1.0.1",
+-        "@radix-ui/react-primitive": "1.0.3",
+-        "@radix-ui/react-use-callback-ref": "1.0.1"
+-      }
+-    },
+     "@radix-ui/react-hover-card": {
+       "version": "1.0.6",
+       "resolved": "https://registry.npmjs.org/@radix-ui/react-hover-card/-/react-hover-card-1.0.6.tgz",
+@@ -5709,32 +5392,6 @@
+         "@radix-ui/react-use-layout-effect": "1.0.1"
+       }
+     },
+-    "@radix-ui/react-menu": {
+-      "version": "2.0.5",
+-      "resolved": "https://registry.npmjs.org/@radix-ui/react-menu/-/react-menu-2.0.5.tgz",
+-      "integrity": "sha512-Gw4f9pwdH+w5w+49k0gLjN0PfRDHvxmAgG16AbyJZ7zhwZ6PBHKtWohvnSwfusfnK3L68dpBREHpVkj8wEM7ZA==",
+-      "requires": {
+-        "@babel/runtime": "^7.13.10",
+-        "@radix-ui/primitive": "1.0.1",
+-        "@radix-ui/react-collection": "1.0.3",
+-        "@radix-ui/react-compose-refs": "1.0.1",
+-        "@radix-ui/react-context": "1.0.1",
+-        "@radix-ui/react-direction": "1.0.1",
+-        "@radix-ui/react-dismissable-layer": "1.0.4",
+-        "@radix-ui/react-focus-guards": "1.0.1",
+-        "@radix-ui/react-focus-scope": "1.0.3",
+-        "@radix-ui/react-id": "1.0.1",
+-        "@radix-ui/react-popper": "1.1.2",
+-        "@radix-ui/react-portal": "1.0.3",
+-        "@radix-ui/react-presence": "1.0.1",
+-        "@radix-ui/react-primitive": "1.0.3",
+-        "@radix-ui/react-roving-focus": "1.0.4",
+-        "@radix-ui/react-slot": "1.0.2",
+-        "@radix-ui/react-use-callback-ref": "1.0.1",
+-        "aria-hidden": "^1.1.1",
+-        "react-remove-scroll": "2.5.5"
+-      }
+-    },
+     "@radix-ui/react-navigation-menu": {
+       "version": "1.1.3",
+       "resolved": "https://registry.npmjs.org/@radix-ui/react-navigation-menu/-/react-navigation-menu-1.1.3.tgz",
+@@ -5813,23 +5470,6 @@
+         "@radix-ui/react-primitive": "1.0.3"
+       }
+     },
+-    "@radix-ui/react-roving-focus": {
+-      "version": "1.0.4",
+-      "resolved": "https://registry.npmjs.org/@radix-ui/react-roving-focus/-/react-roving-focus-1.0.4.tgz",
+-      "integrity": "sha512-2mUg5Mgcu001VkGy+FfzZyzbmuUWzgWkj3rvv4yu+mLw03+mTzbxZHvfcGyFp2b8EkQeMkpRQ5FiA2Vr2O6TeQ==",
+-      "requires": {
+-        "@babel/runtime": "^7.13.10",
+-        "@radix-ui/primitive": "1.0.1",
+-        "@radix-ui/react-collection": "1.0.3",
+-        "@radix-ui/react-compose-refs": "1.0.1",
+-        "@radix-ui/react-context": "1.0.1",
+-        "@radix-ui/react-direction": "1.0.1",
+-        "@radix-ui/react-id": "1.0.1",
+-        "@radix-ui/react-primitive": "1.0.3",
+-        "@radix-ui/react-use-callback-ref": "1.0.1",
+-        "@radix-ui/react-use-controllable-state": "1.0.1"
+-      }
+-    },
+     "@radix-ui/react-slot": {
+       "version": "1.0.2",
+       "resolved": "https://registry.npmjs.org/@radix-ui/react-slot/-/react-slot-1.0.2.tgz",
+@@ -6118,14 +5758,6 @@
+       "resolved": "https://registry.npmjs.org/argparse/-/argparse-2.0.1.tgz",
+       "integrity": "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="
+     },
+-    "aria-hidden": {
+-      "version": "1.2.3",
+-      "resolved": "https://registry.npmjs.org/aria-hidden/-/aria-hidden-1.2.3.tgz",
+-      "integrity": "sha512-xcLxITLe2HYa1cnYnwCjkOO1PqUHQpozB8x9AR0OgWN2woOBi5kSDVxKfd0b7sb1hw5qFeJhXm9H1nu3xSfLeQ==",
+-      "requires": {
+-        "tslib": "^2.0.0"
+-      }
+-    },
+     "aria-query": {
+       "version": "5.3.0",
+       "resolved": "https://registry.npmjs.org/aria-query/-/aria-query-5.3.0.tgz",
+@@ -6549,11 +6181,6 @@
+       "resolved": "https://registry.npmjs.org/detect-node/-/detect-node-2.1.0.tgz",
+       "integrity": "sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g=="
+     },
+-    "detect-node-es": {
+-      "version": "1.1.0",
+-      "resolved": "https://registry.npmjs.org/detect-node-es/-/detect-node-es-1.1.0.tgz",
+-      "integrity": "sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ=="
+-    },
+     "didyoumean": {
+       "version": "1.2.2",
+       "resolved": "https://registry.npmjs.org/didyoumean/-/didyoumean-1.2.2.tgz",
+@@ -7167,11 +6794,6 @@
+         "has-symbols": "^1.0.3"
+       }
+     },
+-    "get-nonce": {
+-      "version": "1.0.1",
+-      "resolved": "https://registry.npmjs.org/get-nonce/-/get-nonce-1.0.1.tgz",
+-      "integrity": "sha512-FJhYRoDaiatfEkUK8HKlicmu/3SGFD51q3itKDGoSTysQJBnfOcxU5GxnhE1E6soB76MbT0MBtnKJuXyAx+96Q=="
+-    },
+     "get-stream": {
+       "version": "6.0.1",
+       "resolved": "https://registry.npmjs.org/get-stream/-/get-stream-6.0.1.tgz",
+@@ -7359,14 +6981,6 @@
+         "side-channel": "^1.0.4"
+       }
+     },
+-    "invariant": {
+-      "version": "2.2.4",
+-      "resolved": "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz",
+-      "integrity": "sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==",
+-      "requires": {
+-        "loose-envify": "^1.0.0"
+-      }
+-    },
+     "is-array-buffer": {
+       "version": "3.0.2",
+       "resolved": "https://registry.npmjs.org/is-array-buffer/-/is-array-buffer-3.0.2.tgz",
+@@ -8149,37 +7763,6 @@
+         "match-sorter": "^6.0.2"
+       }
+     },
+-    "react-remove-scroll": {
+-      "version": "2.5.5",
+-      "resolved": "https://registry.npmjs.org/react-remove-scroll/-/react-remove-scroll-2.5.5.tgz",
+-      "integrity": "sha512-ImKhrzJJsyXJfBZ4bzu8Bwpka14c/fQt0k+cyFp/PBhTfyDnU5hjOtM4AG/0AMyy8oKzOTR0lDgJIM7pYXI0kw==",
+-      "requires": {
+-        "react-remove-scroll-bar": "^2.3.3",
+-        "react-style-singleton": "^2.2.1",
+-        "tslib": "^2.1.0",
+-        "use-callback-ref": "^1.3.0",
+-        "use-sidecar": "^1.1.2"
+-      }
+-    },
+-    "react-remove-scroll-bar": {
+-      "version": "2.3.4",
+-      "resolved": "https://registry.npmjs.org/react-remove-scroll-bar/-/react-remove-scroll-bar-2.3.4.tgz",
+-      "integrity": "sha512-63C4YQBUt0m6ALadE9XV56hV8BgJWDmmTPY758iIJjfQKt2nYwoUrPk0LXRXcB/yIj82T1/Ixfdpdk68LwIB0A==",
+-      "requires": {
+-        "react-style-singleton": "^2.2.1",
+-        "tslib": "^2.0.0"
+-      }
+-    },
+-    "react-style-singleton": {
+-      "version": "2.2.1",
+-      "resolved": "https://registry.npmjs.org/react-style-singleton/-/react-style-singleton-2.2.1.tgz",
+-      "integrity": "sha512-ZWj0fHEMyWkHzKYUr2Bs/4zU6XLmq9HsgBURm7g5pAVfyn49DgUiNgY2d4lXRlYSiCif9YBGpQleewkcqddc7g==",
+-      "requires": {
+-        "get-nonce": "^1.0.0",
+-        "invariant": "^2.2.4",
+-        "tslib": "^2.0.0"
+-      }
+-    },
+     "read-cache": {
+       "version": "1.0.0",
+       "resolved": "https://registry.npmjs.org/read-cache/-/read-cache-1.0.0.tgz",
+@@ -8701,23 +8284,6 @@
+         "punycode": "^2.1.0"
+       }
+     },
+-    "use-callback-ref": {
+-      "version": "1.3.0",
+-      "resolved": "https://registry.npmjs.org/use-callback-ref/-/use-callback-ref-1.3.0.tgz",
+-      "integrity": "sha512-3FT9PRuRdbB9HfXhEq35u4oZkvpJ5kuYbpqhCfmiZyReuRgpnhDlbr2ZEnnuS0RrJAPn6l23xjFg9kpDM+Ms7w==",
+-      "requires": {
+-        "tslib": "^2.0.0"
+-      }
+-    },
+-    "use-sidecar": {
+-      "version": "1.1.2",
+-      "resolved": "https://registry.npmjs.org/use-sidecar/-/use-sidecar-1.1.2.tgz",
+-      "integrity": "sha512-epTbsLuzZ7lPClpz2TyryBfztm7m+28DlEv2ZCQ3MDr5ssiwyOwGH/e5F9CkfWjJ1t4clvI58yF822/GUkjjhw==",
+-      "requires": {
+-        "detect-node-es": "^1.1.0",
+-        "tslib": "^2.0.0"
+-      }
+-    },
+     "util-deprecate": {
+       "version": "1.0.2",
+       "resolved": "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz",
+diff --git a/package.json b/package.json
+index 592550d..d051281 100644
+--- a/package.json
++++ b/package.json
+@@ -10,7 +10,6 @@
+     "lint": "next lint"
+   },
+   "dependencies": {
+-    "@radix-ui/react-dropdown-menu": "^2.0.5",
+     "@radix-ui/react-hover-card": "^1.0.6",
+     "@radix-ui/react-navigation-menu": "^1.1.3",
+     "@radix-ui/react-progress": "^1.0.3",
+diff --git a/src/Components/ui/textarea.tsx b/src/Components/ui/textarea.tsx
+deleted file mode 100644
+index 4c5d6b5..0000000
+--- a/src/Components/ui/textarea.tsx
++++ /dev/null
+@@ -1,24 +0,0 @@
+-import * as React from "react"
+-
+-import { cn } from "@/lib/utils"
+-
+-export interface TextareaProps
+-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+-
+-const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+-  ({ className, ...props }, ref) => {
+-    return (
+-      <textarea
+-        className={cn(
+-          "flex min-h-[80px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+-          className
+-        )}
+-        ref={ref}
+-        {...props}
+-      />
+-    )
+-  }
+-)
+-Textarea.displayName = "Textarea"
+-
+-export { Textarea }
+diff --git a/src/app/posts/CommentSection.tsx b/src/app/posts/CommentSection.tsx
+index 49484da..b08def1 100644
+--- a/src/app/posts/CommentSection.tsx
++++ b/src/app/posts/CommentSection.tsx
+@@ -1,94 +1,54 @@
+-'use client'
++// "use client";
+ 
+-import { Button } from "@/components/ui/button";
+-import { Textarea } from "@/components/ui/textarea";
+-import { ChevronDown, Heart } from "lucide-react";
+-import Image from "next/image";
+-import defaultImg from "../../../public/default.svg";
++// import { Button } from "@/components/ui/button";
++// import { Textarea } from "@/components/ui/textarea";
++// import defaultImg from "../../../public/default.svg";
++// import Image from "next/image";
++// import {
++//   DropdownMenu,
++//   DropdownMenuContent,
++//   DropdownMenuItem,
++//   DropdownMenuLabel,
++//   DropdownMenuSeparator,
++//   DropdownMenuTrigger,
++// } from "@/components/ui/dropdown-menu";
+ 
+-function CommentSection() {
+-  return (
+-    <div className="">
+-      <h3 className="font-semibold text-xl">Comments (3)</h3>
+-      <div className="content divide-y-2">
+-        <div className="grid gap-4 my-6">
+-          <div className="flex gap-2 items-center">
+-            <Image
+-              src={defaultImg}
+-              width={24}
+-              height={24}
+-              className="rounded-full object-cover h-8 w-8"
+-              alt=""
+-            />
+-            <span className="font-bold">Complexlity</span>
+-          </div>
+-          <Textarea
+-            className="border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-lg"
+-            placeholder="Write a thoughful comment"
+-          />
+-          <Button className="justify-self-end">Comment</Button>
+-        </div>
++// function CommentSection() {
++//   return (
++//     <>
++//       <h3>Comments (3)</h3>
++//       <div className="content divide-y-2">
++//         <div className="grid">
++//           <div className="flex gap-4 items-center">
++//             <Image
++//               src={defaultImg}
++//               width={24}
++//               height={24}
++//               className="rounded-full object-cover h-8 w-8"
++//               alt=""
++//             />
++//             Complexlity
++//           </div>
++//           <Textarea placeholder="Write a thoughful comment" />
++//           <Button className="justify-self-end">Comment</Button>
++//         </div>
+ 
+-        <div className="comments py-2">
+-          <div className="dropdown dropdown-bottom p-0">
+-            <label
+-              tabIndex={0}
+-              className="flex px-1 py-1 items-center  w-36 cursor-pointer rounded-md hover:slate-100 border-slate-400 border-2 gap-2"
+-            >
+-              Top Comments
+-              <ChevronDown />
+-            </label>
+-            <ul
+-              tabIndex={0}
+-              className="dropdown-content z-[1] divide-y-2 shadow  -mr-2 w-36 rounded-lg overflow-hidden"
+-            >
+-              <li className=" grid items-center hover:bg-slate-200 cursor-pointer px-4 py-2 bg-white ">
+-                Top Comments
+-              </li>
+-              <li className="grid items-center hover:bg-slate-200 cursor-pointer px-4 py-2  bg-white ">
+-                New Comments
+-              </li>
+-            </ul>
+-          </div>
+-          <div className="divide-y-2">
+-            <SingleComment />
+-            <SingleComment />
+-          </div>
+-        </div>
+-      </div>
+-    </div>
+-  );
+-}
++//         <div className="comments">
++//           <DropdownMenu>
++//             <DropdownMenuTrigger>Open</DropdownMenuTrigger>
++//             <DropdownMenuContent>
++//               <DropdownMenuLabel>My Account</DropdownMenuLabel>
++//               <DropdownMenuSeparator />
++//               <DropdownMenuItem>Profile</DropdownMenuItem>
++//               <DropdownMenuItem>Billing</DropdownMenuItem>
++//               <DropdownMenuItem>Team</DropdownMenuItem>
++//               <DropdownMenuItem>Subscription</DropdownMenuItem>
++//             </DropdownMenuContent>
++//           </DropdownMenu>
++//         </div>
++//       </div>
++//     </>
++//   );
++// }
+ 
+-function SingleComment() {
+-  return (
+-    <div className="space-y-4 my-4">
+-      <div className="profile flex items-center gap-1">
+-        <Image
+-          src={defaultImg}
+-          alt=""
+-          width={12}
+-          height={12}
+-          className="object-cover w-8 h-8 rounded-full"
+-        />
+-        <div>
+-          <p className="font-bold">Complexlity</p>
+-          <span>Jul 5</span>
+-        </div>
+-      </div>
+-      <div className="prose">
+-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id velit vitae
+-        quaerat.
+-      </div>
+-      <div className="flex items-center">
+-        <div className="rounded-full p-2 hover:bg-rose-100 hover:text-rose-600">
+-          <Heart size={23} />
+-        </div>
+-        <span>30</span>
+-      </div>
+-    </div>
+-  );
+-}
+-
+-
+-export default CommentSection;
+\ No newline at end of file
++// export default CommentSection;
+diff --git a/src/app/posts/page.tsx b/src/app/posts/page.tsx
+index e509219..1ea8927 100644
+--- a/src/app/posts/page.tsx
++++ b/src/app/posts/page.tsx
+@@ -1,23 +1,15 @@
+-'use client'
+-
+ import { Icons } from "@/components/Icons";
+-import { Button } from "@/components/ui/button";
+-import { Textarea } from "@/components/ui/textarea";
+-import defaultImg from '../../../public/default.svg';
++import { BookOpen, Heart, MessagesSquare } from "lucide-react";
+ import Image from "next/image";
++import defaultImg from '../../../public/default.svg';
+ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+-import { BookOpen, Heart, MessagesSquare } from "lucide-react";
+-import CommentSection from "./CommentSection";
+-
+ 
+ const SinglePost = () => {
+   return (
+     <div className="container">
+-      <header className=" grid justify-center text-center py-8">
+-        <h1 className="font-extrabold text-3xl md:text-4xl mb-4">
+-          What in the world is working will still work again
+-        </h1>
+-        <p className="mx-auto flex items-center gap-2 md:text-xl mb-4">
++      <header className="grid justify-center text-center">
++        <h1>What in the world is working will still work again</h1>
++        <p className="flex items-center gap-4 not-prose">
+           <Image
+             src={defaultImg}
+             width={24}
+@@ -25,7 +17,7 @@ const SinglePost = () => {
+             className="rounded-full object-cover h-8 w-8"
+             alt=""
+           />
+-          <span className="font-bold">Complexlity</span>
++          <span>Complexlity</span>
+           <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
+           <span>Jul 5, 2023</span>
+           <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
+@@ -76,12 +68,12 @@ const SinglePost = () => {
+             </HoverCardContent>
+           </HoverCard>
+         </div>
+-        <div className="h-[400px] mx-auto bg-orange-400 w-full m-10">
++        <div className="bg-orange-400 w-[400px] h-[400px] mx-auto my-8">
+           <Image
+             src={defaultImg}
+             width={24}
+             height={24}
+-            className="w-full h-full object-cover"
++            className="rounded-full w-full h-full object-cover"
+             alt=""
+           />
+         </div>
+@@ -124,19 +116,15 @@ const SinglePost = () => {
+           eligendi porro et, a recusandae excepturi rem tempore explicabo eaque
+           itaque perferendis ipsum, hic esse dignissimos dolorum! Nobis.
+         </p>
+-        {/* Sticky Buttons */}
+-        <div className="not-prose sticky bottom-10 bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
++        <div className="sticky bottom-10 bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
+           <div className="flex gap-1 items-center">
+-            <div className="rounded-full p-2 hover:bg-rose-100 hover:text-rose-600">
++            <div className="rounded-full p-2 hover:bg-gray-200">
+               <Heart size={23} />
+             </div>
+             <span>30</span>
+           </div>
+-
+           <div className="w-0.5 h-6 mx-2 bg-slate-200"></div>
+-
+-          {/* Comments Drawer */}
+-          <div className="">
++          <div className="flex gap-1 items-center">
+             <div className="drawer drawer-end">
+               <input
+                 id="my-drawer-4"
+@@ -144,21 +132,28 @@ const SinglePost = () => {
+                 className="drawer-toggle"
+               />
+               <div className="drawer-content">
++                <div className="rounded-full p-2 hover:bg-gray-200">
++                  <MessagesSquare size={23} />
++                </div>
++                <span>30</span>
+                 <label
+                   htmlFor="my-drawer-4"
+-                  className="flex gap-1 items-center"
++                  className="drawer-button btn btn-primary"
+                 >
+-                  <div className="rounded-full p-2 hover:bg-sky-100 hover:text-sky-600">
+-                    <MessagesSquare size={23} />
+-                  </div>
+-                  <span>30</span>
++                  Open drawer
+                 </label>
+               </div>
+-              <div className="drawer-side ">
++              <div className="drawer-side">
+                 <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
+-                <div className="menu p-4 z-[40] relative w-1/2 h-full bg-white text-base-content">
+-                  <CommentSection />
+-                </div>
++                <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
++                  {/* Sidebar content here */}
++                  <li>
++                    <a>Sidebar Item 1</a>
++                  </li>
++                  <li>
++                    <a>Sidebar Item 2</a>
++                  </li>
++                </ul>
+               </div>
+             </div>
+           </div>
+@@ -168,7 +163,4 @@ const SinglePost = () => {
+   );
+ }
+ 
+-
+-
+-
+ export default SinglePost;
+\ No newline at end of file

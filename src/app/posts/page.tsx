@@ -1,15 +1,23 @@
+'use client'
+
 import { Icons } from "@/components/Icons";
-import { BookOpen, Heart, MessagesSquare } from "lucide-react";
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import defaultImg from '../../../public/default.svg';
+import Image from "next/image";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { BookOpen, Heart, MessagesSquare } from "lucide-react";
+import CommentSection from "./CommentSection";
+
 
 const SinglePost = () => {
   return (
     <div className="container">
-      <header className="grid justify-center text-center">
-        <h1>What in the world is working will still work again</h1>
-        <p className="flex items-center gap-4 not-prose">
+      <header className=" grid justify-center text-center py-8">
+        <h1 className="font-extrabold text-3xl md:text-4xl mb-4">
+          What in the world is working will still work again
+        </h1>
+        <p className="mx-auto flex items-center gap-2 md:text-xl mb-4">
           <Image
             src={defaultImg}
             width={24}
@@ -17,7 +25,7 @@ const SinglePost = () => {
             className="rounded-full object-cover h-8 w-8"
             alt=""
           />
-          <span>Complexlity</span>
+          <span className="font-bold">Complexlity</span>
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
           <span>Jul 5, 2023</span>
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
@@ -68,12 +76,12 @@ const SinglePost = () => {
             </HoverCardContent>
           </HoverCard>
         </div>
-        <div className="bg-orange-400 w-[400px] h-[400px] mx-auto my-8">
+        <div className="h-[400px] mx-auto bg-orange-400 w-full m-10">
           <Image
             src={defaultImg}
             width={24}
             height={24}
-            className="rounded-full w-full h-full object-cover"
+            className="w-full h-full object-cover"
             alt=""
           />
         </div>
@@ -116,15 +124,19 @@ const SinglePost = () => {
           eligendi porro et, a recusandae excepturi rem tempore explicabo eaque
           itaque perferendis ipsum, hic esse dignissimos dolorum! Nobis.
         </p>
-        <div className="sticky bottom-10 bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
+        {/* Sticky Buttons */}
+        <div className="not-prose sticky bottom-10 bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
           <div className="flex gap-1 items-center">
-            <div className="rounded-full p-2 hover:bg-gray-200">
+            <div className="rounded-full p-2 hover:bg-rose-100 hover:text-rose-600">
               <Heart size={23} />
             </div>
             <span>30</span>
           </div>
+
           <div className="w-0.5 h-6 mx-2 bg-slate-200"></div>
-          <div className="flex gap-1 items-center">
+
+          {/* Comments Drawer */}
+          <div className="">
             <div className="drawer drawer-end">
               <input
                 id="my-drawer-4"
@@ -132,28 +144,21 @@ const SinglePost = () => {
                 className="drawer-toggle"
               />
               <div className="drawer-content">
-                <div className="rounded-full p-2 hover:bg-gray-200">
-                  <MessagesSquare size={23} />
-                </div>
-                <span>30</span>
                 <label
                   htmlFor="my-drawer-4"
-                  className="drawer-button btn btn-primary"
+                  className="flex gap-1 items-center"
                 >
-                  Open drawer
+                  <div className="rounded-full p-2 hover:bg-sky-100 hover:text-sky-600">
+                    <MessagesSquare size={23} />
+                  </div>
+                  <span>30</span>
                 </label>
               </div>
-              <div className="drawer-side">
+              <div className="drawer-side ">
                 <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-                  {/* Sidebar content here */}
-                  <li>
-                    <a>Sidebar Item 1</a>
-                  </li>
-                  <li>
-                    <a>Sidebar Item 2</a>
-                  </li>
-                </ul>
+                <div className="menu p-4 z-[40] relative w-1/2 h-full bg-white text-base-content">
+                  <CommentSection />
+                </div>
               </div>
             </div>
           </div>
@@ -162,5 +167,8 @@ const SinglePost = () => {
     </div>
   );
 }
+
+
+
 
 export default SinglePost;
