@@ -31,7 +31,7 @@ const PostCard = ({ post }: { post: Post }) => {
             </div>
           </div>
           <Link
-            href=""
+            href={`/posts/${post._id}`}
             className={buttonVariants({ size: "sm", className: "flex group" })}
           >
             <span>Read</span>{" "}

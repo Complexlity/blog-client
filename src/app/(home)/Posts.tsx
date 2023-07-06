@@ -1,6 +1,8 @@
 import PostCard from "./PostCard";
 import { getPosts } from "@/lib/serverFunctions";
 
+
+
 const Posts = async () => {
   const posts = await getPosts()
   console.log(posts)

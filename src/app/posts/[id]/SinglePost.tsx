@@ -1,21 +1,26 @@
 'use client'
 
 import { Icons } from "@/components/Icons";
-import defaultImg from "../../../public/default.svg";
+import defaultImg from "../../../../public/default.svg";
 
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { BookOpen, Heart, MessagesSquare } from "lucide-react";
 import Image from "next/image";
 import CommentSection from "./CommentSection";
+import { Post} from '@/lib/types'
+import { calculateTimeToReadPost, formatDate } from "@/lib/utils";
 
 
-const SinglePost = () => {
+const SinglePost = ({ post }: { post: Post }) => {
+
+
+
   return (
     <div className="bg-white">
       <div className="container">
         <header className=" grid justify-center text-center py-8">
           <h1 className="font-extrabold text-3xl md:text-4xl mb-4">
-            What in the world is working will still work again
+            {post.title}
           </h1>
           <p className="mx-auto flex items-center gap-2 md:text-xl mb-4">
             <Image
@@ -25,13 +30,13 @@ const SinglePost = () => {
               className="rounded-full object-cover h-8 w-8"
               alt=""
             />
-            <span className="font-bold">Complexlity</span>
+            <span className="font-bold">{post.author.name}</span>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
-            <span>Jul 5, 2023</span>
+            <span>{formatDate(post.createdAt, 'full')}</span>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
 
             <span className="flex gap-1">
-              <BookOpen />9 min read
+              <BookOpen />{calculateTimeToReadPost(post.content)} min read
             </span>
           </p>
           <div className="flex mx-auto gap-6 items-center">
@@ -64,7 +69,7 @@ const SinglePost = () => {
                       className="cursor-pointer rounded-full object-cover h-8 w-8"
                       alt=""
                     />
-                    +24
+                    {post.likeCount}
                   </div>
                 </div>
               </HoverCardTrigger>
@@ -72,7 +77,7 @@ const SinglePost = () => {
                 className="rounded-lg px-4 py-2 bg-black text-white"
                 side="top"
               >
-                27 people liked the post
+                {post.likeCount} people liked the post
               </HoverCardContent>
             </HoverCard>
           </div>
@@ -89,50 +94,14 @@ const SinglePost = () => {
         <main className="prose mx-auto relative">
           <h2>This is a header</h2>
           <blockquote>What are you saying about this now</blockquote>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-            doloremque quis saepe sapiente blanditiis nisi quasi esse
-            recusandae. Earum dolorum fuga hic incidunt, voluptas nihil amet
-            labore neque voluptate dicta? Mollitia provident nihil fugit
-            assumenda obcaecati harum iste cum eaque officiis dolorum
-            consectetur possimus, minus, saepe necessitatibus sapiente qui,
-            accusantium id. Iusto, ipsum ipsam labore id sint autem officiis
-            aspernatur! Cumque exercitationem, perferendis amet laborum placeat
-            unde, incidunt consequatur reiciendis ducimus asperiores cupiditate
-            assumenda ipsam dicta et beatae nam sequi hic dolorum. Suscipit quo
-            vel iusto assumenda quas, enim ratione? Fugiat quaerat delectus
-            suscipit aut adipisci impedit voluptas placeat ab tenetur
-            consectetur? Rem incidunt necessitatibus id at quae perferendis odit
-            alias non, corporis dignissimos, atque ut optio quos commodi
-            reiciendis! Sunt eveniet ullam quia! Nam ut officia unde rem! Libero
-            id quidem quam assumenda eveniet consequuntur dolorum nobis ratione
-            error illo? Repellendus quod repellat ut, atque qui neque dolore
-            facilis! Soluta doloribus aperiam ad quam perferendis non debitis ut
-            possimus itaque, quidem animi excepturi dolore voluptatibus iste
-            praesentium earum molestiae labore dolor atque in autem unde officia
-            numquam porro. Quo? Nihil soluta ipsum aut nesciunt deserunt
-            eligendi corrupti doloremque, ullam quisquam at esse commodi
-            deleniti reiciendis obcaecati. Odit facere voluptas recusandae,
-            voluptates minima mollitia velit accusantium veritatis nemo, error
-            ipsa. Dicta, minima rerum aspernatur, sed officiis laboriosam dolor
-            ipsum fugiat repudiandae ut unde incidunt tempore illum, enim sequi
-            vitae molestiae quidem distinctio tenetur. Ducimus inventore
-            dolorem, quia voluptatibus beatae ipsa. Quas qui aspernatur, saepe
-            id dolorum ratione debitis asperiores fuga, quo ullam adipisci
-            architecto culpa quasi quod repudiandae ducimus possimus vero nobis
-            non. Aspernatur rem sint neque dolorum quas nihil! Alias magnam
-            perspiciatis quaerat, inventore asperiores velit molestias tempora
-            incidunt quasi labore eligendi porro et, a recusandae excepturi rem
-            tempore explicabo eaque itaque perferendis ipsum, hic esse
-            dignissimos dolorum! Nobis.
-          </p>
+          <p>{post.content}</p>
           {/* Sticky Buttons */}
           <div className="not-prose sticky bottom-10 bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
             <div className="flex gap-1 items-center">
               <div className="rounded-full p-2 hover:bg-rose-100 hover:text-rose-600">
                 <Heart size={23} />
               </div>
-              <span>30</span>
+              <span>{post.likeCount}</span>
             </div>
 
             <div className="w-0.5 h-6 mx-2 bg-slate-200"></div>
@@ -153,7 +122,7 @@ const SinglePost = () => {
                     <div className="rounded-full p-2 hover:bg-sky-100 hover:text-sky-600">
                       <MessagesSquare size={23} />
                     </div>
-                    <span>30</span>
+                    <span>{post.comments.length}</span>
                   </label>
                 </div>
                 <div className="drawer-side ">
@@ -162,7 +131,7 @@ const SinglePost = () => {
                     className="drawer-overlay"
                   ></label>
                   <div className="menu p-4 z-[40] relative w-1/2 h-full bg-white text-base-content">
-                    <CommentSection />
+                    <CommentSection comments={post.comments} />
                   </div>
                 </div>
               </div>

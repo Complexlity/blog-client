@@ -16,7 +16,7 @@ export interface Post {
   content: string;
   author: Pick<User, 'name' | '_id'>;
   published: boolean;
-  comments: Omit<Comment, 'updatedAt' | 'post'>[];
+  comments: OmittedComment[];
   likes: string[];
   likeCount: number;
   createdAt: Date;
@@ -31,6 +31,8 @@ export interface Comment {
   post: string
   likes: string[]
   likeCount: number
-    createdAt: number
-    updatedAt: number
+    createdAt: Date
+    updatedAt: Date
 }
+
+export type OmittedComment = Omit<Comment, "updatedAt" | "post">;
