@@ -1,8 +1,12 @@
 import { Icons } from "@/components/Icons";
-import { BookOpen, Heart, MessagesSquare } from "lucide-react";
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import defaultImg from '../../../public/default.svg';
+import Image from "next/image";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { BookOpen, Heart, MessagesSquare } from "lucide-react";
+import CommentSection from "./CommentSection";
+
 
 const SinglePost = () => {
   return (
@@ -116,7 +120,7 @@ const SinglePost = () => {
           eligendi porro et, a recusandae excepturi rem tempore explicabo eaque
           itaque perferendis ipsum, hic esse dignissimos dolorum! Nobis.
         </p>
-        <div className="sticky bottom-10 bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
+        <div className="not-prose sticky bottom-10 bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
           <div className="flex gap-1 items-center">
             <div className="rounded-full p-2 hover:bg-gray-200">
               <Heart size={23} />
@@ -124,7 +128,7 @@ const SinglePost = () => {
             <span>30</span>
           </div>
           <div className="w-0.5 h-6 mx-2 bg-slate-200"></div>
-          <div className="flex gap-1 items-center">
+          <div className="">
             <div className="drawer drawer-end">
               <input
                 id="my-drawer-4"
@@ -132,28 +136,22 @@ const SinglePost = () => {
                 className="drawer-toggle"
               />
               <div className="drawer-content">
-                <div className="rounded-full p-2 hover:bg-gray-200">
-                  <MessagesSquare size={23} />
-                </div>
-                <span>30</span>
                 <label
                   htmlFor="my-drawer-4"
-                  className="drawer-button btn btn-primary"
+                  className="flex gap-1 items-center"
                 >
-                  Open drawer
+                  <div className="rounded-full p-2 hover:bg-gray-200">
+                    <MessagesSquare size={23} />
+                  </div>
+                  <span>30</span>
                 </label>
               </div>
               <div className="drawer-side">
                 <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-                  {/* Sidebar content here */}
-                  <li>
-                    <a>Sidebar Item 1</a>
-                  </li>
-                  <li>
-                    <a>Sidebar Item 2</a>
-                  </li>
-                </ul>
+                <div className="menu p-4 z-[40] relative w-full h-full bg-base-200 text-base-content">
+                  {/* Drawer Content */}
+                <CommentSection />
+                </div>
               </div>
             </div>
           </div>
@@ -162,5 +160,8 @@ const SinglePost = () => {
     </div>
   );
 }
+
+
+
 
 export default SinglePost;
