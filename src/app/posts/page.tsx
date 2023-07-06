@@ -60,7 +60,10 @@ const SinglePost = () => {
                 </div>
               </div>
             </HoverCardTrigger>
-            <HoverCardContent className="rounded-lg px-4 py-2 bg-black text-white" side='top'>
+            <HoverCardContent
+              className="rounded-lg px-4 py-2 bg-black text-white"
+              side="top"
+            >
               27 people liked the post
             </HoverCardContent>
           </HoverCard>
@@ -116,16 +119,43 @@ const SinglePost = () => {
         <div className="sticky bottom-10 bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
           <div className="flex gap-1 items-center">
             <div className="rounded-full p-2 hover:bg-gray-200">
-              <Heart size={23}/>
+              <Heart size={23} />
             </div>
             <span>30</span>
           </div>
           <div className="w-0.5 h-6 mx-2 bg-slate-200"></div>
           <div className="flex gap-1 items-center">
-            <div className="rounded-full p-2 hover:bg-gray-200">
-              <MessagesSquare size={23}/>
+            <div className="drawer drawer-end">
+              <input
+                id="my-drawer-4"
+                type="checkbox"
+                className="drawer-toggle"
+              />
+              <div className="drawer-content">
+                <div className="rounded-full p-2 hover:bg-gray-200">
+                  <MessagesSquare size={23} />
+                </div>
+                <span>30</span>
+                <label
+                  htmlFor="my-drawer-4"
+                  className="drawer-button btn btn-primary"
+                >
+                  Open drawer
+                </label>
+              </div>
+              <div className="drawer-side">
+                <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
+                <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
+                  {/* Sidebar content here */}
+                  <li>
+                    <a>Sidebar Item 1</a>
+                  </li>
+                  <li>
+                    <a>Sidebar Item 2</a>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <span>30</span>
           </div>
         </div>
       </main>
