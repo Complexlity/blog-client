@@ -22,7 +22,7 @@ export default function Navbar() {
         <NavigationMenuList className="flex gap-8">
           <Image src={logo} alt="logo" height={48} width={48} />
           <NavigationMenuItem className="">
-            <Link href="#" legacyBehavior passHref>
+            <Link href="/posts" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Posts
               </NavigationMenuLink>
