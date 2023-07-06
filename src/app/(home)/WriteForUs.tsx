@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 const WriteForUs = () => {
   return (
     <div className="bg-blueLight">
-      <div className="container text-center py-20 space-y-6">
+      <div className="container text-center py-6 space-y-6">
         <div>
           <Image
             src={scribble}

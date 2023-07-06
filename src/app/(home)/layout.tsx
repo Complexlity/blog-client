@@ -22,7 +22,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <Providers user={user}>
-        <body className={inter.className}>
+        <body className={`${inter.className} overflow-x-hidden`}>
 
           {children}
         </body>
