@@ -1,5 +1,5 @@
 import { getPosts } from "@/lib/serverFunctions";
-import SinglePost from "./SinglePost";
+
 import Header from "@/app/(home)/Header";
 import Posts from "./Posts";
 import WriteForUs from "./WriteForUs";
