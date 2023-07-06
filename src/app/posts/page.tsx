@@ -1,3 +1,5 @@
+'use client'
+
 import { Icons } from "@/components/Icons";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -148,7 +150,7 @@ const SinglePost = () => {
               </div>
               <div className="drawer-side">
                 <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
-                <div className="menu p-4 z-[40] relative w-full h-full bg-base-200 text-base-content">
+                <div className="menu p-4 z-[40] relative w-1/2 h-full bg-base-200 text-base-content">
                   {/* Drawer Content */}
                 <CommentSection />
                 </div>
