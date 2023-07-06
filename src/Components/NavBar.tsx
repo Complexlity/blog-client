@@ -23,7 +23,9 @@ export default function Navbar() {
           <Image src={logo} alt="logo" height={48} width={48} />
           <NavigationMenuItem className="">
             <Link href="/posts" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink
+                className={`${navigationMenuTriggerStyle()} bg-transparent text-white hover:bg-blueLight hover:text-blueDarkest`}
+              >
                 Posts
               </NavigationMenuLink>
             </Link>
@@ -31,7 +33,7 @@ export default function Navbar() {
           <NavigationMenuItem className="">
             <Link href="#" legacyBehavior passHref>
               <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} flex gap-1 items-center`}
+                className={`${navigationMenuTriggerStyle()} flex gap-1 items-center  bg-transparent text-white hover:bg-blueLight hover:text-blueDarkest`}
               >
                 <span>Create</span>
                 <ExternalLink className="w-4 h-4 -mt-1" />

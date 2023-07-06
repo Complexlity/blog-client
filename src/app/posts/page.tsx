@@ -3,7 +3,8 @@
 import { Icons } from "@/components/Icons";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import defaultImg from '../../../public/default.svg';
+import defaultImg from "../../../public/default.svg";
+
 import Image from "next/image";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { BookOpen, Heart, MessagesSquare } from "lucide-react";
@@ -76,7 +77,7 @@ const SinglePost = () => {
             </HoverCardContent>
           </HoverCard>
         </div>
-        <div className="h-[400px] mx-auto bg-orange-400 w-full m-10">
+        <div className="h-[400px] mx-auto w-full m-10">
           <Image
             src={defaultImg}
             width={24}
