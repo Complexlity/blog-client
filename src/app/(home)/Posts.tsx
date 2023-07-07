@@ -5,7 +5,7 @@ import { getPosts } from "@/lib/serverFunctions";
 
 const Posts = async () => {
   const posts = await getPosts()
-  console.log(posts)
+  
   return (
     <div className="bg-slate-400 pb-8 pt-6 ">
       <div className="container space-y-4">

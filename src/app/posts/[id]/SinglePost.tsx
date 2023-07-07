@@ -14,15 +14,14 @@ import { calculateTimeToReadPost, formatDate } from "@/lib/utils";
 const SinglePost = ({ post }: { post: Post }) => {
 
 
-
   return (
-    <div className="bg-white">
+    <div className="bg-white pb-8">
       <div className="container">
         <header className=" grid justify-center text-center py-8">
           <h1 className="font-extrabold text-3xl md:text-4xl mb-4">
             {post.title}
           </h1>
-          <p className="mx-auto flex items-center gap-2 md:text-xl mb-4">
+          <p className="mx-auto flex items-center gap-2 md:text-lg mb-4">
             <Image
               src={defaultImg}
               width={24}
@@ -108,7 +107,7 @@ const SinglePost = ({ post }: { post: Post }) => {
 
             {/* Comments Drawer */}
             <div className="">
-              <div className="drawer drawer-end">
+              <div className="drawer drawer-end ">
                 <input
                   id="my-drawer-4"
                   type="checkbox"
@@ -125,12 +124,12 @@ const SinglePost = ({ post }: { post: Post }) => {
                     <span>{post.comments.length}</span>
                   </label>
                 </div>
-                <div className="drawer-side ">
+                <div className="drawer-side overflow-hidden ">
                   <label
                     htmlFor="my-drawer-4"
                     className="drawer-overlay"
                   ></label>
-                  <div className="menu p-4 z-[40] relative w-1/2 h-full bg-white text-base-content">
+                  <div className="p-4 z-[40] fixed right-0 overflow-y-auto max-w-[400px] w-1/2 h-full bg-white text-base-content ">
                     <CommentSection comments={post.comments} />
                   </div>
                 </div>

@@ -58,8 +58,11 @@ function CommentSection({ comments }: { comments: OmittedComment[] }) {
             {
               comments.length !== 0
                 ?
-                  comments.map(comment => (
+                comments.map(comment => (
+                    <>
                     <SingleComment comment={comment} />
+                    <SingleComment comment={comment} />
+                    </>
                     ))
                 :
                 <h3 className="m-2 text-2xl text-blueDarkest font-bold">No Comments Added Yet</h3>
@@ -73,9 +76,8 @@ function CommentSection({ comments }: { comments: OmittedComment[] }) {
 }
 
 function SingleComment({ comment }: { comment: OmittedComment }) {
-  console.log(comment)
   return (
-    <div className="space-y-4 my-4">
+    <div className="space-y-4  py-4">
       <div className="profile flex items-center gap-1">
         <Image
           src={defaultImg}
