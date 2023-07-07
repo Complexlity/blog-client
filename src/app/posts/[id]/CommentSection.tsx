@@ -2,11 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { ChevronDown, Heart } from "lucide-react";
+import { OmittedComment } from "@/lib/types";
+import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import defaultImg from "../../../../public/default.svg";
-import {  OmittedComment } from "@/lib/types";
-import { formatDate } from "@/lib/utils";
+import SingleComment from "./SingleComment";
 
 function CommentSection({ comments }: { comments: OmittedComment[] }) {
 
@@ -61,7 +61,6 @@ function CommentSection({ comments }: { comments: OmittedComment[] }) {
                 comments.map(comment => (
                     <>
                     <SingleComment comment={comment} />
-                    <SingleComment comment={comment} />
                     </>
                     ))
                 :
@@ -75,34 +74,6 @@ function CommentSection({ comments }: { comments: OmittedComment[] }) {
   );
 }
 
-function SingleComment({ comment }: { comment: OmittedComment }) {
-  return (
-    <div className="space-y-4  py-4">
-      <div className="profile flex items-center gap-1">
-        <Image
-          src={defaultImg}
-          alt=""
-          width={12}
-          height={12}
-          className="object-cover w-8 h-8 rounded-full"
-        />
-        <div>
-          <p className="font-bold">{comment.user.name}</p>
-          <span>{formatDate(comment.createdAt, 'full')}</span>
-        </div>
-      </div>
-      <div className="prose">
-        {comment.comment}
-      </div>
-      <div className="flex items-center">
-        <div className="rounded-full p-2 hover:bg-rose-100 hover:text-rose-600">
-          <Heart size={23} />
-        </div>
-        <span>{comment.likeCount}</span>
-      </div>
-    </div>
-  );
-}
 
 
 export default CommentSection;

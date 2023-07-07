@@ -53,7 +53,7 @@ const LikeButton = ({ id, likes, likeCount, type }: Props) => {
   });
 
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex gap-1 items-center">
       {user ? (
         <HeartWithUser
           isLiking={isLiking}
@@ -82,11 +82,16 @@ function HeartWithUser({
       return;
     };
   return (
-    <Heart
-      className={"hover:text-rose-600 cursor-pointer"}
-      fill={likedByMe ? "red" : "none"}
+    <div
+      className="rounded-full p-2 hover:bg-rose-100 hover:text-rose-600"
       onClick={likePost}
-    />
+    >
+      <Heart
+        size={23}
+        fill={likedByMe ? "red" : "none"}
+        color={likedByMe ? "red" : "black"}
+      />
+    </div>
   );
 }
 

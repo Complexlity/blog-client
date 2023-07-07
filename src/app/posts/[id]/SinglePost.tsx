@@ -7,11 +7,20 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 import { BookOpen, Heart, MessagesSquare } from "lucide-react";
 import Image from "next/image";
 import CommentSection from "./CommentSection";
-import { Post} from '@/lib/types'
 import { calculateTimeToReadPost, formatDate } from "@/lib/utils";
-
+import { Comment, Post } from "@/lib/types";
+import LikeButton from "./LikeButton";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useMutation } from "react-query";
+import { useState } from "react";
+import axios from "axios";
+import { useToast } from "@/components/ui/use-toast";
+import useSession from "@/hooks/useSession";
 
 const SinglePost = ({ post }: { post: Post }) => {
+const { toast } = useToast();
+  const user = useSession();
 
 
   return (
@@ -97,10 +106,12 @@ const SinglePost = ({ post }: { post: Post }) => {
           {/* Sticky Buttons */}
           <div className="not-prose sticky bottom-10 bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
             <div className="flex gap-1 items-center">
-              <div className="rounded-full p-2 hover:bg-rose-100 hover:text-rose-600">
-                <Heart size={23} />
-              </div>
-              <span>{post.likeCount}</span>
+                <LikeButton
+        id={post._id}
+        likes={post.likes}
+        likeCount={post.likeCount}
+        type={"posts"}
+      />
             </div>
 
             <div className="w-0.5 h-6 mx-2 bg-slate-200"></div>

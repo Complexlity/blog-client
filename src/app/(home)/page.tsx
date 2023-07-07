@@ -14,9 +14,7 @@ export default async function Home() {
       <div className="bg-blueLight">
         <Footer />
       </div>
-      {/* {posts.map((post) => {
-        return <SinglePost post={post} />;
-      })} */}
+  
     </>
   );
 }

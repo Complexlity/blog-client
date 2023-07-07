@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import "../../(home)/globals.css";
+import Providers from "@/contexts/Providers";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,6 +21,7 @@ export default async function RootLayout({
   const user = null;
   return (
     <html lang="en" suppressHydrationWarning={true}>
+      <Providers user={user}>
       <body className={inter.className}>
         <div>
           <Navbar />
@@ -28,6 +30,7 @@ export default async function RootLayout({
         </div>
 
       </body>
+      </Providers>
     </html>
   );
 }
