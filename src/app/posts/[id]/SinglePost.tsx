@@ -21,6 +21,8 @@ import useSession from "@/hooks/useSession";
 const SinglePost = ({ post }: { post: Post }) => {
 const { toast } = useToast();
   const user = useSession();
+  console.log(post.likes)
+  
 
 
   return (
@@ -141,7 +143,7 @@ const { toast } = useToast();
                     className="drawer-overlay"
                   ></label>
                   <div className="p-4 z-[40] fixed right-0 overflow-y-auto max-w-[400px] w-1/2 h-full bg-white text-base-content ">
-                    <CommentSection comments={post.comments} />
+                    <CommentSection postId={post._id} comments={post.comments} />
                   </div>
                 </div>
               </div>

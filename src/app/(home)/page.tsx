@@ -1,5 +1,3 @@
-import { getPosts } from "@/lib/serverFunctions";
-
 import Header from "@/app/(home)/Header";
 import Posts from "./Posts";
 import WriteForUs from "./WriteForUs";
@@ -14,7 +12,7 @@ export default async function Home() {
       <div className="bg-blueLight">
         <Footer />
       </div>
-  
+
     </>
   );
 }

@@ -25,7 +25,7 @@ export async function getPosts()  {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts?published=true`,
     {
-      cache: 'default'
+      cache: 'no-store'
     }
   );
   console.log(response)

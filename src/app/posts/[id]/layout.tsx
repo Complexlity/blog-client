@@ -3,6 +3,7 @@ import Navbar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import "../../(home)/globals.css";
 import Providers from "@/contexts/Providers";
+import { Toaster } from "@/components/ui/toaster";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,14 +23,14 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <Providers user={user}>
-      <body className={inter.className}>
-        <div>
-          <Navbar />
-        {children}
-          <Footer />
-        </div>
-
-      </body>
+        <body className={inter.className}>
+          <div>
+            <Navbar />
+            {children}
+            <Footer />
+          </div>
+        </body>
+        <Toaster />
       </Providers>
     </html>
   );

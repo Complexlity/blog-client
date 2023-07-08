@@ -1,7 +1,7 @@
 "use client";
 
 import { Heart } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   HoverCard,
   HoverCardContent,
@@ -11,6 +11,7 @@ import useSession from "@/hooks/useSession";
 import axios from "axios";
 import { useMutation } from "react-query";
 import { toast } from "@/components/ui/use-toast";
+import { getUser } from "@/lib/serverFunctions";
 
 interface Props {
   id: string;
@@ -20,10 +21,17 @@ interface Props {
 }
 
 const LikeButton = ({ id, likes, likeCount, type }: Props) => {
-  const user = useSession();
+  let user = useSession();
   const [likedByMe, setLikedByMe] = useState<boolean>(
-    user ? likes.includes(user?._id) : false
+    likes.includes(user?._id)
   );
+
+  useEffect(() => {
+      setLikedByMe(likes.includes(user?._id))
+    }, [])
+
+
+
   const [likeNumber, setLikeNumber] = useState(likeCount);
 
   const { mutate: likePost, isLoading: isLiking } = useMutation({
