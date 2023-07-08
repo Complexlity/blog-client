@@ -25,11 +25,11 @@ export default function Navbar() {
             <Image src={logo} alt="logo" height={48} width={48} />
             </Link>
             <NavigationMenuItem className="">
-              <Link href="/posts" legacyBehavior passHref>
+              <Link href="/" legacyBehavior passHref>
                 <NavigationMenuLink
                   className={`${navigationMenuTriggerStyle()} bg-transparent text-white hover:bg-blueLight hover:text-blueDarkest`}
                 >
-                  Posts
+                  Home
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
