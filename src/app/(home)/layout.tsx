@@ -19,9 +19,11 @@ export default async function RootLayout({
 }) {
   // const user = await getUser();
   const user = null
+  const posts = null
   return (
+
     <html lang="en" suppressHydrationWarning={true}>
-      <Providers user={user}>
+      <Providers user={user} posts={posts}>
         <body className={`${inter.className} overflow-x-hidden`}>
 
           {children}
