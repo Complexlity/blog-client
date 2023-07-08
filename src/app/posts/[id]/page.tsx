@@ -6,8 +6,9 @@ import SinglePost from "./SinglePost"
 import {redirect} from 'next/navigation'
 import usePosts from "@/hooks/usePosts"
 
-export default async function Post({params}: {params: {id: string}}) {
+export default function Post({params}: {params: {id: string}}) {
   const posts = usePosts()
+  console.log(posts)
   if(!posts) redirect('/')
   const post = posts.filter(post => post._id === params.id)[0]
   if(!post) redirect('/')
