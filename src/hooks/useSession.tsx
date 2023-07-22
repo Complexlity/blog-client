@@ -6,13 +6,13 @@ import { useEffect } from "react";
 
 const useSession = () => {
   const store = useUserContext();
+
   async function refetchUser() {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/me`,
         {
           credentials: "include",
-          cache: 'no-store'
         }
       );
       const user = (await response.json()) as unknown as User;

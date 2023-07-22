@@ -34,9 +34,6 @@ export async function getPosts()  {
 export async function getSinglePost(id: string)  {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts/${id}`,
-    {
-      cache: 'no-store'
-    }
   );
   if(!response.ok) return null
   const posts = (await response.json()) as unknown as Post;

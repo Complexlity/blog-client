@@ -1,9 +1,5 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import Image from "next/image";
-import { ExternalLink } from "lucide-react";
-import logo from '../../public/logo.png'
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -11,18 +7,27 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu";
-import { buttonVariants } from "./ui/button";
+import { ExternalLink } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import defaultImg from '../../public/default.svg';
+import logo from '../../public/logo.png';
+
+import useSession from "@/hooks/useSession";
+import LoginForm from "./LoginForm";
+import SignupFrom from './SignupForm';
 
 
-export default function Navbar() {
+export default async function Navbar() {
+  const user = useSession()
 
   return (
     <div className="bg-blueDarkest  ">
       <div className="container flex items-center justify-between py-3 border-b-2 border-b-blueLight">
         <NavigationMenu className="">
           <NavigationMenuList className="flex gap-8">
-            <Link href='/'>
-            <Image src={logo} alt="logo" height={48} width={48} />
+            <Link href="/">
+              <Image src={logo} alt="logo" height={48} width={48} />
             </Link>
             <NavigationMenuItem className="">
               <Link href="/" legacyBehavior passHref>
@@ -45,14 +50,23 @@ export default function Navbar() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="flex gap-6">
-          <Link href={""} className={buttonVariants({ variant: "outline" })}>
-            Login
-          </Link>
-          <Link href={""} className={buttonVariants()}>
-            SignUp
-          </Link>
-        </div>
+        {!user ? (
+          <div className="flex gap-6">
+            <LoginForm className="" />
+            <SignupFrom />
+          </div>
+        ) : (
+          <div className="flex items-center justify-center gap-2 text-white capitalize">
+            {user.name}
+            <Image
+              src={defaultImg}
+              width={24}
+              height={24}
+              className="rounded-full object-cover h-8 w-8"
+              alt=""
+            />
+          </div>
+        )}
       </div>
     </div>
   );

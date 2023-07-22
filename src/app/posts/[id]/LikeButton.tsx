@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Heart } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
@@ -25,8 +26,8 @@ const LikeButton = ({ id, likes, likeCount, type }: Props) => {
   const [likedByMe, setLikedByMe] = useState<boolean>(
     user ? likes.includes(user?._id) : false
   );
+const router = useRouter()
 
-  
 
 
   const [likeNumber, setLikeNumber] = useState(likeCount);
@@ -53,6 +54,9 @@ const LikeButton = ({ id, likes, likeCount, type }: Props) => {
         }
         setLikeNumber(likeNumber);
         setLikedByMe(likedByMe);
+      }
+      else {
+        router.refresh()
       }
     },
   });

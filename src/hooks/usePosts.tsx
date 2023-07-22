@@ -6,18 +6,15 @@ import { useEffect } from "react";
 
 const usePosts = () => {
   const store = usePostsContext();
-  console.log(store.posts)
   async function refetchPosts() {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts`,
         {
           credentials: "include",
-          cache: 'no-store'
         }
       );
       const posts = (await response.json()) as unknown as Post[];
-      console.log(posts)
       if (!response.ok) throw new Error("user not found");
       store.setPosts(posts);
     } catch (error) {

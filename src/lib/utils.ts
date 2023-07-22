@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatDate(date: Date, type = 'relative') {
+export function formatDate(date: string, type = 'relative') {
   if (type === 'full') {
     const newdate = new Date(date)
     return newdate.toLocaleDateString("en-US", {

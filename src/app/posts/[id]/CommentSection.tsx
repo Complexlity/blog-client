@@ -9,25 +9,25 @@ import defaultImg from "../../../../public/default.svg";
 import SingleComment from "./SingleComment";
 import { Comment, Post } from "@/lib/types";
 import { useMutation } from "react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios, { isAxiosError } from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import useSession from "@/hooks/useSession";
+import { cn } from "@/lib/utils";
 
 function CommentSection({ postId, comments }: { postId: string, comments: OmittedComment[] }) {
     const { toast } = useToast();
     const user = useSession();
-    const [postComments, setpostComments] = useState(comments);
-  const [comment, setComment] = useState("");
-  console.log(postComments)
+    const [postComments, setPostComments] = useState(comments);
+  const [newComment, setComment] = useState("");
+  const [commentOrder, setCommentOrder] = useState('New')
   const { mutate: createComment, isLoading } = useMutation({
-
       //@ts-ignore
       mutationFn: async () => {
         return await axios.post<Comment>(
           `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts/${postId}/comments`,
           {
-            comment,
+            comment: newComment,
           },
           { withCredentials: true }
         );
@@ -45,7 +45,7 @@ function CommentSection({ postId, comments }: { postId: string, comments: Omitte
 
         if (data) {
           setComment("");
-          setpostComments([...postComments, data.data]);
+          setPostComments([data.data, ...postComments]);
 
           return toast({
             title: "Comment Inserted",
@@ -54,6 +54,22 @@ function CommentSection({ postId, comments }: { postId: string, comments: Omitte
         }
       },
     });
+
+  useEffect(() => {
+    if (commentOrder === "New") {
+    const sortedComments = [...postComments].sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+      setPostComments(sortedComments);
+
+    } else if (commentOrder === "Top") {
+      const sortedComments = [...postComments].sort(
+        (a, b) => b.likeCount - a.likeCount
+      );
+      setPostComments(sortedComments);
+    }
+  }, [commentOrder]);
+
 
     function handleSubmit(e: any) {
       e.preventDefault();
@@ -82,7 +98,7 @@ function CommentSection({ postId, comments }: { postId: string, comments: Omitte
               onChange={(e) => {
                           setComment(e.target.value);
                         }}
-                        value={comment}
+                        value={newComment}
             />
             <Button isLoading={isLoading} className="justify-self-end">
               Comment
@@ -94,19 +110,23 @@ function CommentSection({ postId, comments }: { postId: string, comments: Omitte
           <div className="dropdown dropdown-bottom p-0">
             <label
               tabIndex={0}
-              className="flex px-1 py-1 items-center  w-36 cursor-pointer rounded-md hover:slate-100 border-slate-400 border-2 gap-2"
+              className="flex px-1 py-1 items-center justify-between w-[9.5rem] cursor-pointer rounded-md hover:slate-100 border-slate-400 border-2 gap-2"
             >
-              Top Comments
+              {commentOrder === "Top" ? 'Top Comments' : commentOrder  === 'New' ? "New Comments" : null}
               <ChevronDown />
             </label>
             <ul
               tabIndex={0}
               className="dropdown-content z-[1] divide-y-2 shadow  -mr-2 w-36 rounded-lg overflow-hidden"
             >
-              <li className=" grid items-center hover:bg-slate-200 cursor-pointer px-4 py-2 bg-white ">
+              <li onClick={() => {
+                setCommentOrder("Top")
+              }} className={cn([`grid items-center hover:bg-slate-300 cursor-pointer px-4 py-2 bg-white`, commentOrder === 'Top' ? 'bg-slate-200': ''])}>
                 Top Comments
               </li>
-              <li className="grid items-center hover:bg-slate-200 cursor-pointer px-4 py-2  bg-white ">
+              <li onClick={() => {
+                setCommentOrder("New")
+              }} className={cn([`grid items-center hover:bg-slate-300 cursor-pointer px-4 py-2 bg-white`, commentOrder === 'New' ? 'bg-slate-200': ''])}>
                 New Comments
               </li>
             </ul>
@@ -115,7 +135,7 @@ function CommentSection({ postId, comments }: { postId: string, comments: Omitte
             {postComments.length !== 0 ? (
               postComments.map((comment) => (
                 <>
-                  <SingleComment comment={comment} />
+                  <SingleComment comment={comment} key={comment._id} />
                 </>
               ))
             ) : (

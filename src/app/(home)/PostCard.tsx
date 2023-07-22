@@ -9,7 +9,7 @@ import { formatDate } from '@/lib/utils';
 
 
 const PostCard = ({ post }: { post: Post }) => {
-  
+
   return (
     <div className="rounded-2xl p-4 bg-blueDark grid gap-2 hover:scale-[101%] transition-all duration-150 ease-in-out">
       <Image src={defaultImg} alt="image" className="rounded-lg" />

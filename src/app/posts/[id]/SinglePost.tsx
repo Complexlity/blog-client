@@ -1,9 +1,13 @@
-'use client'
+"use client";
 
 import { Icons } from "@/components/Icons";
 import defaultImg from "../../../../public/default.svg";
 
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { BookOpen, Heart, MessagesSquare } from "lucide-react";
 import Image from "next/image";
 import CommentSection from "./CommentSection";
@@ -19,11 +23,8 @@ import { useToast } from "@/components/ui/use-toast";
 import useSession from "@/hooks/useSession";
 
 const SinglePost = ({ post }: { post: Post }) => {
-const { toast } = useToast();
+  const { toast } = useToast();
   const user = useSession();
-  console.log(post.likes)
-  
-
 
   return (
     <div className="bg-white pb-8">
@@ -42,11 +43,12 @@ const { toast } = useToast();
             />
             <span className="font-bold">{post.author.name}</span>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
-            <span>{formatDate(post.createdAt, 'full')}</span>
+            <span>{formatDate(post.createdAt, "full")}</span>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
 
             <span className="flex gap-1">
-              <BookOpen />{calculateTimeToReadPost(post.content)} min read
+              <BookOpen />
+              {calculateTimeToReadPost(post.content)} min read
             </span>
           </p>
           <div className="flex mx-auto gap-6 items-center">
@@ -108,12 +110,12 @@ const { toast } = useToast();
           {/* Sticky Buttons */}
           <div className="not-prose sticky bottom-10 bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
             <div className="flex gap-1 items-center">
-                <LikeButton
-        id={post._id}
-        likes={post.likes}
-        likeCount={post.likeCount}
-        type={"posts"}
-      />
+              <LikeButton
+                id={post._id}
+                likes={post.likes}
+                likeCount={post.likeCount}
+                type={"posts"}
+              />
             </div>
 
             <div className="w-0.5 h-6 mx-2 bg-slate-200"></div>
@@ -143,7 +145,10 @@ const { toast } = useToast();
                     className="drawer-overlay"
                   ></label>
                   <div className="p-4 z-[40] fixed right-0 overflow-y-auto max-w-[400px] w-1/2 h-full bg-white text-base-content ">
-                    <CommentSection postId={post._id} comments={post.comments} />
+                    <CommentSection
+                      postId={post._id}
+                      comments={post.comments}
+                    />
                   </div>
                 </div>
               </div>
@@ -153,9 +158,6 @@ const { toast } = useToast();
       </div>
     </div>
   );
-}
-
-
-
+};
 
 export default SinglePost;

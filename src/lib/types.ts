@@ -31,8 +31,8 @@ export interface Comment {
   post: string
   likes: string[]
   likeCount: number
-    createdAt: Date
-    updatedAt: Date
+    createdAt: string
+    updatedAt: string
 }
 
 export type OmittedComment = Omit<Comment, "updatedAt" | "post">;

@@ -5,7 +5,6 @@ import Image from "next/image";
 import defaultImg from "../../../../public/default.svg";
 
 function SingleComment({ comment }: { comment: OmittedComment }) {
-  console.log(comment)
   return (
     <div className="space-y-4  py-4">
       <div className="profile flex items-center gap-1">
@@ -22,6 +21,7 @@ function SingleComment({ comment }: { comment: OmittedComment }) {
         </div>
       </div>
       <div className="prose">{comment.comment}</div>
+
       <div className="flex items-center">
         <LikeButton
           id={comment._id}
