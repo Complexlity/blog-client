@@ -23,13 +23,10 @@ interface Props {
 const LikeButton = ({ id, likes, likeCount, type }: Props) => {
   let user = useSession();
   const [likedByMe, setLikedByMe] = useState<boolean>(
-    likes.includes(user?._id)
+    user ? likes.includes(user?._id) : false
   );
 
-  useEffect(() => {
-      setLikedByMe(likes.includes(user?._id))
-    }, [])
-
+  
 
 
   const [likeNumber, setLikeNumber] = useState(likeCount);

@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import "../../(home)/globals.css";
 import Providers from "@/contexts/Providers";
 import { Toaster } from "@/components/ui/toaster";
+import { getPosts, getUser } from "@/lib/serverFunctions";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,11 +19,11 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const user = await getUser();
-  const user = null;
+  const user = await getUser()
+  const posts = await getPosts()
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <Providers user={user}>
+      <Providers user={user} posts={posts}>
         <body className={inter.className}>
           <div>
             <Navbar />
