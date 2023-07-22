@@ -20,6 +20,7 @@ export default async function RootLayout({
 }) {
   const user = await getUser();
   const posts = await getPosts()
+  console.log(posts)
   return (
 
     <html lang="en" suppressHydrationWarning={true}>

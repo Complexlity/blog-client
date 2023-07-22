@@ -16,8 +16,8 @@ const usePosts = () => {
           cache: 'no-store'
         }
       );
-      const posts = (await response.json()) as unknown as Post[];
-      console.log(posts)
+     const posts = (await response.json()) as unknown as Post[];
+
       if (!response.ok) throw new Error("user not found");
       store.setPosts(posts);
     } catch (error) {
@@ -30,7 +30,7 @@ const usePosts = () => {
       refetchPosts();
     }
   }, []);
-  return store.posts;
+  return  store.posts;
 };
 
 export default usePosts;
