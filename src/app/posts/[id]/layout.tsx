@@ -23,7 +23,11 @@ export default async function RootLayout({
   const posts = await getPosts()
   return (
     <html lang="en" suppressHydrationWarning={true}>
+<<<<<<< HEAD
       <Providers user={user} posts={posts} post={null}>
+=======
+      <Providers user={user} posts={posts}>
+>>>>>>> bug
         <body className={inter.className}>
           <div>
             <Navbar />

@@ -26,8 +26,13 @@ const LikeButton = ({ id, likes, likeCount, type }: Props) => {
   const [likedByMe, setLikedByMe] = useState<boolean>(
     user ? likes.includes(user?._id) : false
   );
+<<<<<<< HEAD
 const router = useRouter()
 
+=======
+
+  
+>>>>>>> bug
 
 
   const [likeNumber, setLikeNumber] = useState(likeCount);
