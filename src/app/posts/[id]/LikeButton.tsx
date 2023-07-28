@@ -12,7 +12,7 @@ import useSession from "@/hooks/useSession";
 import axios from "axios";
 import { useMutation } from "react-query";
 import { toast } from "@/components/ui/use-toast";
-import { getUser } from "@/lib/serverFunctions";
+import {usePrevious} from '@mantine/hooks'
 
 interface Props {
   id: string;
@@ -26,21 +26,23 @@ const LikeButton = ({ id, likes, likeCount, type }: Props) => {
   const [likedByMe, setLikedByMe] = useState<boolean>(
     user ? likes.includes(user?._id) : false
   );
-<<<<<<< HEAD
-const router = useRouter()
-
-=======
-
-  
->>>>>>> bug
-
 
   const [likeNumber, setLikeNumber] = useState(likeCount);
+  const previouslyLikedByMe = usePrevious(likedByMe)
+  const previousLikeNumber = usePrevious(likeCount)
+  const router = useRouter()
+
+  useEffect(() => {
+    setLikedByMe(user ? likes.includes(user?._id) : false);
+  }, [likes])
+
+
 
   const { mutate: likePost, isLoading: isLiking } = useMutation({
+    // @ts-ignore
     mutationFn: async () => {
-      setLikeNumber(likedByMe ? likeNumber - 1 : likeNumber + 1);
-      setLikedByMe(!likedByMe);
+      // setLikeNumber(likedByMe ? likeNumber - 1 : likeNumber + 1);
+      // setLikedByMe(!likedByMe);
       await axios.put(
         `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/${type}/${id}`,
         null,
@@ -49,21 +51,45 @@ const router = useRouter()
         }
       );
     },
-    onSettled(data, error, variables, context) {
-      if (error) {
-        if (axios.isAxiosError(error)) {
-          toast({
-            description: `${error.response?.data.message}`,
-            variant: "destructive",
-          });
-        }
-        setLikeNumber(likeNumber);
-        setLikedByMe(likedByMe);
-      }
-      else {
-        router.refresh()
+    onError: (error) => {
+      setLikeNumber((prev) => prev -1 )
+      setLikedByMe(previouslyLikedByMe!)
+      if (axios.isAxiosError(error)) {
+        toast({
+          description: `${error.response?.data.message}`,
+          variant: "destructive",
+        });
+        return toast({
+          title: "Something went wrong",
+          variant: 'destructive'
+        })
       }
     },
+    onMutate: () => {
+      if (likedByMe) {
+        setLikeNumber((prev) => prev - 1)
+      }
+      else setLikeNumber((prev) => prev + 1)
+      setLikedByMe(!likedByMe)
+    },
+    onSuccess() {
+      router.refresh()
+    }
+    // onSettled(data, error, variables, context) {
+    //   if (error) {
+    //     if (axios.isAxiosError(error)) {
+    //       toast({
+    //         description: `${error.response?.data.message}`,
+    //         variant: "destructive",
+    //       });
+    //     }
+    //     // setLikeNumber(likeNumber);
+    //     // setLikedByMe(likedByMe);
+    //   }
+    //   else {
+    //     router.refresh()
+    //   }
+    // },
   });
 
   return (

@@ -1,14 +1,12 @@
-'use client'
-
 import usePosts from "@/hooks/usePosts";
 import PostCard from "./PostCard";
-// import { getPosts } from "@/lib/serverFunctions";
+import { getPosts } from "@/lib/serverFunctions";
 
 
 
-const Posts =  () => {
-  // const posts = await getPosts()
-  const posts = usePosts()
+const Posts =  async () => {
+  const posts = await getPosts()
+
 
   return (
     <div className="bg-slate-400 pb-8 pt-6 ">

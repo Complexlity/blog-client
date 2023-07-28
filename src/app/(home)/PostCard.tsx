@@ -27,6 +27,7 @@ const PostCard = ({ post }: { post: Post }) => {
             />
             <div className="text-sm grid gap-1 ">
               <p className="text-gray-200 font-bold">{post.author.name}</p>
+              {/* @ts-expect-error Date object confused as string*/}
               <p className="text-gray-300">{formatDate(post.createdAt)}</p>
             </div>
           </div>

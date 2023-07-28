@@ -20,8 +20,15 @@ function CommentSection({ postId, comments }: { postId: string, comments: Omitte
     const user = useSession();
     const [postComments, setPostComments] = useState(comments);
   const [newComment, setComment] = useState("");
-  const [commentOrder, setCommentOrder] = useState('New')
+
+  useEffect(() => {
+    setPostComments(comments)
+  }, [comments])
+
   const { mutate: createComment, isLoading } = useMutation({
+
+
+
       //@ts-ignore
       mutationFn: async () => {
         return await axios.post<Comment>(
@@ -54,21 +61,6 @@ function CommentSection({ postId, comments }: { postId: string, comments: Omitte
         }
       },
     });
-
-  useEffect(() => {
-    if (commentOrder === "New") {
-    const sortedComments = [...postComments].sort(
-      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
-      setPostComments(sortedComments);
-
-    } else if (commentOrder === "Top") {
-      const sortedComments = [...postComments].sort(
-        (a, b) => b.likeCount - a.likeCount
-      );
-      setPostComments(sortedComments);
-    }
-  }, [commentOrder]);
 
 
     function handleSubmit(e: any) {
@@ -107,30 +99,6 @@ function CommentSection({ postId, comments }: { postId: string, comments: Omitte
         </div>
 
         <div className="comments py-2">
-          <div className="dropdown dropdown-bottom p-0">
-            <label
-              tabIndex={0}
-              className="flex px-1 py-1 items-center justify-between w-[9.5rem] cursor-pointer rounded-md hover:slate-100 border-slate-400 border-2 gap-2"
-            >
-              {commentOrder === "Top" ? 'Top Comments' : commentOrder  === 'New' ? "New Comments" : null}
-              <ChevronDown />
-            </label>
-            <ul
-              tabIndex={0}
-              className="dropdown-content z-[1] divide-y-2 shadow  -mr-2 w-36 rounded-lg overflow-hidden"
-            >
-              <li onClick={() => {
-                setCommentOrder("Top")
-              }} className={cn([`grid items-center hover:bg-slate-300 cursor-pointer px-4 py-2 bg-white`, commentOrder === 'Top' ? 'bg-slate-200': ''])}>
-                Top Comments
-              </li>
-              <li onClick={() => {
-                setCommentOrder("New")
-              }} className={cn([`grid items-center hover:bg-slate-300 cursor-pointer px-4 py-2 bg-white`, commentOrder === 'New' ? 'bg-slate-200': ''])}>
-                New Comments
-              </li>
-            </ul>
-          </div>
           <div className="divide-y-2">
             {postComments.length !== 0 ? (
               postComments.map((comment) => (

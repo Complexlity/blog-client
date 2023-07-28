@@ -8,21 +8,16 @@ import PostsProvider from "./PostsProvider";
 const Providers = ({
   children,
   user,
-  posts,
-  post,
+
 }: {
   children: React.ReactNode;
     user: User | null;
-  posts: Post[] | null
-  post: Post | null
 }) => {
   const queryClient = new QueryClient();
   return (
 
     <SessionProvider user={user}>
-      <PostsProvider posts={posts} currentPost={post}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-      </PostsProvider>
     </SessionProvider>
   );
 };

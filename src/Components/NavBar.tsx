@@ -18,8 +18,9 @@ import LoginForm from "./LoginForm";
 import SignupFrom from './SignupForm';
 
 
-export default async function Navbar() {
+export default function Navbar() {
   const user = useSession()
+  console.log(user)
 
   return (
     <div className="bg-blueDarkest  ">

@@ -43,6 +43,7 @@ const SinglePost = ({ post }: { post: Post }) => {
             />
             <span className="font-bold">{post.author.name}</span>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
+            {/* @ts-expect-error Date object confused for string */}
             <span>{formatDate(post.createdAt, "full")}</span>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
 
