@@ -8,7 +8,7 @@ import Image from "next/image";
 import defaultImg from "../../../../public/default.svg";
 import SingleComment from "./SingleComment";
 import { Comment, Post } from "@/lib/types";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import axios, { isAxiosError } from "axios";
 import { useToast } from "@/components/ui/use-toast";

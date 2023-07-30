@@ -2,7 +2,7 @@
 
 import SessionProvider from "@/contexts/SessionProvider";
 import { Post, User } from "@/lib/types";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PostsProvider from "./PostsProvider";
 
 const Providers = ({
@@ -15,10 +15,9 @@ const Providers = ({
 }) => {
   const queryClient = new QueryClient();
   return (
-
-    <SessionProvider user={user}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </SessionProvider>
+    <QueryClientProvider client={queryClient} contextSharing={true}>
+      <SessionProvider user={user}>{children}</SessionProvider>
+    </QueryClientProvider>
   );
 };
 

@@ -16,7 +16,7 @@ import { Comment, Post } from "@/lib/types";
 import LikeButton from "./LikeButton";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@/components/ui/use-toast";

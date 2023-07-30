@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/hover-card";
 import useSession from "@/hooks/useSession";
 import axios from "axios";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "@/components/ui/use-toast";
 import {usePrevious} from '@mantine/hooks'
 
