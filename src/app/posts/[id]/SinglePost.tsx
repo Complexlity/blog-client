@@ -21,6 +21,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import useSession from "@/hooks/useSession";
+import EditorOutput from "@/app/create/EditorOutput";
 
 const SinglePost = ({ post }: { post: Post }) => {
   const { toast } = useToast();
@@ -105,9 +106,12 @@ const SinglePost = ({ post }: { post: Post }) => {
           </div>
         </header>
         <main className="prose mx-auto relative">
-          <h2>This is a header</h2>
+          <EditorOutput content={JSON.parse(post.content)} />
+          {/* <h2>This is a header</h2>
           <blockquote>What are you saying about this now</blockquote>
-          <p>{post.content}</p>
+          <p>
+
+            {post.content}</p> */}
           {/* Sticky Buttons */}
           <div className="not-prose sticky bottom-10 bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
             <div className="flex gap-1 items-center">

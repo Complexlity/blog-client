@@ -40,12 +40,12 @@ export default function Navbar() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem className="">
-              <Link href="#" legacyBehavior passHref>
+              <Link href="/create" legacyBehavior passHref>
                 <NavigationMenuLink
                   className={`${navigationMenuTriggerStyle()} flex gap-1 items-center  bg-transparent text-white hover:bg-blueLight hover:text-blueDarkest`}
                 >
                   <span>Create</span>
-                  <ExternalLink className="w-4 h-4 -mt-1" />
+                  {/* <ExternalLink className="w-4 h-4 -mt-1" /> */}
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>

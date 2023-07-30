@@ -13,6 +13,7 @@ import axios from 'axios'
 import { Cloudinary } from "@cloudinary/url-gen";
 
 import '@/styles/editor.css'
+import { toast } from '@/components/ui/use-toast'
 
 
 
@@ -51,7 +52,7 @@ export const Editor = () => {
     const LinkTool = (await import('@editorjs/link')).default
     const InlineCode = (await import('@editorjs/inline-code')).default
     const ImageTool = (await import('@editorjs/image')).default
-
+const Quote = (await import ("@editorjs/quote")).default;
     if (!ref.current) {
       const editor = new EditorJS({
         holder: 'editor',
@@ -92,6 +93,15 @@ export const Editor = () => {
           inlineCode: InlineCode,
           table: Table,
           embed: Embed,
+          quote: {
+            class: Quote,
+            inlineToolbar: true,
+            shortcut: 'CMD+SHIFT+0',
+            config: {
+              quotePlaceholder: 'Enter a quote',
+              captionPlaceholder: 'Quote\'s author',
+            }
+          }
         },
       })
     }

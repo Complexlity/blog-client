@@ -8,11 +8,11 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import TextareaAutosize from 'react-textarea-autosize'
 import { z } from 'zod'
+import { uploadFiles } from "@/lib/uploadthing";
 import "@/styles/editor.css";
 
 
 
-import { Cloudinary } from "@cloudinary/url-gen";
 
 import '@/styles/editor.css'
 import Link from "next/link";
@@ -35,8 +35,9 @@ import { Editor } from "@/app/create/Editor";
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import EditorOutput from './EditorOutput';
+import { Cloudinary } from "@cloudinary/url-gen";
 
-const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
+const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
 
 const postSchema = z.object({
   title: z
@@ -46,8 +47,8 @@ const postSchema = z.object({
     .min(1)
     .max(100, "Title must be at most 100 characters"),
   content: z
-    .string({
-      required_error: "Post content cannot be empty",
+  .string({
+    required_error: "Post content cannot be empty",
     })
     .min(1)
     .max(1000, "Content must be at most 1000 characters"),
@@ -77,11 +78,33 @@ export default function CreateForm({ title, content, }: { title?: string, conten
   const pathname = usePathname();
 
   const { mutate: createPostt } = useMutation({
-    mutationFn: async (data) => {
+    mutationFn: async (payload: any) => {
+      const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
+        withCredentials: true,
+      });
+      return data;
+    },
+    onError: (error) => {
+      console.log(error)
+      return toast({
+        title: error.response?.data.message,
+        variant: 'destructive'
+      })
 
-      const { data } = await axios.post(
-        `${SERVER_DOMAIN}/posts`
-      );
+      // return toast({
+      //   title: "Something went wrong",
+      //   description: "Your post was not published. Please try again.",
+      //   variant: "destructive",
+      // });
+    },
+    onSuccess: () => {
+      router.push('/');
+
+      router.refresh();
+
+      return toast({
+        description: "Your post has been published.",
+      });
     },
   });
 
@@ -95,6 +118,7 @@ export default function CreateForm({ title, content, }: { title?: string, conten
     const LinkTool = (await import("@editorjs/link")).default;
     const InlineCode = (await import("@editorjs/inline-code")).default;
     const ImageTool = (await import("@editorjs/image")).default;
+    const Quote = (await import('@editorjs/quote')).default
 
     if (!ref.current) {
       const editor = new EditorJS({
@@ -118,8 +142,12 @@ export default function CreateForm({ title, content, }: { title?: string, conten
             config: {
               uploader: {
                 async uploadByFile(file: File) {
+
                   // upload to uploadthing
-                  const [res] = await uploadFiles([file], "imageUploader");
+                  const [res] = await uploadFiles({
+                    files: [file],
+                    endpoint: "imageUploader",
+                  })
 
                   return {
                     success: 1,
@@ -136,6 +164,7 @@ export default function CreateForm({ title, content, }: { title?: string, conten
           inlineCode: InlineCode,
           table: Table,
           embed: Embed,
+          quote: Quote,
         },
       });
     }
@@ -181,13 +210,14 @@ export default function CreateForm({ title, content, }: { title?: string, conten
 
   async function onSubmit(data: any) {
     const blocks = await ref.current?.save();
-    alert(JSON.stringify(blocks))
+
     setOutput(blocks)
     setPostTitle(data.title)
 
     const payload = {
       title: data.title,
-      content: blocks,
+      content: JSON.stringify(blocks),
+      published: true
     };
 
     createPostt(payload);

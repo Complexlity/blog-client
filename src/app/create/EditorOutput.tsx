@@ -11,29 +11,19 @@ const Output = dynamic(
 )
 
 interface EditorOutputProps {
-  title?: string;
   content: any
 }
 
 const renderers = {
-  image: CustomImageRenderer,
   code: CustomCodeRenderer,
 }
 
-const style = {
-  paragraph: {
-    fontSize: '0.875rem',
-    lineHeight: '1.25rem',
-  },
-}
+
 
 const EditorOutput: FC<EditorOutputProps> = ({ title, content }) => {
   return (
     <>
-      <h1>{title ?? "No title yet"}</h1>
     <Output
-      style={style}
-      className='text-sm'
       renderers={renderers}
       data={content}
       />
