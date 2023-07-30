@@ -33,6 +33,8 @@ import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { Editor } from "@/app/create/Editor";
 import { Button } from '@/components/ui/button';
+import { toast } from '@/components/ui/use-toast';
+import EditorOutput from './EditorOutput';
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
 
@@ -53,8 +55,10 @@ const postSchema = z.object({
 
 type CreatePostInput = z.infer<typeof postSchema>;
 
-export default function CreateForm({ title, content }: { title?: string, content?: any}) {
+export default function CreateForm({ title, content, }: { title?: string, content?: any}) {
   const router = useRouter();
+  const [output, setOutput] = useState<any>()
+  const [postTitle, setPostTitle] = useState()
 
   const {
     register,
@@ -69,11 +73,15 @@ export default function CreateForm({ title, content }: { title?: string, content
   const ref = useRef<EditorJS>();
   const _titleRef = useRef<HTMLTextAreaElement>(null);
   const [isMounted, setIsMounted] = useState<boolean>(false);
+
   const pathname = usePathname();
 
   const { mutate: createPostt } = useMutation({
     mutationFn: async (data) => {
-      alert("Hello world");
+
+      const { data } = await axios.post(
+        `${SERVER_DOMAIN}/posts`
+      );
     },
   });
 
@@ -174,6 +182,8 @@ export default function CreateForm({ title, content }: { title?: string, content
   async function onSubmit(data: any) {
     const blocks = await ref.current?.save();
     alert(JSON.stringify(blocks))
+    setOutput(blocks)
+    setPostTitle(data.title)
 
     const payload = {
       title: data.title,
@@ -191,42 +201,37 @@ export default function CreateForm({ title, content }: { title?: string, content
 
   return (
     <>
-    <div className='w-full p-4 bg-zinc-50 rounded-lg border border-zinc-200'>
-      <form
-        id='subreddit-post-form'
-        className='w-fit'
-        onSubmit={handleSubmit(onSubmit)}>
-        <div className='prose prose-stone dark:prose-invert'>
-          <TextareaAutosize
-            ref={(e) => {
-              titleRef(e)
-              // @ts-ignore
-              _titleRef.current = e
-            }}
-            {...rest}
-            placeholder='Title'
-            className='w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none'
-          />
-          <div id='editor' className='min-h-[500px]' />
-          <p className='text-sm text-gray-500'>
-            Use{' '}
-            <kbd className='rounded-md border bg-muted px-1 text-xs uppercase'>
-              Tab
-            </kbd>{' '}
-            to open the command menu.
-          </p>
+      <div className="w-full p-4 bg-zinc-50 rounded-lg border border-zinc-200">
+        <form
+          id="subreddit-post-form"
+          className="w-fit"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="prose prose-stone dark:prose-invert">
+            <TextareaAutosize
+              ref={(e) => {
+                titleRef(e);
+                // @ts-ignore
+                _titleRef.current = e;
+              }}
+              {...rest}
+              placeholder="Title"
+              className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none"
+            />
+            <div id="editor" className="min-h-[500px]" />
+            <p className="text-sm text-gray-500">
+              Use{" "}
+              <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
+                Tab
+              </kbd>{" "}
+              to open the command menu.
+            </p>
           </div>
           <Button>Submit</Button>
-      </form>
-    </div>
-
-
-
-      {/* <Editor /> */}
+        </form>
+      </div>
     </>
   );
 }
-function toast(arg0: { title: string; description: string; variant: string; }) {
-  throw new Error('Function not implemented.');
-}
+
 
