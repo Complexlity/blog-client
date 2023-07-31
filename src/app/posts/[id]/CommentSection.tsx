@@ -72,32 +72,34 @@ function CommentSection({ postId, comments }: { postId: string, comments: Omitte
     <div className="">
       <h3 className="font-semibold text-xl">Comments ({postComments.length})</h3>
       <div className="content divide-y-2">
-        <div className="grid gap-4 my-6">
-          <div className="flex gap-2 items-center">
-            <Image
-              src={defaultImg}
-              width={24}
-              height={24}
-              className="rounded-full object-cover h-8 w-8"
-              alt=""
-            />
-            <span className="font-bold">{user?.name}</span>
+        {
+user ?
+          <div className="grid gap-4 my-6">
+            <div className="flex gap-2 items-center">
+              <Image
+                src={user.imageSrc}
+                width={24}
+                height={24}
+                className="rounded-full object-cover h-8 w-8 object-top"
+                alt=""
+              />
+              <span className="font-bold">{user?.name}</span>
+            </div>
+            <form className="grid" onSubmit={handleSubmit}>
+              <Textarea
+                className="resize-none border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-lg"
+                placeholder="Write a thoughful comment"
+                onChange={(e) => {
+                  setComment(e.target.value);
+                }}
+                value={newComment}
+              />
+              <Button isLoading={isLoading} className="justify-self-end">
+                Comment
+              </Button>
+            </form>
           </div>
-          <form className="grid" onSubmit={handleSubmit}>
-            <Textarea
-              className="resize-none border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-lg"
-              placeholder="Write a thoughful comment"
-              onChange={(e) => {
-                          setComment(e.target.value);
-                        }}
-                        value={newComment}
-            />
-            <Button isLoading={isLoading} className="justify-self-end">
-              Comment
-            </Button>
-          </form>
-        </div>
-
+      : null  }
         <div className="comments py-2">
           <div className="divide-y-2">
             {postComments.length !== 0 ? (

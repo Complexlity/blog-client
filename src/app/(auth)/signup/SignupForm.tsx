@@ -26,6 +26,9 @@ import {
 
 import fetcher from "@/lib/fetcher";
 import { toast } from "@/components/ui/use-toast";
+import "@uploadthing/react/styles.css";
+import { UploadButton } from "@/lib/uploadthing";
+import Image from "next/image";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
 
@@ -60,7 +63,9 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 const router = useRouter();
-const [registerError, setRegisterError] = useState("Bad things have happened");
+  const [registerError, setRegisterError] = useState("Bad things have happened");
+  const [imageUrl, setImageUrl] = useState('')
+
 const form = useForm<SignupInput>({
   resolver: zodResolver(signUpSchema),
   defaultValues: {
@@ -73,9 +78,16 @@ const form = useForm<SignupInput>({
 
 async function onSubmit(values: SignupInput) {
   const createUser = `${SERVER_DOMAIN}/users`;
+  if (!imageUrl) {
+    toast({
+      title: "Please add a profile image",
+      variant: "destructive"
+    })
+    return
+  }
   try {
     setIsLoading(true)
-    const response = await fetcher(createUser, {}, "POST", values);
+    const response = await fetcher(createUser, {}, "POST", {...values, imageSrc: imageUrl});
 
     //@ts-ignore
     if (response && response.status !== 200) {
@@ -103,14 +115,11 @@ async function onSubmit(values: SignupInput) {
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-4  text-black"
         >
-          {/* <h1 className="text-3xl font-bold text-center">Sign Up Now</h1> */}
-
           <FormField
             control={form.control}
             name="name"
@@ -171,6 +180,7 @@ async function onSubmit(values: SignupInput) {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="passwordConfirmation"
@@ -191,11 +201,36 @@ async function onSubmit(values: SignupInput) {
               </FormItem>
             )}
           />
+          <div className="flex justify-center items-center border-zinc-200 border-2 shadow-sm p-4 gap-8 rounded-md">
+            <p className="text-xl">Profile Image: </p>
+            {!imageUrl ? (
+              <UploadButton
+                endpoint="imageUploader"
+                onClientUploadComplete={(res) => {
+                  // Do something with the response
+                  console.log("Files: ", res);
+                  setImageUrl(res![0].fileUrl);
+                }}
+                onUploadError={(error: Error) => {
+                  // Do something with the error.
+                  alert(`ERROR! ${error.message}`);
+                }}
+              />
+            ) : (
+              <img
+                alt="Profile Image"
+                src={imageUrl}
+                width={50}
+                height={50}
+                className="w-24 h-24 rounded-full object-cover object-top"
+              />
+            )}
+          </div>
           <Button className={"w-full"} disabled={isLoading}>
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            Sign In with Email
+            Sign up
           </Button>
         </form>
       </Form>

@@ -137,7 +137,7 @@ function HeartWithUser({
 
 function HeartWithoutUser() {
   return (
-    <HoverCard>
+    <HoverCard openDelay={2}>
       <HoverCardTrigger>
         <Heart className="fill-gray-200 text-gray-300" />
       </HoverCardTrigger>

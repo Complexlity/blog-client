@@ -79,6 +79,7 @@ const form = useForm<CreateSessionInput>({
 
     } catch (error: any) {
       setLoginError(error.message);
+      setIsLoading(false)
     }
   }
 

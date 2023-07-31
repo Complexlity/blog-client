@@ -8,6 +8,7 @@ export interface User {
   session: string;
   iat: number;
   exp: number;
+  imageSrc: string;
 }
 
 export interface Post {
