@@ -15,6 +15,16 @@ interface EditorOutputProps {
   content: any
 }
 
+const config = {
+  header: {
+    disableDefaultStyle: true,
+  },
+  paragraph: {
+    disableDefaultStyle: true,
+  }
+};
+
+
 const renderers = {
   code: CustomCodeRenderer,
   quote: CustomQuoteRenderer
@@ -22,12 +32,14 @@ const renderers = {
 
 
 
-const EditorOutput: FC<EditorOutputProps> = ({ title, content }) => {
+
+const EditorOutput: FC<EditorOutputProps> = ({ content }) => {
   return (
     <>
     <Output
       renderers={renderers}
-      data={content}
+        data={content}
+        config={config}
       />
       </>
   )

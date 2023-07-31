@@ -1,6 +1,12 @@
 "use client";
 
-function CustomQuoteRenderer({ data }: any) {
+interface QuoteProps {
+  text: string,
+  caption?: string,
+  alignment: string
+}
+
+function CustomQuoteRenderer({ data }: { data: QuoteProps }) {
   data;
   console.log(data)
 
