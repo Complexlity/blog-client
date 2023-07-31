@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/form";
 
 import fetcher from "@/lib/fetcher";
+import { toast } from "@/components/ui/use-toast";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
 
@@ -72,8 +73,8 @@ const form = useForm<SignupInput>({
 
 async function onSubmit(values: SignupInput) {
   const createUser = `${SERVER_DOMAIN}/users`;
-  setIsLoading(true)
   try {
+    setIsLoading(true)
     const response = await fetcher(createUser, {}, "POST", values);
 
     //@ts-ignore
@@ -88,7 +89,10 @@ async function onSubmit(values: SignupInput) {
       throw new Error(error.message);
     }
     form.reset();
-    router.refresh();
+    router.push('/login')
+    toast({
+      title: "Please Login"
+    })
     setIsLoading(false);
   } catch (error: any) {}
 }

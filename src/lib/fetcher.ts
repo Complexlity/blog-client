@@ -9,7 +9,8 @@ const fetcher = async<T>(url: string, headers = {}, method = "GET", values: any 
   },
       credentials: "include",
   body: JSON.stringify(values)
-});
+    });
+    console.log(response.body)
     return response
 
   } catch (e) {

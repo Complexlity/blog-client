@@ -3,8 +3,9 @@ import { Inter } from "next/font/google";
 import "../(home)/globals.css";
 
 import { Toaster } from "@/components/ui/toaster";
-import { getPosts, getUser } from "@/lib/serverFunctions";
-// import { getUser } from "@/lib/serverFunctions";
+import { getUser } from "@/lib/serverFunctions";
+import { redirect } from "next/navigation";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const user = await getUser();
+  if(user) redirect("/")
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <Providers user={user}>

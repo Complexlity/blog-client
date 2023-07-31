@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dispatch, SetStateAction, useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -75,8 +75,8 @@ const form = useForm<CreateSessionInput>({
       }
       form.reset();
       setIsLoading(false);
+      router.push('/')
 
-      router.refresh();
     } catch (error: any) {
       setLoginError(error.message);
     }
@@ -85,30 +85,6 @@ const form = useForm<CreateSessionInput>({
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      {/* <form onSubmit={onSubmit}>
-        <div className="grid gap-2">
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
-              Email
-            </Label>
-            <Input
-              id="email"
-              placeholder="name@example.com"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              disabled={isLoading}
-            />
-          </div>
-          <Button disabled={isLoading}>
-            {isLoading && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
-            Sign In with Email
-          </Button>
-        </div>
-      </form> */}
       {loginError && (
         <Alert variant="destructive" className="w-[98%]">
           <AlertCircle className="h-4 w-4" />
@@ -121,7 +97,7 @@ const form = useForm<CreateSessionInput>({
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-6 text-black "
         >
-          
+
           <FormField
             control={form.control}
             name="email"
