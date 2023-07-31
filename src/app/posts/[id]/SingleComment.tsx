@@ -14,11 +14,12 @@ const user = useSession()
     <div className="space-y-4  py-4">
       <div className="profile flex items-center gap-1">
         <Image
-          src={defaultImg}
+          unoptimized
+          src={comment.user.imageSrc ?? defaultImg}
           alt=""
           width={12}
           height={12}
-          className="object-cover w-8 h-8 rounded-full"
+          className="object-cover w-10 h-10 rounded-full object-top"
         />
         <div>
           <p className="font-bold">{comment.user.name}</p>

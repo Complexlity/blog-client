@@ -77,11 +77,12 @@ user ?
           <div className="grid gap-4 my-6">
             <div className="flex gap-2 items-center">
               <Image
-                src={user.imageSrc}
+                src={user.imageSrc ?? defaultImg}
                 width={24}
                 height={24}
-                className="rounded-full object-cover h-8 w-8 object-top"
-                alt=""
+                className="rounded-full object-cover h-10 w-10 object-top"
+                  alt=""
+                  unoptimized
               />
               <span className="font-bold">{user?.name}</span>
             </div>

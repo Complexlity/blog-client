@@ -28,7 +28,7 @@ export interface Post {
 export interface Comment {
   _id: string
   comment: string
-  user: Pick<User, 'name' | '_id'>
+  user: Pick<User, 'name' | '_id' | 'imageSrc'>
   post: string
   likes: string[]
   likeCount: number
