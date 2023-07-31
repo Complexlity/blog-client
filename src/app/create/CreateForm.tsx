@@ -85,7 +85,6 @@ export default function CreateForm({ title, content, }: { title?: string, conten
       return data;
     },
     onError: (error) => {
-      console.log(error)
       return toast({
         title: error.response?.data.message,
         variant: 'destructive'

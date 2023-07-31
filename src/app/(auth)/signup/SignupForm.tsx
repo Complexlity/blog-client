@@ -207,8 +207,6 @@ async function onSubmit(values: SignupInput) {
               <UploadButton
                 endpoint="imageUploader"
                 onClientUploadComplete={(res) => {
-                  // Do something with the response
-                  console.log("Files: ", res);
                   setImageUrl(res![0].fileUrl);
                 }}
                 onUploadError={(error: Error) => {
