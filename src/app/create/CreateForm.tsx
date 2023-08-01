@@ -25,7 +25,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, MinusCircle } from "lucide-react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useMutation } from "@tanstack/react-query";
@@ -35,7 +35,11 @@ import { Editor } from "@/app/create/Editor";
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import EditorOutput from './EditorOutput';
-import { Cloudinary } from "@cloudinary/url-gen";
+import defaultImg from '@/../public/default.svg'
+import { Image } from "lucide-react";
+import { useUploadThing } from "@/lib/uploadthing";
+import { Icons } from '@/components/Icons';
+import { ErrorMessage } from "@hookform/error-message"
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
 
@@ -46,29 +50,25 @@ const postSchema = z.object({
     })
     .min(1)
     .max(100, "Title must be at most 100 characters"),
-  content: z
-  .string({
-    required_error: "Post content cannot be empty",
-    })
-    .min(1)
-    .max(1000, "Content must be at most 1000 characters"),
+  content: z.any()
 });
 
 type CreatePostInput = z.infer<typeof postSchema>;
 
-export default function CreateForm({ title, content, }: { title?: string, content?: any}) {
+export default function CreateForm() {
   const router = useRouter();
-  const [output, setOutput] = useState<any>()
-  const [postTitle, setPostTitle] = useState()
+  const [coverImage, setCoverImage] = useState(null);
+  const [previewImageUrl, setPreviewImageUrl] = useState("");
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
+    resolver: zodResolver(postSchema),
     defaultValues: {
-      title: title ?? "",
-      content: content ?? null ,
+      title: "",
+      content: null ,
     },
   });
   const ref = useRef<EditorJS>();
@@ -77,16 +77,28 @@ export default function CreateForm({ title, content, }: { title?: string, conten
 
   const pathname = usePathname();
 
-  const { mutate: createPostt } = useMutation({
-    mutationFn: async (payload: any) => {
-      const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
-        withCredentials: true,
-      });
-      return data;
+  const { mutate: createPostt, isLoading: isCreating } = useMutation({
+    mutationFn: async (payload: CreatePostInput) => {
+      if (coverImage) {
+        const res = await startUpload([coverImage])
+        const fileUrl = res![0].fileUrl
+        payload.coverImageSource = fileUrl
+        postData(payload)
+      }
+      else {
+        postData(payload)
+      }
+
+     async function postData(payload: CreatePostInput) {
+        const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
+          withCredentials: true,
+        });
+        return data;
+      }
     },
     onError: (error) => {
       return toast({
-        title: error.response?.data.message,
+        title: error.response?.data.message ?? error.message,
         variant: 'destructive'
       })
 
@@ -175,7 +187,7 @@ export default function CreateForm({ title, content, }: { title?: string, conten
         value;
         toast({
           title: "Something went wrong.",
-          description: (value as { message: string }).message,
+          description: "Title or Content is not provided",
           variant: "destructive",
         });
       }
@@ -207,36 +219,88 @@ export default function CreateForm({ title, content, }: { title?: string, conten
     }
   }, [isMounted, initializeEditor]);
 
-  async function onSubmit(data: any) {
-    const blocks = await ref.current?.save();
 
-    setOutput(blocks)
-    setPostTitle(data.title)
+  const { startUpload } = useUploadThing("imageUploader", {
+    onClientUploadComplete: () => {
+      // alert("uploaded successfully!");
+      console.log("uploadSuccessful");
+    },
+    onUploadError: () => {
+      alert("error occurred while uploading");
+      throw new Error("Something went wrong")
+    },
+  });
+
+  async function onSubmit(data: any) {
+
+    const blocks = await ref.current?.save();
 
     const payload = {
       title: data.title,
       content: JSON.stringify(blocks),
       published: true
     };
-
     createPostt(payload);
   }
 
   if (!isMounted) {
-    return null;
+    return <div>Loading...</div>
   }
 
   const { ref: titleRef, ...rest } = register("title");
 
   return (
     <>
-      <div className="w-full p-4 bg-zinc-50 rounded-lg border border-zinc-200">
+      <div className="w-full prose mx-auto">
         <form
           id="subreddit-post-form"
-          className="w-fit"
+          className="w-full grid"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="prose prose-stone dark:prose-invert">
+          <div className="flex gap-2 my-2">
+            <div>
+              <label
+                htmlFor="cover-image"
+                className="hover:bg-slate-200 cursor-pointer rounded-full p-2 flex content-start max-w-fit gap-2 items-center"
+              >
+                <Image />
+                <span>{previewImageUrl ? "Change" : "Add"} Cover Image</span>
+              </label>
+              <input
+                type="file"
+                id="cover-image"
+                name="cover-image"
+                className="hidden"
+                onChange={(e) => {
+                  let file = e.target.files[0];
+                  let clientFileUrl = URL.createObjectURL(file);
+                  setPreviewImageUrl(clientFileUrl);
+                  setCoverImage(file);
+                }}
+              />
+            </div>
+            {previewImageUrl ? <div
+              onClick={() => {
+                setPreviewImageUrl('')
+                setCoverImage(null)
+              } }
+              className="hover:bg-rose-100 text-red-400 cursor-pointer rounded-full p-2 flex content-start max-w-fit gap-2 items-center" >
+              <MinusCircle />
+              <span>Remove Cover Image</span>
+            </div>
+              : null
+}
+          </div>
+          {previewImageUrl ? <div className="not-prose w-full h-[500px] my-4  rounded-md overflow-hidden">
+            <img
+              src={previewImageUrl}
+              alt="cover image"
+              className="object-cover object-top w-full h-full"
+            />
+          </div>
+: null
+}
+          <div className="">
             <TextareaAutosize
               ref={(e) => {
                 titleRef(e);
@@ -247,7 +311,7 @@ export default function CreateForm({ title, content, }: { title?: string, conten
               placeholder="Title"
               className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none"
             />
-            <div id="editor" className="min-h-[500px]" />
+            <div id="editor" className="min-h-[calc(100vh-350px)]" />
             <p className="text-sm text-gray-500">
               Use{" "}
               <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
@@ -256,7 +320,16 @@ export default function CreateForm({ title, content, }: { title?: string, conten
               to open the command menu.
             </p>
           </div>
-          <Button>Submit</Button>
+          <Button
+            disabled={isCreating}
+            type="submit"
+            className="w-full max-w-[500px] mx-auto"
+          >
+            {isCreating && (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            )}
+            Create Post
+          </Button>
         </form>
       </div>
     </>

@@ -12,9 +12,8 @@ export default async function createPost() {
   const user = await getUser()
   if(!user) redirect("/login")
   return (
-    <div className="h-screen w-screen grid content-center gap-4 justify-center items-center">
+    <div className="max-w-[1000px] mx-auto p-4">
       <CreateForm />
-
     </div>
   );
 }

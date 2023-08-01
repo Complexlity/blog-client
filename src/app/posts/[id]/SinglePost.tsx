@@ -29,17 +29,18 @@ const SinglePost = ({ post }: { post: Post }) => {
 
   return (
     <div className="bg-white pb-8">
-      <div className="container">
-        <header className=" grid justify-center text-center py-8">
+      <div className=" MinusCircle ">
+        <header className=" grid max-w-[800px] mx-auto px-8 text-center py-8">
           <h1 className="font-extrabold text-3xl md:text-4xl mb-4">
             {post.title}
           </h1>
           <p className="mx-auto flex items-center gap-2 md:text-lg mb-4">
             <Image
-              src={defaultImg}
+              src={post.author.imageSrc}
               width={24}
               height={24}
-              className="rounded-full object-cover h-8 w-8"
+              className="rounded-full object-cover h-10 w-10 object-top"
+              unoptimized
               alt=""
             />
             <span className="font-bold">{post.author.name}</span>
@@ -95,23 +96,23 @@ const SinglePost = ({ post }: { post: Post }) => {
               </HoverCardContent>
             </HoverCard>
           </div>
-          <div className="h-[400px] mx-auto w-full m-10">
+          {
+            post.coverImageSource
+              ?
+          <div className="h-[500px] mx-auto w-full m-10">
             <Image
-              src={defaultImg}
+              src={post.coverImageSource}
               width={24}
               height={24}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-top"
               alt=""
+              unoptimized
             />
           </div>
+         : null }
         </header>
-        <main className="prose mx-auto relative">
+        <main className="prose mx-auto relative space-y-6">
           <EditorOutput content={JSON.parse(post.content)} />
-          {/* <h2>This is a header</h2>
-          <blockquote>What are you saying about this now</blockquote>
-          <p>
-
-            {post.content}</p> */}
           {/* Sticky Buttons */}
           <div className="not-prose sticky bottom-10 bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
             <div className="flex gap-1 items-center">

@@ -15,8 +15,9 @@ export interface Post {
   _id: string;
   title: string;
   content: string;
-  author: Pick<User, 'name' | '_id'>;
+  author: Pick<User, 'name' | '_id' | 'imageSrc'>;
   published: boolean;
+  coverImageSource?: string
   comments: OmittedComment[];
   likes: string[];
   likeCount: number;
