@@ -248,7 +248,7 @@ export default function CreateForm() {
 
   if (!isMounted) {
     return (
-      // < Skeleton count = { 24} />
+      
       <div className="w-full prose mx-auto">
         <form
           id="subreddit-post-form"
@@ -257,14 +257,14 @@ export default function CreateForm() {
         >
           <div className="flex gap-2 items-center my-2">
               <Skeleton circle={true} height={32} width={32} />
-              <Skeleton width={`80px`} height={24} />
+              <Skeleton width={`150px`} height={24} />
 
       </div>
 
 
           <div className="">
             <div id="editor" className="min-h-[calc(100vh-350px)]">
-              <Skeleton height={`calc(100vh - 200px)`}/>
+              <Skeleton height={`calc(100vh - 300px)`}/>
             </div>
             <p className="text-sm text-gray-500">
           <Skeleton height={`40px`}/>
