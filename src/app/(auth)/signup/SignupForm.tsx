@@ -247,8 +247,14 @@ const { startUpload } = useUploadThing("imageUploader", {
               // />
               <div>
                 <label
+                  tabIndex={0}
                   htmlFor="upload-profile"
                   className={buttonVariants({ className: "cursor-pointer" })}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      document.getElementById("upload-profile")?.click();
+                    }
+                  }}
                 >
                   Upload Image
                 </label>
@@ -272,8 +278,11 @@ const { startUpload } = useUploadThing("imageUploader", {
                 <div className="absolute -right-2 -top-2">
                   <HoverCard openDelay={1} closeDelay={1}>
                     <HoverCardTrigger>
-                        <span onClick={removeProfileImage} className="text-red-400 hover:text-red-600 cursor-pointer">
-                        <XCircle/>
+                      <span
+                        onClick={removeProfileImage}
+                        className="text-red-400 hover:text-red-600 cursor-pointer"
+                      >
+                        <XCircle />
                       </span>
                     </HoverCardTrigger>
                     <HoverCardContent className="border-0 border-transparent p-2">
