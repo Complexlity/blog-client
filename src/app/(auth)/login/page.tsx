@@ -5,16 +5,17 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { UserAuthForm } from "./LoginForm";
+import { Icons } from "@/components/Icons";
 
 export const metadata: Metadata = {
-  title: "Authentication",
-  description: "Authentication forms built using the components.",
+  title: "Login",
+  description: "Access full blogging rights by logging in",
 };
 
 export default function AuthenticationPage() {
   return (
     <>
-      <div className="md:hidden">
+      <div className="hidden">
         <Image
           src="/examples/authentication-light.png"
           width={1280}
@@ -38,33 +39,20 @@ export default function AuthenticationPage() {
             "absolute right-4 top-4 md:right-8 md:top-8"
           )}
         >
-          Signup
+          Sign Up
         </Link>
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-zinc-900" />
           <div className="relative z-20 flex items-center text-lg font-medium">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="mr-2 h-6 w-6"
-            >
-              <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
-            </svg>
-            Acme Inc
+            <Icons.logo className="mr-2 h-6 w-6 text-blue-500" />
+            Complex Blog
           </div>
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
               <p className="text-lg">
-                &ldquo;This library has saved me countless hours of work and
-                helped me deliver stunning designs to my clients faster than
-                ever before.&rdquo;
+                &ldquo;Believe you can and you're halfway there.&rdquo;
               </p>
-              <footer className="text-sm">Sofia Davis</footer>
+              <footer className="text-sm">Theodore Roosevelt</footer>
             </blockquote>
           </div>
         </div>
@@ -82,14 +70,14 @@ export default function AuthenticationPage() {
             <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking continue, you agree to our{" "}
               <Link
-                href="/terms"
+                href="#"
                 className="underline underline-offset-4 hover:text-primary"
               >
                 Terms of Service
               </Link>{" "}
               and{" "}
               <Link
-                href="/privacy"
+                href="#"
                 className="underline underline-offset-4 hover:text-primary"
               >
                 Privacy Policy

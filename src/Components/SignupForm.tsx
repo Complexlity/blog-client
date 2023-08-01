@@ -25,6 +25,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { toast } from "./ui/use-toast";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
 
@@ -54,7 +55,7 @@ const signUpSchema = z
 type SignupInput = z.infer<typeof signUpSchema>;
 
 export default function SignupForm() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const router = useRouter();
   const [registerError, setRegisterError] = useState(
     "Bad things have happened"
@@ -87,7 +88,10 @@ export default function SignupForm() {
       }
       form.reset();
       router.refresh()
-      setOpen(false)
+      toast({
+        title: "Please login now"
+      })
+      // setOpen(false)
     } catch (error: any) {}
   }
 

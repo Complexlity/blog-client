@@ -235,16 +235,6 @@ const { startUpload } = useUploadThing("imageUploader", {
           <div className="flex justify-center items-center border-zinc-200 border-2 shadow-sm p-4 gap-8 rounded-md">
             <p className="text-xl">Profile Image: </p>
             {!imageUrl ? (
-              // <UploadButton
-              //   endpoint="imageUploader"
-              //   onClientUploadComplete={(res) => {
-              //     setImageUrl(res![0].fileUrl);
-              //   }}
-              //   onUploadError={(error: Error) => {
-              //     // Do something with the error.
-              //     alert(`ERROR! ${error.message}`);
-              //   }}
-              // />
               <div>
                 <label
                   tabIndex={0}
@@ -298,9 +288,6 @@ const { startUpload } = useUploadThing("imageUploader", {
             className={"w-full"}
             disabled={isLoading}
           >
-            {/* {isLoading && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )} */}
             Sign up
           </Button>
         </form>

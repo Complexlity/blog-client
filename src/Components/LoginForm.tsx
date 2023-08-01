@@ -27,6 +27,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { revalidatePath } from "next/cache";
+import { toast } from "./ui/use-toast";
 
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
@@ -45,7 +47,7 @@ export default function LoginForm({
   className,
 
 }: {
-  className: string;
+  className?: string;
 
   }) {
   const [open, setOpen] = useState(false);
@@ -74,6 +76,9 @@ export default function LoginForm({
       }
       form.reset();
       setOpen(false);
+      toast({
+        title: `Signed In`
+      })
 
       router.refresh()
 
