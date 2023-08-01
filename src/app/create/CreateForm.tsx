@@ -40,6 +40,9 @@ import { Image } from "lucide-react";
 import { useUploadThing } from "@/lib/uploadthing";
 import { Icons } from '@/components/Icons';
 import { ErrorMessage } from "@hookform/error-message"
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
 
@@ -77,7 +80,7 @@ export default function CreateForm() {
 
   const pathname = usePathname();
 
-  const { mutate: createPostt, isLoading: isCreating } = useMutation({
+  const { mutate: createPost, isLoading: isCreating } = useMutation({
     mutationFn: async (payload: CreatePostInput) => {
       if (coverImage) {
         const res = await startUpload([coverImage])
@@ -240,11 +243,37 @@ export default function CreateForm() {
       content: JSON.stringify(blocks),
       published: true
     };
-    createPostt(payload);
+    createPost(payload);
   }
 
   if (!isMounted) {
-    return <div>Loading...</div>
+    return (
+      // < Skeleton count = { 24} />
+      <div className="w-full prose mx-auto">
+        <form
+          id="subreddit-post-form"
+          className="w-full grid"
+
+        >
+          <div className="flex gap-2 items-center my-2">
+              <Skeleton circle={true} height={32} width={32} />
+              <Skeleton width={`80px`} height={24} />
+
+      </div>
+
+
+          <div className="">
+            <div id="editor" className="min-h-[calc(100vh-350px)]">
+              <Skeleton height={`calc(100vh - 200px)`}/>
+            </div>
+            <p className="text-sm text-gray-500">
+          <Skeleton height={`40px`}/>
+            </p>
+          </div>
+
+        </form>
+      </div>
+    );
   }
 
   const { ref: titleRef, ...rest } = register("title");
