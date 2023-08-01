@@ -29,6 +29,13 @@ import { toast } from "@/components/ui/use-toast";
 import "@uploadthing/react/styles.css";
 import { UploadButton } from "@/lib/uploadthing";
 import Image from "next/image";
+import { useUploadThing } from "@/lib/uploadthing";
+import { MinusCircle, XCircle } from "lucide-react";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
 
@@ -65,6 +72,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 const router = useRouter();
   const [registerError, setRegisterError] = useState("Bad things have happened");
   const [imageUrl, setImageUrl] = useState('')
+  const [imageFile, setImageFile] = useState(null)
 
 const form = useForm<SignupInput>({
   resolver: zodResolver(signUpSchema),
@@ -78,7 +86,7 @@ const form = useForm<SignupInput>({
 
 async function onSubmit(values: SignupInput) {
   const createUser = `${SERVER_DOMAIN}/users`;
-  if (!imageUrl) {
+  if (!imageFile) {
     toast({
       title: "Please add a profile image",
       variant: "destructive"
@@ -87,7 +95,9 @@ async function onSubmit(values: SignupInput) {
   }
   try {
     setIsLoading(true)
-    const response = await fetcher(createUser, {}, "POST", {...values, imageSrc: imageUrl});
+    const res = await startUpload([imageFile]);
+    const fileUrl = res![0].fileUrl;
+    const response = await fetcher(createUser, {}, "POST", {...values, imageSrc: fileUrl});
 
     //@ts-ignore
     if (response && response.status !== 200) {
@@ -109,7 +119,28 @@ async function onSubmit(values: SignupInput) {
   } catch (error: any) {}
 }
 
+  function addProfileImage(e: any) {
+    let file = e.target.files[0];
+    let clientFileUrl = URL.createObjectURL(file);
+    setImageUrl(clientFileUrl);
+    setImageFile(file);
+  }
 
+  function removeProfileImage() {
+    setImageUrl('')
+    setImageFile(null)
+  }
+
+const { startUpload } = useUploadThing("imageUploader", {
+  onClientUploadComplete: () => {
+    // alert("uploaded successfully!");
+    console.log("uploadSuccessful");
+  },
+  onUploadError: () => {
+    alert("error occurred while uploading");
+    throw new Error("Image Could not be uploaded");
+  },
+});
 
 
 
@@ -204,30 +235,63 @@ async function onSubmit(values: SignupInput) {
           <div className="flex justify-center items-center border-zinc-200 border-2 shadow-sm p-4 gap-8 rounded-md">
             <p className="text-xl">Profile Image: </p>
             {!imageUrl ? (
-              <UploadButton
-                endpoint="imageUploader"
-                onClientUploadComplete={(res) => {
-                  setImageUrl(res![0].fileUrl);
-                }}
-                onUploadError={(error: Error) => {
-                  // Do something with the error.
-                  alert(`ERROR! ${error.message}`);
-                }}
-              />
+              // <UploadButton
+              //   endpoint="imageUploader"
+              //   onClientUploadComplete={(res) => {
+              //     setImageUrl(res![0].fileUrl);
+              //   }}
+              //   onUploadError={(error: Error) => {
+              //     // Do something with the error.
+              //     alert(`ERROR! ${error.message}`);
+              //   }}
+              // />
+              <div>
+                <label
+                  htmlFor="upload-profile"
+                  className={buttonVariants({ className: "cursor-pointer" })}
+                >
+                  Upload Image
+                </label>
+                <input
+                  type="file"
+                  id="upload-profile"
+                  name="upload-profile"
+                  className="hidden"
+                  onChange={addProfileImage}
+                />
+              </div>
             ) : (
-              <img
-                alt="Profile Image"
-                src={imageUrl}
-                width={50}
-                height={50}
-                className="w-24 h-24 rounded-full object-cover object-top"
-              />
+              <div className="relative">
+                <img
+                  alt="Profile Image"
+                  src={imageUrl}
+                  width={50}
+                  height={50}
+                  className="w-24 h-24 rounded-full object-cover object-top"
+                />
+                <div className="absolute -right-2 -top-2">
+                  <HoverCard openDelay={1} closeDelay={1}>
+                    <HoverCardTrigger>
+                        <span onClick={removeProfileImage} className="text-red-400 hover:text-red-600 cursor-pointer">
+                        <XCircle/>
+                      </span>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="border-0 border-transparent p-2">
+                      Remove Image
+                    </HoverCardContent>
+                  </HoverCard>
+                </div>
+              </div>
             )}
           </div>
-          <Button className={"w-full"} disabled={isLoading}>
-            {isLoading && (
+          <Button
+            isLoading={isLoading}
+            className={"w-full"}
+            disabled={isLoading}
+          >
+            {/* {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
+            )} */}
             Sign up
           </Button>
         </form>

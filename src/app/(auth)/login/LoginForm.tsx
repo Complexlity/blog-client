@@ -133,10 +133,10 @@ const form = useForm<CreateSessionInput>({
               </FormItem>
             )}
           />
-          <Button className={"w-full"} disabled={isLoading}>
-            {isLoading && (
+          <Button isLoading={isLoading} className={"w-full"} disabled={isLoading}>
+            {/* {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
+            )} */}
             Sign Up with Email
           </Button>
 

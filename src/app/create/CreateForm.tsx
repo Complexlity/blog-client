@@ -226,7 +226,7 @@ export default function CreateForm() {
   const { startUpload } = useUploadThing("imageUploader", {
     onClientUploadComplete: () => {
       // alert("uploaded successfully!");
-      console.log("uploadSuccessful");
+      // console.log("uploadSuccessful");
     },
     onUploadError: () => {
       alert("error occurred while uploading");
@@ -350,13 +350,14 @@ export default function CreateForm() {
             </p>
           </div>
           <Button
+            isLoading={isCreating}
             disabled={isCreating}
             type="submit"
             className="w-full max-w-[500px] mx-auto"
           >
-            {isCreating && (
+            {/* {isCreating && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
+            )} */}
             Create Post
           </Button>
         </form>
