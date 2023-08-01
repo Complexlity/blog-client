@@ -24,7 +24,7 @@ function SingleComment({ comment }: { comment: OmittedComment }) {
         />
         <div>
           <p className="font-bold">{comment.user.name}</p>
-          <span>{formatDate(comment.createdAt, "full")}</span>
+          <span>{formatDate(comment.createdAt)}</span>
         </div>
       </div>
       <div className="prose">{comment.comment}</div>

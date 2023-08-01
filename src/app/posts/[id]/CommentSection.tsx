@@ -14,6 +14,7 @@ import axios, { isAxiosError } from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import useSession from "@/hooks/useSession";
 import { cn } from "@/lib/utils";
+import TextareaAutosize from 'react-textarea-autosize'
 
 function CommentSection({ postId, comments }: { postId: string, comments: OmittedComment[] }) {
     const { toast } = useToast();
@@ -70,10 +71,11 @@ function CommentSection({ postId, comments }: { postId: string, comments: Omitte
 
   return (
     <div className="">
-      <h3 className="font-semibold text-xl">Comments ({postComments.length})</h3>
+      <h3 className="font-semibold text-xl">
+        Comments ({postComments.length})
+      </h3>
       <div className="content divide-y-2">
-        {
-user ?
+        {user ? (
           <div className="grid gap-4 my-6">
             <div className="flex gap-2 items-center">
               <Image
@@ -81,15 +83,17 @@ user ?
                 width={24}
                 height={24}
                 className="rounded-full object-cover h-10 w-10 object-top"
-                  alt=""
-                  unoptimized
+                alt=""
+                unoptimized
               />
               <span className="font-bold">{user.name}</span>
             </div>
             <form className="grid" onSubmit={handleSubmit}>
-              <Textarea
-                className="resize-none border-none focus-visible:ring-0 focus-visible:ring-offset-0 text-lg"
+
+              <TextareaAutosize
                 placeholder="Write a thoughful comment"
+                className="resize-none border-none focus-visible:ring-0 focus-visible:outline-none focus-visible:ring-offset-0 text-lg mb-4"
+                minRows={2}
                 onChange={(e) => {
                   setComment(e.target.value);
                 }}
@@ -100,7 +104,7 @@ user ?
               </Button>
             </form>
           </div>
-      : null  }
+        ) : null}
         <div className="comments py-2">
           <div className="divide-y-2">
             {postComments.length !== 0 ? (

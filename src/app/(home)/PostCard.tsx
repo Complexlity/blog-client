@@ -21,7 +21,7 @@ const PostCard = ({ post }: { post: Post }) => {
         <div className="flex gap-2 items-center justify-between">
           <div className="flex items-center gap-1">
             <Image
-              src={defaultImg}
+              src={post.author.imageSrc}
               alt="image"
               className="rounded-full w-12 h-12 object-cover"
             />
