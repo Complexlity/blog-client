@@ -77,14 +77,14 @@ user ?
           <div className="grid gap-4 my-6">
             <div className="flex gap-2 items-center">
               <Image
-                src={user.imageSrc ?? defaultImg}
+                src={user.imageSrc}
                 width={24}
                 height={24}
                 className="rounded-full object-cover h-10 w-10 object-top"
                   alt=""
                   unoptimized
               />
-              <span className="font-bold">{user?.name}</span>
+              <span className="font-bold">{user.name}</span>
             </div>
             <form className="grid" onSubmit={handleSubmit}>
               <Textarea

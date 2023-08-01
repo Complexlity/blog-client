@@ -5,11 +5,18 @@ import CustomImageRenderer from '@/components/renderers/CustomImageRenderer'
 import { FC } from 'react'
 import dynamic from 'next/dynamic'
 import CustomQuoteRenderer from '@/components/renderers/CustomQuoteRenderer'
-
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import "react-loading-skeleton/dist/skeleton.css";
 const Output = dynamic(
   async () => (await import('editorjs-react-renderer')).default,
-  { ssr: false }
+  {
+    ssr: false,
+    loading: () => <PostSkeleton />
+  }
 )
+
+
+
 
 interface EditorOutputProps {
   content: any
@@ -31,18 +38,41 @@ const renderers = {
 }
 
 
+function PostSkeleton() {
+  return (
+    <SkeletonTheme baseColor="#e5e7eb" highlightColor="#d1d5db">
+      <div className="w-full prose mx-auto z-[-10] -mt-5">
+
+          <div className="text-sm text-gray-500">
+            <Skeleton height={`30`} />
+            <Skeleton height={`30`} width={`80%`} />
+            <Skeleton height={`30`} width={`50%`} />
+            <Skeleton height={`30`} width={`80%`} />
+            <Skeleton height={`30`} width={`40%`} />
+            <Skeleton height={`30`} width={`50%`} />
+            <Skeleton height={`30`} width={`90%`} />
+            <Skeleton height={`30`} width={`80%`} />
+            <Skeleton height={`30`} />
+          </div>
+        
+      </div>
+    </SkeletonTheme>
+  );
+}
+
+
 
 
 const EditorOutput: FC<EditorOutputProps> = ({ content }) => {
   return (
     <>
-    <Output
+      <Output
       renderers={renderers}
         data={content}
         config={config}
       />
-      </>
-  )
+    </>
+  );
 }
 
 export default EditorOutput

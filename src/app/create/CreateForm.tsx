@@ -40,7 +40,7 @@ import { Image } from "lucide-react";
 import { useUploadThing } from "@/lib/uploadthing";
 import { Icons } from '@/components/Icons';
 import { ErrorMessage } from "@hookform/error-message"
-import Skeleton from "react-loading-skeleton";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 
@@ -248,31 +248,25 @@ export default function CreateForm() {
 
   if (!isMounted) {
     return (
-      
-      <div className="w-full prose mx-auto">
-        <form
-          id="subreddit-post-form"
-          className="w-full grid"
-
-        >
-          <div className="flex gap-2 items-center my-2">
+      <SkeletonTheme baseColor="#e5e7eb" highlightColor="#d1d5db">
+        <div className="w-full prose mx-auto">
+          <form id="subreddit-post-form" className="w-full grid">
+            <div className="flex gap-2 items-center my-2">
               <Skeleton circle={true} height={32} width={32} />
               <Skeleton width={`150px`} height={24} />
-
-      </div>
-
-
-          <div className="">
-            <div id="editor" className="min-h-[calc(100vh-350px)]">
-              <Skeleton height={`calc(100vh - 300px)`}/>
             </div>
-            <p className="text-sm text-gray-500">
-          <Skeleton height={`40px`}/>
-            </p>
-          </div>
 
-        </form>
-      </div>
+            <div className="">
+              <div id="editor" className="min-h-[calc(100vh-350px)]">
+                <Skeleton height={`calc(100vh - 300px)`} />
+              </div>
+              <p className="text-sm text-gray-500">
+                <Skeleton height={`40px`} />
+              </p>
+            </div>
+          </form>
+        </div>
+      </SkeletonTheme>
     );
   }
 
@@ -338,7 +332,7 @@ export default function CreateForm() {
               }}
               {...rest}
               placeholder="Title"
-              className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none"
+              className="text-black w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none"
             />
             <div id="editor" className="min-h-[calc(100vh-350px)]" />
             <p className="text-sm text-gray-500">
@@ -355,10 +349,7 @@ export default function CreateForm() {
             type="submit"
             className="w-full max-w-[500px] mx-auto"
           >
-            {/* {isCreating && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )} */}
-            Create Post
+            {isCreating ? "Creating..." : "Create Post"}
           </Button>
         </form>
       </div>

@@ -104,7 +104,7 @@ const SinglePost = ({ post }: { post: Post }) => {
               src={post.coverImageSource}
               width={24}
               height={24}
-              className="w-full h-full object-cover object-top"
+              className="w-full h-full object-cover object-top rounded-md"
               alt=""
               unoptimized
             />

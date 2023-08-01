@@ -134,7 +134,7 @@ async function onSubmit(values: SignupInput) {
 const { startUpload } = useUploadThing("imageUploader", {
   onClientUploadComplete: () => {
     // alert("uploaded successfully!");
-    console.log("uploadSuccessful");
+    // console.log("uploadSuccessful");
   },
   onUploadError: () => {
     alert("error occurred while uploading");

@@ -127,9 +127,10 @@ function HeartWithUser({
       onClick={likePost}
     >
       <Heart
+        className={`${likedByMe ? "text-red-500" :"text-black"} hover:text-rose-500`}
         size={23}
         fill={likedByMe ? "red" : "none"}
-        color={likedByMe ? "red" : "black"}
+
       />
     </div>
   );
@@ -137,11 +138,11 @@ function HeartWithUser({
 
 function HeartWithoutUser() {
   return (
-    <HoverCard openDelay={2}>
+    <HoverCard openDelay={1} closeDelay={1}>
       <HoverCardTrigger>
         <Heart className="fill-gray-200 text-gray-300" />
       </HoverCardTrigger>
-      <HoverCardContent className="border-0 border-transparent p-2 text-gray-400">
+      <HoverCardContent className="border-0 border-transparent p-2 text-gray-600">
         Login to like posts
       </HoverCardContent>
     </HoverCard>

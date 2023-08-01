@@ -9,13 +9,14 @@ import useSession from "@/hooks/useSession";
 import DeleteButton from "./DeleteButton";
 
 function SingleComment({ comment }: { comment: OmittedComment }) {
-const user = useSession()
+  const user = useSession()
+  // console.log(comment.user)
   return (
     <div className="space-y-4  py-4">
       <div className="profile flex items-center gap-1">
         <Image
           unoptimized
-          src={comment.user.imageSrc ?? defaultImg}
+          src={comment.user.imageSrc}
           alt=""
           width={12}
           height={12}
