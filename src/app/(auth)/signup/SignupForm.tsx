@@ -43,16 +43,16 @@ const signUpSchema = z
   .object({
     name: z
       .string({ required_error: "required" })
-      .min(2, "Too short")
-      .max(40, "Too long"),
+      .min(2, "Minimum 2 characters")
+      .max(20, "Maximum 20 characters"),
     email: z
       .string({ required_error: "required" })
       .trim()
-      .email("Invalid email address"),
+      .email("Email is invalid"),
     password: z
       .string({ required_error: "required" })
       .trim()
-      .min(8, "Too short"),
+      .min(8, "Must be at least 8 characters"),
     passwordConfirmation: z.string({
       required_error: "Password Confirmation is required",
     }),

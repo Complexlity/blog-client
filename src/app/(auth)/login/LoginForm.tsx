@@ -40,8 +40,8 @@ const logInSchema = z.object({
   email: z
     .string({ required_error: "required" })
     .trim()
-    .email("Invalid email address"),
-  password: z.string({ required_error: "required" }).trim().min(8, "Too short"),
+    .email("Email address is invalid"),
+  password: z.string({ required_error: "required" }).trim().min(8, "Minimum of 8 characters"),
 });
 
 type CreateSessionInput = z.infer<typeof logInSchema>;
@@ -134,8 +134,7 @@ const form = useForm<CreateSessionInput>({
             )}
           />
           <Button isLoading={isLoading} className={"w-full"} disabled={isLoading}>
-            
-            Sign Up with Email
+            Log In
           </Button>
 
         </form>
