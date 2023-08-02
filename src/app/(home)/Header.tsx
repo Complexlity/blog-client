@@ -1,9 +1,9 @@
 "use client";
 
-import Navbar from "../../components/NavBar";
-import Image from 'next/image'
+import Image from 'next/image';
 import personImg from "../../../public/person.svg";
 import person2Img from "../../../public/person2.svg";
+import Navbar from "../../components/NavBar";
 
 
 const Hero = () => {

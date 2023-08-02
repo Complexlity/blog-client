@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { UserAuthForm } from "./SignupForm";
 import { Icons } from "@/components/Icons";
-import { ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { ChevronsLeft, ChevronsRight } from "lucide-react";
+import { UserAuthForm } from "./SignupForm";
 
 export const metadata: Metadata = {
   title: "Sign Up",

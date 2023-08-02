@@ -1,10 +1,10 @@
-import { Inter } from "next/font/google";
-import Navbar from "@/components/NavBar";
 import Footer from "@/components/Footer";
-import "../(home)/globals.css";
-import Providers from "@/contexts/Providers";
+import Navbar from "@/components/NavBar";
 import { Toaster } from "@/components/ui/toaster";
-import { getPosts, getUser } from "@/lib/serverFunctions";
+import Providers from "@/contexts/Providers";
+import { getUser } from "@/lib/serverFunctions";
+import { Inter } from "next/font/google";
+import "../(home)/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

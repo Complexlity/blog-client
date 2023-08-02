@@ -1,15 +1,6 @@
 "use client";
 
 
-import EditorJS from '@editorjs/editorjs'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { usePathname, useRouter } from 'next/navigation'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import TextareaAutosize from 'react-textarea-autosize'
-import { z } from 'zod'
-import { uploadFiles } from "@/lib/uploadthing";
-import "@/styles/editor.css";
 import {
   Select,
   SelectContent,
@@ -17,40 +8,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { uploadFiles } from "@/lib/uploadthing";
+import "@/styles/editor.css";
+import EditorJS from '@editorjs/editorjs';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { usePathname, useRouter } from 'next/navigation';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import TextareaAutosize from 'react-textarea-autosize';
+import { z } from 'zod';
 
 
 
 
 
-import '@/styles/editor.css'
-import Link from "next/link";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { AlertCircle, MinusCircle } from "lucide-react";
+import '@/styles/editor.css';
+import { MinusCircle } from "lucide-react";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { useMutation } from "@tanstack/react-query";
-import { Textarea } from "@/components/ui/textarea";
-import axios from "axios";
-import { Editor } from "@/app/create/Editor";
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
-import EditorOutput from './EditorOutput';
-import defaultImg from '@/../public/default.svg'
-import { Image } from "lucide-react";
+import { PostCategory } from '@/lib/types';
 import { useUploadThing } from "@/lib/uploadthing";
-import { Icons } from '@/components/Icons';
-import { ErrorMessage } from "@hookform/error-message"
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { Image } from "lucide-react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { PostCategory } from '@/lib/types';
 
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;

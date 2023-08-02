@@ -1,20 +1,16 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { OmittedComment } from "@/lib/types";
-import { ChevronDown } from "lucide-react";
-import Image from "next/image";
-import defaultImg from "../../../../public/default.svg";
-import SingleComment from "./SingleComment";
-import { Comment, Post } from "@/lib/types";
-import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import axios, { isAxiosError } from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import useSession from "@/hooks/useSession";
+import { Comment, OmittedComment } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
+import axios, { isAxiosError } from "axios";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import SingleComment from "./SingleComment";
 
 function CommentSection({
   postId,

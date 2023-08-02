@@ -1,7 +1,7 @@
-import { Metadata } from "next";
-import CreateForm from "./CreateForm";
 import { getUser } from "@/lib/serverFunctions";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+import CreateForm from "./CreateForm";
 
 export const metadata: Metadata = {
   title: "Create New Post | Complex blog",

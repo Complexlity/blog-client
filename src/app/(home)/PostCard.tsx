@@ -1,16 +1,15 @@
-import Image from 'next/image';
-import defaultImg from '../../../public/default.svg'
 import { Badge } from "@/components/ui/badge";
-import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/button';
-import { ChevronRight } from "lucide-react";
 import { Post } from '@/lib/types';
 import { formatDate, getCategoryColor } from '@/lib/utils';
+import { ChevronRight } from "lucide-react";
+import Image from 'next/image';
+import Link from 'next/link';
 
 
 const PostCard = ({ post }: { post: Post }) => {
 
-  
+
   return (
     <div className="rounded-2xl p-4 bg-blueDark grid gap-2 hover:scale-[101%] transition-all duration-150 ease-in-out">
       {post.coverImageSource ?

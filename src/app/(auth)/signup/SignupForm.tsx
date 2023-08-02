@@ -2,18 +2,10 @@
 
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
-import { Icons } from "@/components/Icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
-import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Form,
@@ -23,19 +15,22 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
-import fetcher from "@/lib/fetcher";
-import { toast } from "@/components/ui/use-toast";
-import "@uploadthing/react/styles.css";
-import { UploadButton } from "@/lib/uploadthing";
-import Image from "next/image";
-import { useUploadThing } from "@/lib/uploadthing";
-import { MinusCircle, XCircle } from "lucide-react";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { toast } from "@/components/ui/use-toast";
+import fetcher from "@/lib/fetcher";
+import { useUploadThing } from "@/lib/uploadthing";
+import "@uploadthing/react/styles.css";
+import { XCircle } from "lucide-react";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
 

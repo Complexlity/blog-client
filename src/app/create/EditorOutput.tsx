@@ -1,12 +1,11 @@
 'use client'
 
 import CustomCodeRenderer from '@/components/renderers/CustomCodeRenderer'
-import CustomImageRenderer from '@/components/renderers/CustomImageRenderer'
-import { FC } from 'react'
-import dynamic from 'next/dynamic'
 import CustomQuoteRenderer from '@/components/renderers/CustomQuoteRenderer'
+import dynamic from 'next/dynamic'
+import { FC } from 'react'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-import "react-loading-skeleton/dist/skeleton.css";
+import "react-loading-skeleton/dist/skeleton.css"
 const Output = dynamic(
   async () => (await import('editorjs-react-renderer')).default,
   {
@@ -54,7 +53,7 @@ function PostSkeleton() {
             <Skeleton height={`30`} width={`80%`} />
             <Skeleton height={`30`} />
           </div>
-        
+
       </div>
     </SkeletonTheme>
   );

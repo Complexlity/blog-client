@@ -1,18 +1,18 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { Heart } from "lucide-react";
-import { useEffect, useState } from "react";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import useSession from "@/hooks/useSession";
-import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
 import { toast } from "@/components/ui/use-toast";
-import {usePrevious} from '@mantine/hooks'
+import useSession from "@/hooks/useSession";
+import { usePrevious } from '@mantine/hooks';
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { Heart } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface Props {
   id: string;

@@ -1,7 +1,7 @@
 import Header from "@/app/(home)/Header";
+import Footer from "@/components/Footer";
 import Posts from "./Posts";
 import WriteForUs from "./WriteForUs";
-import Footer from "@/components/Footer";
 
 export default async function Home() {
   return (

@@ -1,27 +1,15 @@
 "use client";
 
-import { Icons } from "@/components/Icons";
-import defaultImg from "../../../../public/default.svg";
 
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { BookOpen, Heart, MessagesSquare } from "lucide-react";
-import Image from "next/image";
-import CommentSection from "./CommentSection";
-import { calculateTimeToReadPost, formatDate, getCategoryColor } from "@/lib/utils";
-import { Comment, Post } from "@/lib/types";
-import LikeButton from "./LikeButton";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
-import axios from "axios";
+import EditorOutput from "@/app/create/EditorOutput";
 import { useToast } from "@/components/ui/use-toast";
 import useSession from "@/hooks/useSession";
-import EditorOutput from "@/app/create/EditorOutput";
+import { Post } from "@/lib/types";
+import { calculateTimeToReadPost, formatDate, getCategoryColor } from "@/lib/utils";
+import { BookOpen, MessagesSquare } from "lucide-react";
+import Image from "next/image";
+import CommentSection from "./CommentSection";
+import LikeButton from "./LikeButton";
 
 const SinglePost = ({ post }: { post: Post }) => {
   const { toast } = useToast();

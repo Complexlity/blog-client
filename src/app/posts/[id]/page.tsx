@@ -1,8 +1,7 @@
 
-import SinglePost from "./SinglePost"
-import { getSinglePost, getUser } from '@/lib/serverFunctions'
-import {redirect} from 'next/navigation'
-import usePosts from "@/hooks/usePosts"
+import { getSinglePost } from '@/lib/serverFunctions';
+import { redirect } from 'next/navigation';
+import SinglePost from "./SinglePost";
 
 
 export const dynamic = "force-dynamic";

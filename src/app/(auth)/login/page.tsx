@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { UserAuthForm } from "./LoginForm";
 import { Icons } from "@/components/Icons";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
+import { UserAuthForm } from "./LoginForm";
 
 export const metadata: Metadata = {
   title: "Login",

@@ -1,6 +1,5 @@
-import usePosts from "@/hooks/usePosts";
-import PostCard from "./PostCard";
 import { getPosts } from "@/lib/serverFunctions";
+import PostCard from "./PostCard";
 
 
 

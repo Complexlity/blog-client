@@ -1,6 +1,5 @@
 'use client'
 
-import { Trash2 } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,10 +11,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { toast } from "@/components/ui/use-toast";
+import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 

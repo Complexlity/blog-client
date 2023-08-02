@@ -1,12 +1,11 @@
 'use client'
 
+import useSession from "@/hooks/useSession";
 import { OmittedComment } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
-import LikeButton from "./LikeButton";
 import Image from "next/image";
-import defaultImg from "../../../../public/default.svg";
-import useSession from "@/hooks/useSession";
 import DeleteButton from "./DeleteButton";
+import LikeButton from "./LikeButton";
 
 function SingleComment({ comment }: { comment: OmittedComment }) {
   const user = useSession()
