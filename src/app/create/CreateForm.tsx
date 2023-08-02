@@ -50,6 +50,7 @@ import { Icons } from '@/components/Icons';
 import { ErrorMessage } from "@hookform/error-message"
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { PostCategory } from '@/lib/types';
 
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
@@ -70,7 +71,7 @@ export default function CreateForm() {
   const router = useRouter();
   const [coverImage, setCoverImage] = useState(null);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState<PostCategory | null>(null)
 
 
   const {
@@ -205,7 +206,7 @@ export default function CreateForm() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsMounted(true);
+      setIsMounted(false);
     }
   }, []);
 
@@ -274,6 +275,9 @@ return toast({
             <div className="flex gap-2 items-center my-2">
               <Skeleton circle={true} height={32} width={32} />
               <Skeleton width={`150px`} height={24} />
+
+              <Skeleton width={`180px`} height={32} className="rounded-full" borderRadius={`9999vw`} />
+
             </div>
 
             <div className="">
@@ -334,7 +338,7 @@ return toast({
                 <span>Remove Cover Image</span>
               </div>
             ) : null}
-            <Select onValueChange={(value) => {
+            <Select onValueChange={(value: PostCategory) => {
                 setCategory(value)
             }}>
               <SelectTrigger className="w-[180px] rounded-full">

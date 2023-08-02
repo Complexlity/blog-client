@@ -38,3 +38,6 @@ export interface Comment {
 }
 
 export type OmittedComment = Omit<Comment, "updatedAt" | "post">;
+
+
+export type PostCategory = 'technology' | 'advice' | 'general' | 'stackies'
