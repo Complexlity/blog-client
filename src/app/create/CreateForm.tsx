@@ -82,15 +82,12 @@ export default function CreateForm() {
 
   const { mutate: createPost, isLoading: isCreating } = useMutation({
     mutationFn: async (payload: CreatePostInput) => {
-      if (coverImage) {
         const res = await startUpload([coverImage])
         const fileUrl = res![0].fileUrl
         payload.coverImageSource = fileUrl
         postData(payload)
-      }
-      else {
-        postData(payload)
-      }
+
+
 
      async function postData(payload: CreatePostInput) {
         const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
@@ -225,24 +222,31 @@ export default function CreateForm() {
 
   const { startUpload } = useUploadThing("imageUploader", {
     onClientUploadComplete: () => {
-      // alert("uploaded successfully!");
+      
       // console.log("uploadSuccessful");
     },
     onUploadError: () => {
-      alert("error occurred while uploading");
-      throw new Error("Something went wrong")
+      throw new Error("Something went wrong while uploading image")
     },
   });
 
   async function onSubmit(data: any) {
+    if (!coverImage) {
+      toast({
+        title: "Cover Image Missing",
+        description: "You need add a cover image to the post",
+        variant:'destructive'
+      })
+      return
+    }
 
     const blocks = await ref.current?.save();
-
     const payload = {
       title: data.title,
       content: JSON.stringify(blocks),
       published: true
     };
+
     createPost(payload);
   }
 
