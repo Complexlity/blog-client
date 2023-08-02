@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 
 export default async function Home() {
   return (
-    <>
+    <div>
       <Header />
       <Posts />
       <WriteForUs />
@@ -13,6 +13,6 @@ export default async function Home() {
         <Footer />
       </div>
 
-    </>
+    </div>
   );
 }
