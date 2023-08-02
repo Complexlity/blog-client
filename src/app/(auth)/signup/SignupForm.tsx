@@ -179,7 +179,7 @@ const { startUpload } = useUploadThing("imageUploader", {
                 <FormLabel>Email *</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="cool email"
+                    placeholder="enter a valid email"
                     {...field}
                     autoCapitalize="none"
                     autoComplete="email"
@@ -199,7 +199,7 @@ const { startUpload } = useUploadThing("imageUploader", {
                 <FormLabel>Password *</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="enter a strong password"
+                    placeholder="choose a strong password"
                     {...field}
                     autoCapitalize="none"
                     autoComplete="email"
