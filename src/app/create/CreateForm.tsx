@@ -206,7 +206,7 @@ export default function CreateForm() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsMounted(false);
+      setIsMounted(true);
     }
   }, []);
 

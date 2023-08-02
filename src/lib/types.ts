@@ -17,7 +17,8 @@ export interface Post {
   content: string;
   author: Pick<User, 'name' | '_id' | 'imageSrc'>;
   published: boolean;
-  coverImageSource?: string
+  coverImageSource: string;
+  category: PostCategory;
   comments: OmittedComment[];
   likes: string[];
   likeCount: number;

@@ -11,7 +11,7 @@ import {
 import { BookOpen, Heart, MessagesSquare } from "lucide-react";
 import Image from "next/image";
 import CommentSection from "./CommentSection";
-import { calculateTimeToReadPost, formatDate } from "@/lib/utils";
+import { calculateTimeToReadPost, formatDate, getCategoryColor } from "@/lib/utils";
 import { Comment, Post } from "@/lib/types";
 import LikeButton from "./LikeButton";
 import { Input } from "@/components/ui/input";
@@ -55,8 +55,8 @@ const SinglePost = ({ post }: { post: Post }) => {
             </span>
           </p>
           <div className="flex mx-auto gap-6 items-center justify-center">
-            <p className="px-6 py-2  bg-blueLight rounded-full text-blueDarkest font-bold hover:shadow-xl hover:shadow-gray-200">
-              Technology
+            <p style={{backgroundColor: getCategoryColor(post.category)}} className="px-6 py-2 rounded-full text-blueDarkest font-bold hover:shadow-xl hover:shadow-gray-200">
+              {post.category}
             </p>
             {/* <HoverCard openDelay={5}>
               <HoverCardTrigger>
