@@ -21,7 +21,7 @@ const WriteForUs = () => {
           inner wordsmith and become an author for our simple blog today! Trust
           us, it&apos;s a game-changer.
         </p>
-        <Button size={'lg'} className="bg-blueDark py-6 px-8">Join Us Now</Button>
+        <Button size={'lg'}>Join Us Now</Button>
       </div>
     </div>
   );
