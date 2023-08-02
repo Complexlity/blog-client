@@ -10,6 +10,14 @@ import TextareaAutosize from 'react-textarea-autosize'
 import { z } from 'zod'
 import { uploadFiles } from "@/lib/uploadthing";
 import "@/styles/editor.css";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 
 
 
@@ -62,6 +70,8 @@ export default function CreateForm() {
   const router = useRouter();
   const [coverImage, setCoverImage] = useState(null);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
+  const [category, setCategory] = useState('')
+
 
   const {
     register,
@@ -86,7 +96,6 @@ export default function CreateForm() {
         const fileUrl = res![0].fileUrl
         payload.coverImageSource = fileUrl
         postData(payload)
-
 
 
      async function postData(payload: CreatePostInput) {
@@ -222,7 +231,7 @@ export default function CreateForm() {
 
   const { startUpload } = useUploadThing("imageUploader", {
     onClientUploadComplete: () => {
-      
+
       // console.log("uploadSuccessful");
     },
     onUploadError: () => {
@@ -232,19 +241,26 @@ export default function CreateForm() {
 
   async function onSubmit(data: any) {
     if (!coverImage) {
-      toast({
+return toast({
         title: "Cover Image Missing",
         description: "You need add a cover image to the post",
         variant:'destructive'
       })
-      return
+    }
+    if(!category){
+      return toast({
+        title: "Select A Category",
+        variant: 'destructive'
+      })
+
     }
 
     const blocks = await ref.current?.save();
     const payload = {
       title: data.title,
       content: JSON.stringify(blocks),
-      published: true
+      published: true,
+      category
     };
 
     createPost(payload);
@@ -284,7 +300,7 @@ export default function CreateForm() {
           className="w-full grid"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="flex gap-2 my-2">
+          <div className="flex gap-2 my-2 items-center">
             <div>
               <label
                 htmlFor="cover-image"
@@ -306,27 +322,41 @@ export default function CreateForm() {
                 }}
               />
             </div>
-            {previewImageUrl ? <div
-              onClick={() => {
-                setPreviewImageUrl('')
-                setCoverImage(null)
-              } }
-              className="hover:bg-rose-100 text-red-400 cursor-pointer rounded-full p-2 flex content-start max-w-fit gap-2 items-center" >
-              <MinusCircle />
-              <span>Remove Cover Image</span>
+            {previewImageUrl ? (
+              <div
+                onClick={() => {
+                  setPreviewImageUrl("");
+                  setCoverImage(null);
+                }}
+                className="hover:bg-rose-100 text-red-400 cursor-pointer rounded-full p-2 flex content-start max-w-fit gap-2 items-center"
+              >
+                <MinusCircle />
+                <span>Remove Cover Image</span>
+              </div>
+            ) : null}
+            <Select onValueChange={(value) => {
+                setCategory(value)
+            }}>
+              <SelectTrigger className="w-[180px] rounded-full">
+                <SelectValue placeholder="Category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="technology">Technology</SelectItem>
+                <SelectItem value="advice">Advice</SelectItem>
+                <SelectItem value="stackies">Stackies</SelectItem>
+                <SelectItem value="general">General</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          {previewImageUrl ? (
+            <div className="not-prose w-full h-[500px] my-4  rounded-md overflow-hidden">
+              <img
+                src={previewImageUrl}
+                alt="cover image"
+                className="object-cover object-top w-full h-full"
+              />
             </div>
-              : null
-}
-          </div>
-          {previewImageUrl ? <div className="not-prose w-full h-[500px] my-4  rounded-md overflow-hidden">
-            <img
-              src={previewImageUrl}
-              alt="cover image"
-              className="object-cover object-top w-full h-full"
-            />
-          </div>
-: null
-}
+          ) : null}
           <div className="">
             <TextareaAutosize
               ref={(e) => {
@@ -338,7 +368,7 @@ export default function CreateForm() {
               placeholder="Title"
               className="text-black w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none"
             />
-            <div id="editor" className="min-h-[calc(100vh-350px)]" />
+            {/* <div id="editor" className="min-h-[calc(100vh-400px)]" /> */}
             <p className="text-sm text-gray-500">
               Use{" "}
               <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">

@@ -54,11 +54,11 @@ const SinglePost = ({ post }: { post: Post }) => {
               {calculateTimeToReadPost(post.content)} min read
             </span>
           </p>
-          <div className="flex mx-auto gap-6 items-center">
+          <div className="flex mx-auto gap-6 items-center justify-center">
             <p className="px-6 py-2  bg-blueLight rounded-full text-blueDarkest font-bold hover:shadow-xl hover:shadow-gray-200">
               Technology
             </p>
-            <HoverCard openDelay={5}>
+            {/* <HoverCard openDelay={5}>
               <HoverCardTrigger>
                 <div className="flex gap-2 items-center bg-gray-100 hover:bg-gray-200 rounded-full px-2 py-2 text-sm">
                   <Icons.loveIcon className="h-6 w-6 fill-gray-300 text-slate-600 stroke-current" />
@@ -94,7 +94,7 @@ const SinglePost = ({ post }: { post: Post }) => {
               >
                 {post.likeCount} people liked the post
               </HoverCardContent>
-            </HoverCard>
+            </HoverCard> */}
           </div>
           {
             post.coverImageSource
