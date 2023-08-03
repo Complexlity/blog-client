@@ -251,7 +251,7 @@ export default function CreateForm() {
   if (!isMounted) {
     return (
       <SkeletonTheme baseColor="#e5e7eb" highlightColor="#d1d5db">
-        <div className="w-full prose mx-auto">
+        <div className="max-w-[65ch] mb-0 w-full mx-auto">
           <form id="subreddit-post-form" className="w-full grid">
             <div className="flex gap-2 items-center my-2">
               <Skeleton circle={true} height={32} width={32} />
@@ -266,11 +266,11 @@ export default function CreateForm() {
             </div>
 
             <div className="">
-              <div id="editor" className="min-h-[calc(100vh-350px)]">
-                <Skeleton height={`calc(100vh - 300px)`} />
+              <div id="" className="min-h-[45vh] mb-2">
+                <Skeleton height={`100%`} className="h-full  min-h-[45ch]" />
               </div>
-              <p className="text-sm text-gray-500">
-                <Skeleton height={`40px`} />
+              <p className="text-sm text-gray-500 w-full max-w-[500px] mx-auto">
+                <Skeleton height={`35px`} />
               </p>
             </div>
           </form>
@@ -341,11 +341,11 @@ export default function CreateForm() {
             </Select>
           </div>
           {previewImageUrl ? (
-            <div className="not-prose w-full h-[500px] my-4  rounded-md overflow-hidden">
+            <div className="not-prose w-full max-w-[600px] aspect-square mx-auto my-2 mb-4 rounded-md overflow-hidden">
               <img
                 src={previewImageUrl}
                 alt="cover image"
-                className="object-cover object-top w-full h-full"
+                className="object-cover mx-auto object-top w-full h-full"
               />
             </div>
           ) : null}
