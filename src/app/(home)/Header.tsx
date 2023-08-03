@@ -3,7 +3,7 @@
 import Image from "next/image";
 import personImg from "../../../public/person.svg";
 import person2Img from "../../../public/person2.svg";
-import Navbar from "../../components/NavBar";
+import Navbar from '@/Components/NavBar'
 
 const Hero = () => {
   return (
