@@ -10,7 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@cloudinary/url-gen": "^1.11.0",
     "@editorjs/code": "^2.8.0",
     "@editorjs/editorjs": "^2.27.2",
     "@editorjs/embed": "^2.5.3",
@@ -19,8 +18,8 @@
     "@editorjs/inline-code": "^1.4.0",
     "@editorjs/link": "^2.5.0",
     "@editorjs/list": "^1.8.0",
+    "@editorjs/quote": "^2.5.0",
     "@editorjs/table": "^2.2.2",
-    "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^3.1.1",
     "@mantine/hooks": "^6.0.17",
     "@radix-ui/react-alert-dialog": "^1.0.4",
@@ -33,15 +32,14 @@
     "@radix-ui/react-select": "^1.2.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.4",
+    "@tailwindcss/typography": "^0.5.9",
     "@tanstack/react-query": "^4.32.0",
-    "@types/node": "20.3.2",
-    "@types/react": "18.2.14",
-    "@types/react-dom": "18.2.6",
     "@uploadthing/react": "^5.2.0",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "class-variance-authority": "^0.6.1",
     "clsx": "^1.2.1",
+    "daisyui": "^3.1.9",
     "dayjs": "^1.11.9",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
@@ -62,8 +60,8 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@editorjs/quote": "^2.5.0",
-    "@tailwindcss/typography": "^0.5.9",
-    "daisyui": "^3.1.9"
+    "@types/node": "20.3.2",
+    "@types/react": "18.2.14",
+    "@types/react-dom": "18.2.6"
   }
 }
