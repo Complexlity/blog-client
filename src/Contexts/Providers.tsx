@@ -1,9 +1,8 @@
 "use client";
 
 import SessionProvider from "@/contexts/SessionProvider";
-import { Post, User } from "@/lib/types";
+import { User } from "@/lib/types";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import PostsProvider from "./PostsProvider";
 
 const Providers = ({
   children,

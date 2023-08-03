@@ -1,7 +1,7 @@
 'use client'
 
 import { User } from "@/lib/types";
-import { useState, createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 export type GlobalPosts = {
   user: User | null;

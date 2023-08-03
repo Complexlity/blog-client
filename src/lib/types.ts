@@ -2,13 +2,13 @@ export interface User {
   _id: string;
   email: string;
   name: string;
+  imageSrc: string;
   createdAt: Date;
   updatedAt: Date;
   __v: number;
   session: string;
   iat: number;
   exp: number;
-  imageSrc: string;
 }
 
 export interface Post {
@@ -34,8 +34,8 @@ export interface Comment {
   post: string
   likes: string[]
   likeCount: number
-    createdAt: string
-    updatedAt: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 export type OmittedComment = Omit<Comment, "updatedAt" | "post">;

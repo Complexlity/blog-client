@@ -7,23 +7,18 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu";
-import { ArrowDownNarrowWide, ChevronDown, ExternalLink } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import defaultImg from '../../public/default.svg';
 import logo from '../../public/logo.png';
 
-import useSession from "@/hooks/useSession";
-import LoginForm from "./LoginForm";
-import SignupFrom from './SignupForm';
-import { Button, buttonVariants } from "./ui/button";
-import { Icons } from "./Icons";
-import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import axios, { isAxiosError } from "axios";
-import { useRouter } from "next/navigation";
-import { toast } from "./ui/use-toast";
 import { useUserContext } from "@/contexts/SessionProvider";
+import useSession from "@/hooks/useSession";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { Button, buttonVariants } from "./ui/button";
+import { toast } from "./ui/use-toast";
 
 import {
   DropdownMenu,
@@ -72,7 +67,7 @@ export default function Navbar() {
 
   return (
     <div className="bg-blueDarkest  ">
-      <div className="container flex items-center justify-between py-3 border-b-2 border-b-blueLight max-w-[900px]">
+      <div className="container flex items-center justify-between py-3 border-b-2 border-b-blueLight max-w-[1200px]">
         <NavigationMenu className="">
           <NavigationMenuList className="flex gap-8">
             <Link href="/">

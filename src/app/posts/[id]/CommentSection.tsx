@@ -66,18 +66,17 @@ function CommentSection({
 
   function handleSubmit(e: any) {
     e.preventDefault();
-    if (tooLong) {
-      toast({
-        title: "Comment is too long",
-        variant: "destructive",
-      });
-      return;
-    }
     createComment();
   }
 
   const almostTooLong = allowance < 10;
-  const tooLong = allowance < 0;
+  function updateComment(e) {
+    const newValue = e.target.value;
+    if (newValue.length > MAXIMUM_COMMENT_LENGTH) {
+      return;
+    }
+    setComment(e.target.value);
+  }
 
   return (
     <div className="">
@@ -103,17 +102,13 @@ function CommentSection({
                 placeholder="Write a thoughful comment"
                 className="resize-none border-none focus-visible:ring-0 focus-visible:outline-none focus-visible:ring-offset-0 text-lg mb-4"
                 minRows={2}
-                onChange={(e) => {
-                  setComment(e.target.value);
-                }}
+                onChange={updateComment}
                 value={newComment}
               />
               <div
                 className={cn(
                   `${
-                    tooLong
-                      ? "bg-red-500"
-                      : almostTooLong
+                    almostTooLong
                       ? "bg-red-200"
                       : "bg-blue-400"
                   } rounded-full  justify-self-end  flex items-center justify-center w-10 h-10 mb-2`

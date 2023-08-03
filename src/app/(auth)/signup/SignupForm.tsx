@@ -110,8 +110,16 @@ async function onSubmit(values: SignupInput) {
     toast({
       title: "Please Login"
     })
-    setIsLoading(false);
-  } catch (error: any) {}
+
+  } catch (error: any) {
+    toast({
+      title: error.message,
+      variant: "destructive"
+    })
+   }
+  finally {
+    setIsLoading(false)
+  }
 }
 
   function addProfileImage(e: any) {
@@ -132,8 +140,8 @@ const { startUpload } = useUploadThing("imageUploader", {
     // console.log("uploadSuccessful");
   },
   onUploadError: () => {
-    alert("error occurred while uploading");
-    throw new Error("Image Could not be uploaded");
+    // alert("error occurred while uploading");
+    throw new Error("Profile image upload failed!");
   },
 });
 
@@ -244,6 +252,7 @@ const { startUpload } = useUploadThing("imageUploader", {
                   Upload Image
                 </label>
                 <input
+                  accept="jpg"
                   type="file"
                   id="upload-profile"
                   name="upload-profile"

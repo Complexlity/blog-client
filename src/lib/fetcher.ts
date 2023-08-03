@@ -1,4 +1,4 @@
-const fetcher = async<T>(url: string, headers = {}, method = "GET", values: any = {}): Promise<Response | T | null> => {
+const fetcher = async(url: string, headers = {}, method = "GET", values: any = {}): Promise<Response | null> => {
   if(!values) values = null
   try {
     const response = await fetch(url, {
