@@ -52,7 +52,7 @@ type CreatePostInput = z.infer<typeof postSchema>;
 
 export default function CreateForm() {
   const router = useRouter();
-  const [coverImage, setCoverImage] = useState(null);
+  const [coverImage, setCoverImage] = useState<File | null>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [category, setCategory] = useState<PostCategory | null>(null)
 
@@ -76,8 +76,9 @@ export default function CreateForm() {
 
   const { mutate: createPost, isLoading: isCreating } = useMutation({
     mutationFn: async (payload: CreatePostInput) => {
-        const res = await startUpload([coverImage])
-        const fileUrl = res![0].fileUrl
+        const res = await startUpload([coverImage!])
+      const fileUrl = res![0].fileUrl
+      // @ts-ignore
         payload.coverImageSource = fileUrl
         postData(payload)
 
@@ -116,13 +117,21 @@ export default function CreateForm() {
   const initializeEditor = useCallback(async () => {
     const EditorJS = (await import("@editorjs/editorjs")).default;
     const Header = (await import("@editorjs/header")).default;
+    // @ts-ignore
     const Embed = (await import("@editorjs/embed")).default;
+    // @ts-ignore
     const Table = (await import("@editorjs/table")).default;
+    // @ts-ignore
     const List = (await import("@editorjs/list")).default;
+    // @ts-ignore
     const Code = (await import("@editorjs/code")).default;
+    // @ts-ignore
     const LinkTool = (await import("@editorjs/link")).default;
+    // @ts-ignore
     const InlineCode = (await import("@editorjs/inline-code")).default;
+    // @ts-ignore
     const ImageTool = (await import("@editorjs/image")).default;
+    // @ts-ignore
     const Quote = (await import('@editorjs/quote')).default
 
     if (!ref.current) {
@@ -303,6 +312,7 @@ return toast({
                 name="cover-image"
                 className="hidden"
                 onChange={(e) => {
+                  // @ts-ignore
                   let file = e.target.files[0];
                   let clientFileUrl = URL.createObjectURL(file);
                   setPreviewImageUrl(clientFileUrl);

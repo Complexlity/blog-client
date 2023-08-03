@@ -38,10 +38,7 @@ export default function AuthenticationPage() {
             <ChevronsLeft />
             Back to homepage
           </Link>
-          <Link
-            href="/signup"
-            className={cn(buttonVariants())}
-          >
+          <Link href="/signup" className={cn(buttonVariants())}>
             Sign Up
             <ChevronsRight />
           </Link>
@@ -55,7 +52,7 @@ export default function AuthenticationPage() {
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
               <p className="text-lg">
-                &ldquo;Believe you can and you're halfway there.&rdquo;
+                &lsquo;Believe you can and you&apos;re halfway there.&rsquo;
               </p>
               <footer className="text-sm">Theodore Roosevelt</footer>
             </blockquote>

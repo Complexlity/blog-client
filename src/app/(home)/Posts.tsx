@@ -12,7 +12,7 @@ const Posts = async () => {
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {posts?.map((post) => (
-            <PostCard post={post} />
+            <PostCard post={post} key={post._id} />
           ))}
         </div>
       </div>
