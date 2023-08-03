@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { User } from "@/lib/types";
+import { User } from "@/Lib/types";
 import { createContext, useContext, useState } from "react";
 
 export type GlobalPosts = {
@@ -14,7 +14,7 @@ const UserContext = createContext<GlobalPosts>({
 
 interface Props {
   children: React.ReactNode;
-  user: User | null
+  user: User | null;
 }
 
 export const useUserContext = () => useContext(UserContext);

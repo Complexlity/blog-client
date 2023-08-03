@@ -1,4 +1,4 @@
-import { Post, User } from "@/lib/types";
+import { Post, User } from "@/Lib/types";
 import { headers } from "next/headers";
 
 export async function getUser() {
@@ -21,21 +21,20 @@ export async function getUser() {
   return null;
 }
 
-export async function getPosts()  {
+export async function getPosts() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts?published=true`,
-
+    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts?published=true`
   );
-  if(!response.ok) return null
+  if (!response.ok) return null;
   const posts = (await response.json()) as unknown as Post[];
   return posts;
-};
+}
 
-export async function getSinglePost(id: string)  {
+export async function getSinglePost(id: string) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts/${id}`,
+    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts/${id}`
   );
-  if(!response.ok) return null
+  if (!response.ok) return null;
   const posts = (await response.json()) as unknown as Post;
   return posts;
-};
+}

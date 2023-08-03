@@ -1,9 +1,9 @@
-import Providers from "@/contexts/Providers";
+import Providers from "@/Contexts/Providers";
 import { Inter } from "next/font/google";
-import "@/styles/globals.css";
+import "@/Styles/globals.css";
 
 import { Toaster } from "@/Components/ui/toaster";
-import { getUser } from "@/lib/serverFunctions";
+import { getUser } from "@/Lib/serverFunctions";
 import { redirect } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });

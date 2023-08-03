@@ -1,7 +1,7 @@
 "use client";
 
-import { usePostsContext } from "@/contexts/PostsProvider";
-import { Post } from "@/lib/types";
+import { usePostsContext } from "@/Contexts/PostsProvider";
+import { Post } from "@/Lib/types";
 import { useEffect } from "react";
 
 const usePosts = () => {

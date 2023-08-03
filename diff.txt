@@ -589,7 +589,7 @@ index 4c5d6b5..0000000
 @@ -1,24 +0,0 @@
 -import * as React from "react"
 -
--import { cn } from "@/lib/utils"
+-import { cn } from "@/Lib/utils"
 -
 -export interface TextareaProps
 -  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
@@ -618,7 +618,7 @@ index 49484da..b08def1 100644
 @@ -1,94 +1,54 @@
 -'use client'
 +// "use client";
- 
+
 -import { Button } from "@/components/ui/button";
 -import { Textarea } from "@/components/ui/textarea";
 -import { ChevronDown, Heart } from "lucide-react";
@@ -636,7 +636,7 @@ index 49484da..b08def1 100644
 +//   DropdownMenuSeparator,
 +//   DropdownMenuTrigger,
 +// } from "@/components/ui/dropdown-menu";
- 
+
 -function CommentSection() {
 -  return (
 -    <div className="">
@@ -678,7 +678,7 @@ index 49484da..b08def1 100644
 +//           <Textarea placeholder="Write a thoughful comment" />
 +//           <Button className="justify-self-end">Comment</Button>
 +//         </div>
- 
+
 -        <div className="comments py-2">
 -          <div className="dropdown dropdown-bottom p-0">
 -            <label
@@ -726,7 +726,7 @@ index 49484da..b08def1 100644
 +//     </>
 +//   );
 +// }
- 
+
 -function SingleComment() {
 -  return (
 -    <div className="space-y-4 my-4">
@@ -779,7 +779,7 @@ index e509219..1ea8927 100644
 -import { BookOpen, Heart, MessagesSquare } from "lucide-react";
 -import CommentSection from "./CommentSection";
 -
- 
+
  const SinglePost = () => {
    return (
      <div className="container">
@@ -882,7 +882,7 @@ index e509219..1ea8927 100644
 @@ -168,7 +163,4 @@ const SinglePost = () => {
    );
  }
- 
+
 -
 -
 -

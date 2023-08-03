@@ -1,7 +1,7 @@
 "use client";
 
-import { useUserContext } from "@/contexts/SessionProvider";
-import { User } from "@/lib/types";
+import { useUserContext } from "@/Contexts/SessionProvider";
+import { User } from "@/Lib/types";
 import { useEffect } from "react";
 
 const useSession = () => {

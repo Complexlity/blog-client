@@ -7,8 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/Components/ui/select";
-import { uploadFiles } from "@/lib/uploadthing";
-import "@/styles/editor.css";
+import { uploadFiles } from "@/Lib/uploadthing";
+import "@/Styles/editor.css";
 import EditorJS from "@editorjs/editorjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
@@ -17,13 +17,13 @@ import { useForm } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
 import { z } from "zod";
 
-import "@/styles/editor.css";
+import "@/Styles/editor.css";
 import { MinusCircle } from "lucide-react";
 
 import { Button } from "@/Components/ui/button";
 import { toast } from "@/Components/ui/use-toast";
-import { PostCategory } from "@/lib/types";
-import { useUploadThing } from "@/lib/uploadthing";
+import { PostCategory } from "@/Lib/types";
+import { useUploadThing } from "@/Lib/uploadthing";
 import { useMutation } from "@tanstack/react-query";
 import axios, { isAxiosError } from "axios";
 import { Image } from "lucide-react";

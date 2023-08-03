@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import useSession from "@/hooks/useSession";
-import { OmittedComment } from "@/lib/types";
-import { formatDate } from "@/lib/utils";
+import useSession from "@/Hooks/useSession";
+import { OmittedComment } from "@/Lib/types";
+import { formatDate } from "@/Lib/utils";
 import Image from "next/image";
 import DeleteButton from "./DeleteButton";
 import LikeButton from "./LikeButton";
 
 function SingleComment({ comment }: { comment: OmittedComment }) {
-  const user = useSession()
+  const user = useSession();
   return (
     <div className="space-y-4  py-4">
       <div className="profile flex items-center gap-1">
@@ -34,13 +34,12 @@ function SingleComment({ comment }: { comment: OmittedComment }) {
           likeCount={comment.likeCount}
           type="comments"
         />
-        {user?._id === comment.user._id ? <DeleteButton
-          id={comment._id}
-        /> : null}
-
+        {user?._id === comment.user._id ? (
+          <DeleteButton id={comment._id} />
+        ) : null}
       </div>
     </div>
   );
 }
 
-export default SingleComment
+export default SingleComment;

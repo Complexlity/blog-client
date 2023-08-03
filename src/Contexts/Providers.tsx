@@ -1,16 +1,15 @@
 "use client";
 
-import SessionProvider from "@/contexts/SessionProvider";
-import { User } from "@/lib/types";
+import SessionProvider from "@/Contexts/SessionProvider";
+import { User } from "@/Lib/types";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const Providers = ({
   children,
   user,
-
 }: {
   children: React.ReactNode;
-    user: User | null;
+  user: User | null;
 }) => {
   const queryClient = new QueryClient();
   return (

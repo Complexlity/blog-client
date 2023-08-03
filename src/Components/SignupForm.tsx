@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/Components/ui/form";
 import { Input } from "@/Components/ui/input";
-import fetcher from "@/lib/fetcher";
+import fetcher from "@/Lib/fetcher";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

@@ -2,13 +2,13 @@
 
 import EditorOutput from "@/app/create/EditorOutput";
 import { useToast } from "@/Components/ui/use-toast";
-import useSession from "@/hooks/useSession";
-import { Post } from "@/lib/types";
+import useSession from "@/Hooks/useSession";
+import { Post } from "@/Lib/types";
 import {
   calculateTimeToReadPost,
   formatDate,
   getCategoryColor,
-} from "@/lib/utils";
+} from "@/Lib/utils";
 import { BookOpen, MessagesSquare } from "lucide-react";
 import Image from "next/image";
 import CommentSection from "./CommentSection";

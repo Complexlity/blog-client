@@ -1,6 +1,6 @@
 "use client";
 
-import { Post } from "@/lib/types";
+import { Post } from "@/Lib/types";
 import { createContext, useContext, useState } from "react";
 
 export type GlobalPosts = {
@@ -11,15 +11,15 @@ export type GlobalPosts = {
 };
 const PostsContext = createContext<GlobalPosts>({
   posts: null,
-  setPosts: () => { },
+  setPosts: () => {},
   currentPost: null,
-  setCurrentPost: () => {}
+  setCurrentPost: () => {},
 });
 
 interface Props {
   children: React.ReactNode;
   posts: Post[] | null;
-  currentPost: Post | null
+  currentPost: Post | null;
 }
 
 export const usePostsContext = () => useContext(PostsContext);
@@ -27,9 +27,16 @@ export const usePostsContext = () => useContext(PostsContext);
 const PostsContextProvider = ({ children, posts, currentPost }: Props) => {
   const [allPosts, setAllPosts] = useState<Post[] | null>(posts);
 
-  const [newestPost, setNewestPost] = useState < Post | null>(currentPost)
+  const [newestPost, setNewestPost] = useState<Post | null>(currentPost);
   return (
-    <PostsContext.Provider value={{ posts: allPosts, setPosts: setAllPosts, currentPost: newestPost, setCurrentPost: setNewestPost }}>
+    <PostsContext.Provider
+      value={{
+        posts: allPosts,
+        setPosts: setAllPosts,
+        currentPost: newestPost,
+        setCurrentPost: setNewestPost,
+      }}
+    >
       {children}
     </PostsContext.Provider>
   );

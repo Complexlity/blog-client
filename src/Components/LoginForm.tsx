@@ -24,7 +24,7 @@ import {
   DialogDescription,
   DialogTrigger,
 } from "@/Components/ui/dialog";
-import fetcher from "@/lib/fetcher";
+import fetcher from "@/Lib/fetcher";
 import { toast } from "./ui/use-toast";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
