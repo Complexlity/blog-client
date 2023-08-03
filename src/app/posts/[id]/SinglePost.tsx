@@ -1,25 +1,25 @@
 "use client";
 
-
 import EditorOutput from "@/app/create/EditorOutput";
 import { useToast } from "@/components/ui/use-toast";
 import useSession from "@/hooks/useSession";
 import { Post } from "@/lib/types";
-import { calculateTimeToReadPost, formatDate, getCategoryColor } from "@/lib/utils";
+import {
+  calculateTimeToReadPost,
+  formatDate,
+  getCategoryColor,
+} from "@/lib/utils";
 import { BookOpen, MessagesSquare } from "lucide-react";
 import Image from "next/image";
 import CommentSection from "./CommentSection";
 import LikeButton from "./LikeButton";
 
 const SinglePost = ({ post }: { post: Post }) => {
-  const { toast } = useToast();
-  const user = useSession();
-
   return (
     <div className="bg-white pb-8">
       <div className=" MinusCircle ">
         <header className=" grid max-w-[800px] mx-auto px-8 text-center py-8">
-          <h1 className="font-extrabold text-3xl md:text-4xl mb-4">
+          <h1 className="font-roboto font-extrabold text-3xl md:text-4xl mb-4">
             {post.title}
           </h1>
           <p className="mx-auto flex items-center gap-2 md:text-lg mb-4">
@@ -33,7 +33,6 @@ const SinglePost = ({ post }: { post: Post }) => {
             />
             <span className="font-bold">{post.author.name}</span>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
-            {/* @ts-expect-error Date object confused for string */}
             <span>{formatDate(post.createdAt, "full")}</span>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
 
@@ -43,7 +42,10 @@ const SinglePost = ({ post }: { post: Post }) => {
             </span>
           </p>
           <div className="flex mx-auto gap-6 items-center justify-center">
-            <p style={{backgroundColor: getCategoryColor(post.category)}} className="px-6 py-2 rounded-full text-blueDarkest font-bold hover:shadow-xl hover:shadow-gray-200">
+            <p
+              style={{ backgroundColor: getCategoryColor(post.category) }}
+              className="px-6 py-2 rounded-full text-blueDarkest font-bold hover:shadow-xl hover:shadow-gray-200"
+            >
               {post.category}
             </p>
             {/* <HoverCard openDelay={5}>
@@ -84,20 +86,18 @@ const SinglePost = ({ post }: { post: Post }) => {
               </HoverCardContent>
             </HoverCard> */}
           </div>
-          {
-            post.coverImageSource
-              ?
-          <div className="h-[500px] mx-auto w-full m-10">
-            <Image
-              src={post.coverImageSource}
-              width={24}
-              height={24}
-              className="w-full h-full object-cover object-top rounded-md"
-              alt=""
-              unoptimized
-            />
-          </div>
-         : null }
+          {post.coverImageSource ? (
+            <div className="h-[500px] mx-auto w-full m-10">
+              <Image
+                src={post.coverImageSource}
+                width={24}
+                height={24}
+                className="w-full h-full object-cover object-top rounded-md"
+                alt=""
+                unoptimized
+              />
+            </div>
+          ) : null}
         </header>
         <main className="prose mx-auto relative space-y-6">
           <EditorOutput content={JSON.parse(post.content)} />

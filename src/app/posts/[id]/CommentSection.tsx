@@ -70,7 +70,7 @@ function CommentSection({
   }
 
   const almostTooLong = allowance < 10;
-  function updateComment(e) {
+  function updateComment(e: any) {
     const newValue = e.target.value;
     if (newValue.length > MAXIMUM_COMMENT_LENGTH) {
       return;

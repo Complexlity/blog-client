@@ -75,21 +75,7 @@ const LikeButton = ({ id, likes, likeCount, type }: Props) => {
     onSuccess() {
       router.refresh()
     }
-    // onSettled(data, error, variables, context) {
-    //   if (error) {
-    //     if (axios.isAxiosError(error)) {
-    //       toast({
-    //         description: `${error.response?.data.message}`,
-    //         variant: "destructive",
-    //       });
-    //     }
-    //     // setLikeNumber(likeNumber);
-    //     // setLikedByMe(likedByMe);
-    //   }
-    //   else {
-    //     router.refresh()
-    //   }
-    // },
+    
   });
 
   return (

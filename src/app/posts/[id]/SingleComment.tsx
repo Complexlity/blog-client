@@ -9,7 +9,6 @@ import LikeButton from "./LikeButton";
 
 function SingleComment({ comment }: { comment: OmittedComment }) {
   const user = useSession()
-  // console.log(comment.user)
   return (
     <div className="space-y-4  py-4">
       <div className="profile flex items-center gap-1">

@@ -23,7 +23,6 @@ import { useRouter } from "next/navigation";
 const DeleteButton = ({ id }: { id: string }) => {
   const router = useRouter()
 
-
   const { mutate: deleteComment, isLoading: deleting } = useMutation({
     // @ts-ignore
     mutationFn: async (id: string) => {

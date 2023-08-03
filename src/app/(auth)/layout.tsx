@@ -1,6 +1,6 @@
 import Providers from "@/contexts/Providers";
 import { Inter } from "next/font/google";
-import "../(home)/globals.css";
+import "@/styles/globals.css";
 
 import { Toaster } from "@/components/ui/toaster";
 import { getUser } from "@/lib/serverFunctions";

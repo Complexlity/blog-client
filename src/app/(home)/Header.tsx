@@ -1,10 +1,9 @@
 "use client";
 
-import Image from 'next/image';
+import Image from "next/image";
 import personImg from "../../../public/person.svg";
 import person2Img from "../../../public/person2.svg";
 import Navbar from "../../components/NavBar";
-
 
 const Hero = () => {
   return (
@@ -19,7 +18,7 @@ const Hero = () => {
           <div className="absolute  translate-x-[-10rem] lg:translate-x-[-18rem] translate-y-[-7rem]">
             <Image src={personImg} height={500} alt="" />
           </div>
-          <h1 className="relative z-1 text-6xl text-blueLight font-bold">
+          <h1 className="font-roboto relative z-1 text-6xl text-blueLight font-bold">
             Welcome to Our Complex Blog Platform
           </h1>
           <p className="text-white relative z-1">

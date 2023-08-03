@@ -30,7 +30,7 @@ import { toast } from '@/components/ui/use-toast';
 import { PostCategory } from '@/lib/types';
 import { useUploadThing } from "@/lib/uploadthing";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import { Image } from "lucide-react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -90,17 +90,18 @@ export default function CreateForm() {
       }
     },
     onError: (error) => {
-      return toast({
-        title: error.response?.data.message ?? error.message,
-        variant: 'destructive'
+      if (isAxiosError(error)) {
+        return toast({
+          title: error.response?.data.message ?? error.message,
+          variant: 'destructive'
+        })
+      }
+      toast({
+        title: "Something went wrong",
+        description: "Please try again later",
+        variant: "destructive"
       })
-
-      // return toast({
-      //   title: "Something went wrong",
-      //   description: "Your post was not published. Please try again.",
-      //   variant: "destructive",
-      // });
-    },
+     },
     onSuccess: () => {
       router.push('/');
 

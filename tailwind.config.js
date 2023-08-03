@@ -16,6 +16,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        roboto: ["roboto", "sans-serif"],
+      },
       colors: {
         blueDarkest: "#293241",
         blueDark: "#3d5a80",
