@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/button";
 import {
   Form,
   FormControl,
@@ -10,8 +10,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/Components/ui/form";
+import { Input } from "@/Components/ui/input";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle } from "lucide-react";
@@ -20,7 +20,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/Components/ui/alert";
 import fetcher from "@/lib/fetcher";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
@@ -30,7 +30,10 @@ const logInSchema = z.object({
     .string({ required_error: "required" })
     .trim()
     .email("Email address is invalid"),
-  password: z.string({ required_error: "required" }).trim().min(8, "Minimum of 8 characters"),
+  password: z
+    .string({ required_error: "required" })
+    .trim()
+    .min(8, "Minimum of 8 characters"),
 });
 
 type CreateSessionInput = z.infer<typeof logInSchema>;
@@ -39,21 +42,21 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-const [loginError, setLoginError] = useState(null);
-const router = useRouter();
-const form = useForm<CreateSessionInput>({
-  resolver: zodResolver(logInSchema),
-  defaultValues: {
-    email: "",
-    password: "",
-  },
-});
+  const [loginError, setLoginError] = useState(null);
+  const router = useRouter();
+  const form = useForm<CreateSessionInput>({
+    resolver: zodResolver(logInSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
   function handleInput() {
     setLoginError(null);
   }
   async function onSubmit(values: CreateSessionInput) {
     const loginUser = `${SERVER_DOMAIN}/sessions`;
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const response = await fetcher(loginUser, {}, "POST", values);
       //@ts-ignore
@@ -64,14 +67,12 @@ const form = useForm<CreateSessionInput>({
       }
       form.reset();
       setIsLoading(false);
-      router.push('/')
-
+      router.push("/");
     } catch (error: any) {
       setLoginError(error.message);
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }
-
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
@@ -87,7 +88,6 @@ const form = useForm<CreateSessionInput>({
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-6 text-black "
         >
-
           <FormField
             control={form.control}
             name="email"
@@ -122,10 +122,13 @@ const form = useForm<CreateSessionInput>({
               </FormItem>
             )}
           />
-          <Button isLoading={isLoading} className={"w-full"} disabled={isLoading}>
+          <Button
+            isLoading={isLoading}
+            className={"w-full"}
+            disabled={isLoading}
+          >
             Log In
           </Button>
-
         </form>
       </Form>
     </div>

@@ -4,10 +4,10 @@ import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { toast } from "@/components/ui/use-toast";
+} from "@/Components/ui/hover-card";
+import { toast } from "@/Components/ui/use-toast";
 import useSession from "@/hooks/useSession";
-import { usePrevious } from '@mantine/hooks';
+import { usePrevious } from "@mantine/hooks";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { Heart } from "lucide-react";
@@ -28,15 +28,13 @@ const LikeButton = ({ id, likes, likeCount, type }: Props) => {
   );
 
   const [likeNumber, setLikeNumber] = useState(likeCount);
-  const previouslyLikedByMe = usePrevious(likedByMe)
-  const previousLikeNumber = usePrevious(likeCount)
-  const router = useRouter()
+  const previouslyLikedByMe = usePrevious(likedByMe);
+  const previousLikeNumber = usePrevious(likeCount);
+  const router = useRouter();
 
   useEffect(() => {
     setLikedByMe(user ? likes.includes(user?._id) : false);
-  }, [likes])
-
-
+  }, [likes]);
 
   const { mutate: likePost, isLoading: isLiking } = useMutation({
     // @ts-ignore
@@ -52,8 +50,8 @@ const LikeButton = ({ id, likes, likeCount, type }: Props) => {
       );
     },
     onError: (error) => {
-      setLikeNumber((prev) => prev -1 )
-      setLikedByMe(previouslyLikedByMe!)
+      setLikeNumber((prev) => prev - 1);
+      setLikedByMe(previouslyLikedByMe!);
       if (axios.isAxiosError(error)) {
         toast({
           description: `${error.response?.data.message}`,
@@ -61,21 +59,19 @@ const LikeButton = ({ id, likes, likeCount, type }: Props) => {
         });
         return toast({
           title: "Something went wrong",
-          variant: 'destructive'
-        })
+          variant: "destructive",
+        });
       }
     },
     onMutate: () => {
       if (likedByMe) {
-        setLikeNumber((prev) => prev - 1)
-      }
-      else setLikeNumber((prev) => prev + 1)
-      setLikedByMe(!likedByMe)
+        setLikeNumber((prev) => prev - 1);
+      } else setLikeNumber((prev) => prev + 1);
+      setLikedByMe(!likedByMe);
     },
     onSuccess() {
-      router.refresh()
-    }
-    
+      router.refresh();
+    },
   });
 
   return (
@@ -113,10 +109,11 @@ function HeartWithUser({
       onClick={likePost}
     >
       <Heart
-        className={`${likedByMe ? "text-red-500" :"text-black"} hover:text-rose-500`}
+        className={`${
+          likedByMe ? "text-red-500" : "text-black"
+        } hover:text-rose-500`}
         size={23}
         fill={likedByMe ? "red" : "none"}
-
       />
     </div>
   );

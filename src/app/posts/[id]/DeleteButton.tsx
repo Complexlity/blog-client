@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   AlertDialog,
@@ -10,18 +10,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { toast } from "@/components/ui/use-toast";
+} from "@/Components/ui/alert-dialog";
+import { Button } from "@/Components/ui/button";
+import { toast } from "@/Components/ui/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-
-
 const DeleteButton = ({ id }: { id: string }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   const { mutate: deleteComment, isLoading: deleting } = useMutation({
     // @ts-ignore
@@ -47,8 +45,8 @@ const DeleteButton = ({ id }: { id: string }) => {
     },
     onSuccess() {
       toast({
-        title: "Comment deleted successfully"
-      })
+        title: "Comment deleted successfully",
+      });
       router.refresh();
     },
   });
@@ -80,6 +78,6 @@ const DeleteButton = ({ id }: { id: string }) => {
       </AlertDialogContent>
     </AlertDialog>
   );
-}
+};
 
 export default DeleteButton;

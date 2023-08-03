@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Icons } from "@/components/Icons";
-import { buttonVariants } from "@/components/ui/button";
+import { Icons } from "@/Components/Icons";
+import { buttonVariants } from "@/Components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { UserAuthForm } from "./SignupForm";
@@ -38,16 +38,10 @@ export default function AuthenticationPage() {
             <ChevronsLeft />
             Back to homepage
           </Link>
-        <Link
-          href="/login/"
-          className={cn(
-            buttonVariants(),
-
-          )}
-        >
-          Log In
-          <ChevronsRight />
-        </Link>
+          <Link href="/login/" className={cn(buttonVariants())}>
+            Log In
+            <ChevronsRight />
+          </Link>
         </div>
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-blueDarkest " />

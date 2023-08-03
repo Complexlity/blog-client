@@ -1,12 +1,12 @@
 "use client";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/Components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogTrigger
-} from "@/components/ui/dialog";
+  DialogTrigger,
+} from "@/Components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -14,8 +14,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/Components/ui/form";
+import { Input } from "@/Components/ui/input";
 import fetcher from "@/lib/fetcher";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -84,10 +84,10 @@ export default function SignupForm() {
         throw new Error(error.message);
       }
       form.reset();
-      router.refresh()
+      router.refresh();
       toast({
-        title: "Please login now"
-      })
+        title: "Please login now",
+      });
       // setOpen(false)
     } catch (error: any) {}
   }
@@ -95,9 +95,7 @@ export default function SignupForm() {
   return (
     <>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger className={buttonVariants()}>
-          Sign Up
-        </DialogTrigger>
+        <DialogTrigger className={buttonVariants()}>Sign Up</DialogTrigger>
         <DialogContent>
           <DialogDescription>
             <Form {...form}>
@@ -163,7 +161,6 @@ export default function SignupForm() {
                   )}
                 />
                 <Button type="submit">Submit</Button>
-
               </form>
             </Form>
           </DialogDescription>

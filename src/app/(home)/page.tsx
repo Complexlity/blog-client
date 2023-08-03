@@ -1,5 +1,5 @@
 import Header from "@/app/(home)/Header";
-import Footer from "@/components/Footer";
+import Footer from "@/Components/Footer";
 import Posts from "./Posts";
 import WriteForUs from "./WriteForUs";
 
@@ -12,7 +12,6 @@ export default async function Home() {
       <div className="bg-blueLight">
         <Footer />
       </div>
-
     </div>
   );
 }

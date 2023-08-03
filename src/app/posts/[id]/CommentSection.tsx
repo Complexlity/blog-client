@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/Components/ui/button";
+import { useToast } from "@/Components/ui/use-toast";
 import useSession from "@/hooks/useSession";
 import { Comment, OmittedComment } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -108,9 +108,7 @@ function CommentSection({
               <div
                 className={cn(
                   `${
-                    almostTooLong
-                      ? "bg-red-200"
-                      : "bg-blue-400"
+                    almostTooLong ? "bg-red-200" : "bg-blue-400"
                   } rounded-full  justify-self-end  flex items-center justify-center w-10 h-10 mb-2`
                 )}
               >

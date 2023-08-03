@@ -1,40 +1,34 @@
 "use client";
 
-
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/Components/ui/select";
 import { uploadFiles } from "@/lib/uploadthing";
 import "@/styles/editor.css";
-import EditorJS from '@editorjs/editorjs';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { usePathname, useRouter } from 'next/navigation';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import TextareaAutosize from 'react-textarea-autosize';
-import { z } from 'zod';
+import EditorJS from "@editorjs/editorjs";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import TextareaAutosize from "react-textarea-autosize";
+import { z } from "zod";
 
-
-
-
-
-import '@/styles/editor.css';
+import "@/styles/editor.css";
 import { MinusCircle } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
-import { toast } from '@/components/ui/use-toast';
-import { PostCategory } from '@/lib/types';
+import { Button } from "@/Components/ui/button";
+import { toast } from "@/Components/ui/use-toast";
+import { PostCategory } from "@/lib/types";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useMutation } from "@tanstack/react-query";
 import axios, { isAxiosError } from "axios";
 import { Image } from "lucide-react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
 
@@ -45,7 +39,7 @@ const postSchema = z.object({
     })
     .min(1)
     .max(100, "Title must be at most 100 characters"),
-  content: z.any()
+  content: z.any(),
 });
 
 type CreatePostInput = z.infer<typeof postSchema>;
@@ -54,8 +48,7 @@ export default function CreateForm() {
   const router = useRouter();
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
-  const [category, setCategory] = useState<PostCategory | null>(null)
-
+  const [category, setCategory] = useState<PostCategory | null>(null);
 
   const {
     register,
@@ -65,7 +58,7 @@ export default function CreateForm() {
     resolver: zodResolver(postSchema),
     defaultValues: {
       title: "",
-      content: null ,
+      content: null,
     },
   });
   const ref = useRef<EditorJS>();
@@ -76,14 +69,13 @@ export default function CreateForm() {
 
   const { mutate: createPost, isLoading: isCreating } = useMutation({
     mutationFn: async (payload: CreatePostInput) => {
-        const res = await startUpload([coverImage!])
-      const fileUrl = res![0].fileUrl
+      const res = await startUpload([coverImage!]);
+      const fileUrl = res![0].fileUrl;
       // @ts-ignore
-        payload.coverImageSource = fileUrl
-        postData(payload)
+      payload.coverImageSource = fileUrl;
+      postData(payload);
 
-
-     async function postData(payload: CreatePostInput) {
+      async function postData(payload: CreatePostInput) {
         const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
           withCredentials: true,
         });
@@ -94,17 +86,17 @@ export default function CreateForm() {
       if (isAxiosError(error)) {
         return toast({
           title: error.response?.data.message ?? error.message,
-          variant: 'destructive'
-        })
+          variant: "destructive",
+        });
       }
       toast({
         title: "Something went wrong",
         description: "Please try again later",
-        variant: "destructive"
-      })
-     },
+        variant: "destructive",
+      });
+    },
     onSuccess: () => {
-      router.push('/');
+      router.push("/");
 
       router.refresh();
 
@@ -132,7 +124,7 @@ export default function CreateForm() {
     // @ts-ignore
     const ImageTool = (await import("@editorjs/image")).default;
     // @ts-ignore
-    const Quote = (await import('@editorjs/quote')).default
+    const Quote = (await import("@editorjs/quote")).default;
 
     if (!ref.current) {
       const editor = new EditorJS({
@@ -156,12 +148,11 @@ export default function CreateForm() {
             config: {
               uploader: {
                 async uploadByFile(file: File) {
-
                   // upload to uploadthing
                   const [res] = await uploadFiles({
                     files: [file],
                     endpoint: "imageUploader",
-                  })
+                  });
 
                   return {
                     success: 1,
@@ -222,31 +213,28 @@ export default function CreateForm() {
     }
   }, [isMounted, initializeEditor]);
 
-
   const { startUpload } = useUploadThing("imageUploader", {
     onClientUploadComplete: () => {
-
       // console.log("uploadSuccessful");
     },
     onUploadError: () => {
-      throw new Error("Something went wrong while uploading image")
+      throw new Error("Something went wrong while uploading image");
     },
   });
 
   async function onSubmit(data: any) {
     if (!coverImage) {
-return toast({
+      return toast({
         title: "Cover Image Missing",
         description: "You need add a cover image to the post",
-        variant:'destructive'
-      })
+        variant: "destructive",
+      });
     }
-    if(!category){
+    if (!category) {
       return toast({
         title: "Select A Category",
-        variant: 'destructive'
-      })
-
+        variant: "destructive",
+      });
     }
 
     const blocks = await ref.current?.save();
@@ -254,7 +242,7 @@ return toast({
       title: data.title,
       content: JSON.stringify(blocks),
       published: true,
-      category
+      category,
     };
 
     createPost(payload);
@@ -269,8 +257,12 @@ return toast({
               <Skeleton circle={true} height={32} width={32} />
               <Skeleton width={`150px`} height={24} />
 
-              <Skeleton width={`180px`} height={32} className="rounded-full" borderRadius={`9999vw`} />
-
+              <Skeleton
+                width={`180px`}
+                height={32}
+                className="rounded-full"
+                borderRadius={`9999vw`}
+              />
             </div>
 
             <div className="">
@@ -332,9 +324,11 @@ return toast({
                 <span>Remove Cover Image</span>
               </div>
             ) : null}
-            <Select onValueChange={(value: PostCategory) => {
-                setCategory(value)
-            }}>
+            <Select
+              onValueChange={(value: PostCategory) => {
+                setCategory(value);
+              }}
+            >
               <SelectTrigger className="w-[180px] rounded-full">
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
@@ -388,5 +382,3 @@ return toast({
     </>
   );
 }
-
-

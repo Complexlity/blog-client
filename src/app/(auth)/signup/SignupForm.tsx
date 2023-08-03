@@ -2,11 +2,11 @@
 
 import * as React from "react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/Components/ui/button";
+import { Input } from "@/Components/ui/input";
 import { cn } from "@/lib/utils";
 
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/Components/ui/button";
 import {
   Form,
   FormControl,
@@ -14,7 +14,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/Components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -25,8 +25,8 @@ import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { toast } from "@/components/ui/use-toast";
+} from "@/Components/ui/hover-card";
+import { toast } from "@/Components/ui/use-toast";
 import fetcher from "@/lib/fetcher";
 import { useUploadThing } from "@/lib/uploadthing";
 import "@uploadthing/react/styles.css";
@@ -57,70 +57,71 @@ const signUpSchema = z
     path: ["passwordConfirmation"],
   });
 
-
-
 type SignupInput = z.infer<typeof signUpSchema>;
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-const router = useRouter();
-  const [registerError, setRegisterError] = useState("Bad things have happened");
-  const [imageUrl, setImageUrl] = useState('')
-  const [imageFile, setImageFile] = useState(null)
+  const router = useRouter();
+  const [registerError, setRegisterError] = useState(
+    "Bad things have happened"
+  );
+  const [imageUrl, setImageUrl] = useState("");
+  const [imageFile, setImageFile] = useState(null);
 
-const form = useForm<SignupInput>({
-  resolver: zodResolver(signUpSchema),
-  defaultValues: {
-    name: "",
-    email: "",
-    password: "",
-    passwordConfirmation: "",
-  },
-});
+  const form = useForm<SignupInput>({
+    resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirmation: "",
+    },
+  });
 
-async function onSubmit(values: SignupInput) {
-  const createUser = `${SERVER_DOMAIN}/users`;
-  if (!imageFile) {
-    toast({
-      title: "Please add a profile image",
-      variant: "destructive"
-    })
-    return
-  }
-  try {
-    setIsLoading(true)
-    const res = await startUpload([imageFile]);
-    const fileUrl = res![0].fileUrl;
-    const response = await fetcher(createUser, {}, "POST", {...values, imageSrc: fileUrl});
-
-    //@ts-ignore
-    if (response && response.status !== 200) {
-      //@ts-ignore
-      const error = await response.json();
-      form.setError("email", {
-        type: "custom",
-        message: error.message,
+  async function onSubmit(values: SignupInput) {
+    const createUser = `${SERVER_DOMAIN}/users`;
+    if (!imageFile) {
+      toast({
+        title: "Please add a profile image",
+        variant: "destructive",
       });
-      //@ts-ignore
-      throw new Error(error.message);
+      return;
     }
-    form.reset();
-    router.push('/login')
-    toast({
-      title: "Please Login"
-    })
+    try {
+      setIsLoading(true);
+      const res = await startUpload([imageFile]);
+      const fileUrl = res![0].fileUrl;
+      const response = await fetcher(createUser, {}, "POST", {
+        ...values,
+        imageSrc: fileUrl,
+      });
 
-  } catch (error: any) {
-    toast({
-      title: error.message,
-      variant: "destructive"
-    })
-   }
-  finally {
-    setIsLoading(false)
+      //@ts-ignore
+      if (response && response.status !== 200) {
+        //@ts-ignore
+        const error = await response.json();
+        form.setError("email", {
+          type: "custom",
+          message: error.message,
+        });
+        //@ts-ignore
+        throw new Error(error.message);
+      }
+      form.reset();
+      router.push("/login");
+      toast({
+        title: "Please Login",
+      });
+    } catch (error: any) {
+      toast({
+        title: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
-}
 
   function addProfileImage(e: any) {
     let file = e.target.files[0];
@@ -130,22 +131,20 @@ async function onSubmit(values: SignupInput) {
   }
 
   function removeProfileImage() {
-    setImageUrl('')
-    setImageFile(null)
+    setImageUrl("");
+    setImageFile(null);
   }
 
-const { startUpload } = useUploadThing("imageUploader", {
-  onClientUploadComplete: () => {
-    // alert("uploaded successfully!");
-    // console.log("uploadSuccessful");
-  },
-  onUploadError: () => {
-    // alert("error occurred while uploading");
-    throw new Error("Profile image upload failed!");
-  },
-});
-
-
+  const { startUpload } = useUploadThing("imageUploader", {
+    onClientUploadComplete: () => {
+      // alert("uploaded successfully!");
+      // console.log("uploadSuccessful");
+    },
+    onUploadError: () => {
+      // alert("error occurred while uploading");
+      throw new Error("Profile image upload failed!");
+    },
+  });
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>

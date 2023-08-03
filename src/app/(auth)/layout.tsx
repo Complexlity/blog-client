@@ -2,10 +2,9 @@ import Providers from "@/contexts/Providers";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/Components/ui/toaster";
 import { getUser } from "@/lib/serverFunctions";
 import { redirect } from "next/navigation";
-
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +19,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const user = await getUser();
-  if(user) redirect("/")
+  if (user) redirect("/");
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <Providers user={user}>

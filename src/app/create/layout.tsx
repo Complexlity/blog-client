@@ -1,6 +1,6 @@
-import Footer from "@/components/Footer";
-import Navbar from "@/components/NavBar";
-import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/Components/Footer";
+import Navbar from "@/Components/NavBar";
+import { Toaster } from "@/Components/ui/toaster";
 import Providers from "@/contexts/Providers";
 import { getUser } from "@/lib/serverFunctions";
 import { Inter } from "next/font/google";

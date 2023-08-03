@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Icons } from "@/components/Icons";
-import { buttonVariants } from "@/components/ui/button";
+import { Icons } from "@/Components/Icons";
+import { buttonVariants } from "@/Components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { UserAuthForm } from "./LoginForm";

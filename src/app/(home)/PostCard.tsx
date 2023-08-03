@@ -1,18 +1,15 @@
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from '@/components/ui/button';
-import { Post } from '@/lib/types';
-import { formatDate, getCategoryColor } from '@/lib/utils';
+import { Badge } from "@/Components/ui/badge";
+import { buttonVariants } from "@/Components/ui/button";
+import { Post } from "@/lib/types";
+import { formatDate, getCategoryColor } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
-import Image from 'next/image';
-import Link from 'next/link';
-
+import Image from "next/image";
+import Link from "next/link";
 
 const PostCard = ({ post }: { post: Post }) => {
-
-
   return (
     <div className="rounded-2xl p-4 bg-blueDark grid gap-2 hover:scale-[101%] transition-all duration-150 ease-in-out">
-      {post.coverImageSource ?
+      {post.coverImageSource ? (
         <div className="h-full aspect-square overflow-hidden rounded-lg">
           <Image
             className="object-cover w-full object-top "
@@ -21,14 +18,14 @@ const PostCard = ({ post }: { post: Post }) => {
             alt="image"
             width={48}
             height={48}
-
           />
         </div>
-        :
-        null
-      }
+      ) : null}
       <div className="space-y-4">
-        <Badge style={{backgroundColor: getCategoryColor(post.category)}} className="text-blueDarkest hover:text-white hover:opacity-80 ">
+        <Badge
+          style={{ backgroundColor: getCategoryColor(post.category) }}
+          className="text-blueDarkest hover:text-white hover:opacity-80 "
+        >
           {post.category}
         </Badge>
         <h2 className="text-xl font-bold text-gray-200">{post.title}</h2>
@@ -44,7 +41,7 @@ const PostCard = ({ post }: { post: Post }) => {
             />
             <div className="text-sm grid gap-1 ">
               <p className="text-gray-200 font-bold">{post.author.name}</p>
-              
+
               <p className="text-gray-300">{formatDate(post.createdAt)}</p>
             </div>
           </div>
@@ -59,6 +56,6 @@ const PostCard = ({ post }: { post: Post }) => {
       </div>
     </div>
   );
-}
+};
 
 export default PostCard;

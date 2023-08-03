@@ -1,7 +1,7 @@
 "use client";
 
 import EditorOutput from "@/app/create/EditorOutput";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/Components/ui/use-toast";
 import useSession from "@/hooks/useSession";
 import { Post } from "@/lib/types";
 import {

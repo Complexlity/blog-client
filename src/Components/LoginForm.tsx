@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/Components/ui/button";
 import {
   Form,
   FormControl,
@@ -8,8 +8,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/Components/ui/form";
+import { Input } from "@/Components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -17,16 +17,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/Components/ui/alert";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogTrigger
-} from "@/components/ui/dialog";
+  DialogTrigger,
+} from "@/Components/ui/dialog";
 import fetcher from "@/lib/fetcher";
 import { toast } from "./ui/use-toast";
-
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
 
@@ -40,13 +39,7 @@ const logInSchema = z.object({
 
 type CreateSessionInput = z.infer<typeof logInSchema>;
 
-export default function LoginForm({
-  className,
-
-}: {
-  className?: string;
-
-  }) {
+export default function LoginForm({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
   const [loginError, setLoginError] = useState(null);
   const router = useRouter();
@@ -74,11 +67,10 @@ export default function LoginForm({
       form.reset();
       setOpen(false);
       toast({
-        title: `Signed In`
-      })
+        title: `Signed In`,
+      });
 
-      router.refresh()
-
+      router.refresh();
     } catch (error: any) {
       setLoginError(error.message);
     }
