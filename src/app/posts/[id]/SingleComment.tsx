@@ -1,8 +1,8 @@
 "use client";
 
-import useSession from "@/Hooks/useSession";
-import { OmittedComment } from "@/Lib/types";
-import { formatDate } from "@/Lib/utils";
+import useSession from "@/hooks/useSession";
+import { OmittedComment } from "@/lib/types";
+import { formatDate } from "@/lib/utils";
 import Image from "next/image";
 import DeleteButton from "./DeleteButton";
 import LikeButton from "./LikeButton";

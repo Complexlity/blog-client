@@ -1,7 +1,7 @@
 import { Badge } from "@/Components/ui/badge";
 import { buttonVariants } from "@/Components/ui/button";
-import { Post } from "@/Lib/types";
-import { formatDate, getCategoryColor } from "@/Lib/utils";
+import { Post } from "@/lib/types";
+import { formatDate, getCategoryColor } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

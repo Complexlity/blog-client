@@ -1,4 +1,4 @@
-import { getUser } from "@/Lib/serverFunctions";
+import { getUser } from "@/lib/serverFunctions";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import CreateForm from "./CreateForm";

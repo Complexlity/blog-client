@@ -6,7 +6,7 @@ import {
   HoverCardTrigger,
 } from "@/Components/ui/hover-card";
 import { toast } from "@/Components/ui/use-toast";
-import useSession from "@/Hooks/useSession";
+import useSession from "@/hooks/useSession";
 import { usePrevious } from "@mantine/hooks";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";

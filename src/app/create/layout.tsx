@@ -2,9 +2,9 @@ import Footer from "@/Components/Footer";
 import Navbar from "@/Components/NavBar";
 import { Toaster } from "@/Components/ui/toaster";
 import Providers from "@/Contexts/Providers";
-import { getUser } from "@/Lib/serverFunctions";
+import { getUser } from "@/lib/serverFunctions";
 import { Inter } from "next/font/google";
-import "@/Styles/globals.css";
+import "@/styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

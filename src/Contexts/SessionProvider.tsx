@@ -1,6 +1,6 @@
 "use client";
 
-import { User } from "@/Lib/types";
+import { User } from "@/lib/types";
 import { createContext, useContext, useState } from "react";
 
 export type GlobalPosts = {

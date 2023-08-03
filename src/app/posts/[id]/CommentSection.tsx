@@ -2,9 +2,9 @@
 
 import { Button } from "@/Components/ui/button";
 import { useToast } from "@/Components/ui/use-toast";
-import useSession from "@/Hooks/useSession";
-import { Comment, OmittedComment } from "@/Lib/types";
-import { cn } from "@/Lib/utils";
+import useSession from "@/hooks/useSession";
+import { Comment, OmittedComment } from "@/lib/types";
+import { cn } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import axios, { isAxiosError } from "axios";
 import Image from "next/image";

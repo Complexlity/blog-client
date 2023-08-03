@@ -13,7 +13,7 @@ import Link from "next/link";
 import logo from "../../public/logo.png";
 
 import { useUserContext } from "@/Contexts/SessionProvider";
-import useSession from "@/Hooks/useSession";
+import useSession from "@/hooks/useSession";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";

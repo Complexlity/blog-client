@@ -1,4 +1,4 @@
-import { getPosts } from "@/Lib/serverFunctions";
+import { getPosts } from "@/lib/serverFunctions";
 import PostCard from "./PostCard";
 
 const Posts = async () => {

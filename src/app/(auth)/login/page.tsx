@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Icons } from "@/Components/Icons";
 import { buttonVariants } from "@/Components/ui/button";
-import { cn } from "@/Lib/utils";
+import { cn } from "@/lib/utils";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { UserAuthForm } from "./LoginForm";
 

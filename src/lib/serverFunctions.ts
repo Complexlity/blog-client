@@ -1,4 +1,4 @@
-import { Post, User } from "@/Lib/types";
+import { Post, User } from "@/lib/types";
 import { headers } from "next/headers";
 
 export async function getUser() {

@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
-import { cn } from "@/Lib/utils";
+import { cn } from "@/lib/utils";
 
 import { buttonVariants } from "@/Components/ui/button";
 import {
@@ -27,8 +27,8 @@ import {
   HoverCardTrigger,
 } from "@/Components/ui/hover-card";
 import { toast } from "@/Components/ui/use-toast";
-import fetcher from "@/Lib/fetcher";
-import { useUploadThing } from "@/Lib/uploadthing";
+import fetcher from "@/lib/fetcher";
+import { useUploadThing } from "@/lib/uploadthing";
 import "@uploadthing/react/styles.css";
 import { XCircle } from "lucide-react";
 

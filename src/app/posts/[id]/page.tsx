@@ -1,4 +1,4 @@
-import { getSinglePost } from "@/Lib/serverFunctions";
+import { getSinglePost } from "@/lib/serverFunctions";
 import { redirect } from "next/navigation";
 import SinglePost from "./SinglePost";
 

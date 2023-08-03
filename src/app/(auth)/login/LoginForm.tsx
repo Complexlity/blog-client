@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from "@/Components/ui/form";
 import { Input } from "@/Components/ui/input";
-import { cn } from "@/Lib/utils";
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -21,7 +21,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Alert, AlertDescription, AlertTitle } from "@/Components/ui/alert";
-import fetcher from "@/Lib/fetcher";
+import fetcher from "@/lib/fetcher";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
 
