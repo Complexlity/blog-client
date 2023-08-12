@@ -1,6 +1,9 @@
 import { getPosts } from "@/lib/serverFunctions";
 import PostCard from "./PostCard";
 
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 const Posts = async () => {
   const posts = await getPosts();
 

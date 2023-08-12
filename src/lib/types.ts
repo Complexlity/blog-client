@@ -14,6 +14,7 @@ export interface User {
 export interface Post {
   _id: string;
   title: string;
+  slug: string;
   content: string;
   author: Pick<User, 'name' | '_id' | 'imageSrc'>;
   published: boolean;

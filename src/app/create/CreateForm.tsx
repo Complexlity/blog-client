@@ -98,9 +98,9 @@ export default function CreateForm() {
       });
     },
     onSuccess: () => {
+      router.refresh();
       router.push("/");
 
-      router.refresh();
 
       return toast({
         description: "Your post has been published.",
