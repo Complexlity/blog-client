@@ -29,6 +29,7 @@ import axios, { isAxiosError } from "axios";
 import { Image } from "lucide-react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import useSession from "@/hooks/useSession";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
 
@@ -45,6 +46,7 @@ const postSchema = z.object({
 type CreatePostInput = z.infer<typeof postSchema>;
 
 export default function CreateForm() {
+  const user = useSession()
   const router = useRouter();
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
@@ -148,6 +150,13 @@ export default function CreateForm() {
             config: {
               uploader: {
                 async uploadByFile(file: File) {
+                  if (!user) {
+                    return toast({
+                      title: "Not logged in",
+                      description: "Please login to be able to create a post",
+                      variant: "destructive",
+                    });
+                  }
                   // upload to uploadthing
                   const [res] = await uploadFiles({
                     files: [file],
@@ -223,6 +232,13 @@ export default function CreateForm() {
   });
 
   async function onSubmit(data: any) {
+    if (!user) {
+      return toast({
+        title: "Not logged in",
+        description: "Please login to be able to create a post",
+        variant: "destructive"
+      })
+    }
     if (!coverImage) {
       return toast({
         title: "Cover Image Missing",
