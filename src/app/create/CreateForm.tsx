@@ -46,7 +46,7 @@ const postSchema = z.object({
 type CreatePostInput = z.infer<typeof postSchema>;
 
 export default function CreateForm() {
-  const user = useSession()
+  const user = useSession();
   const router = useRouter();
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
@@ -236,8 +236,8 @@ export default function CreateForm() {
       return toast({
         title: "Not logged in",
         description: "Please login to be able to create a post",
-        variant: "destructive"
-      })
+        variant: "destructive",
+      });
     }
     if (!coverImage) {
       return toast({
