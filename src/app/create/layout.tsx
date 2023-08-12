@@ -18,10 +18,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getUser();
+
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <Providers user={user}>
+      <Providers >
         <body className={inter.className}>
           <div>
             <Navbar />

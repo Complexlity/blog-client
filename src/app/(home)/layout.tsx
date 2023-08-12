@@ -15,12 +15,11 @@ export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
-  const user = await getUser();
-  const posts = await getPosts();
+  }) {
+  let user = null
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <Providers user={user}>
+      <Providers >
         <body className={`${inter.className} overflow-x-hidden`}>
           {children}
         </body>

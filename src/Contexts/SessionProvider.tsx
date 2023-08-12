@@ -14,13 +14,13 @@ const UserContext = createContext<GlobalPosts>({
 
 interface Props {
   children: React.ReactNode;
-  user: User | null;
+
 }
 
 export const useUserContext = () => useContext(UserContext);
 
-const UserContextProvider = ({ children, user }: Props) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(user);
+const UserContextProvider = ({ children }: Props) => {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   return (
     <UserContext.Provider value={{ user: currentUser, setCurrentUser }}>
       {children}

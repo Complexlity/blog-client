@@ -9,8 +9,6 @@ export const metadata: Metadata = {
 };
 
 export default async function createPost() {
-  const user = await getUser();
-  if (!user) redirect("/login");
   return (
     <div className="max-w-[1000px] mx-auto p-4">
       <CreateForm />

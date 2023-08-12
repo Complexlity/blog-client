@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 const useSession = () => {
   const store = useUserContext();
-
+  
   async function refetchUser() {
     try {
       const response = await fetch(
