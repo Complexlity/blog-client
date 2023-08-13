@@ -66,7 +66,7 @@ export default function Navbar() {
     <div className="bg-blueDarkest">
       <div className="container flex items-center justify-between py-3 border-b-2 border-b-blueLight max-w-[1200px]">
         <NavigationMenu className="">
-          <NavigationMenuList className="flex gap-8">
+          <NavigationMenuList className="flex gap-1 md:gap-8">
             <Link href="/">
               <Image src={logo} alt="logo" height={48} width={48} />
             </Link>
@@ -93,7 +93,7 @@ export default function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
         {!user ? (
-          <div className="flex gap-6">
+          <div className="flex gap-1 md:gap-6">
             <Link
               href="/login"
               className={buttonVariants({ variant: "outline" })}

@@ -12,10 +12,10 @@ const Hero = () => {
       {/* font type: fascinate */}
       <div className="container grid justify-center ">
         <div className="py-32 max-w-[70ch] grid gap-8 mx-auto  text-center ml-0">
-          <div className=" absolute right-0  scale-x-[-1]  translate-x-[10rem] lg:translate-x-[0] translate-y-[-7rem]">
+          <div className="hidden lg:block absolute right-0  scale-x-[-1]  translate-x-[10rem] lg:translate-x-[0] translate-y-[-7rem]">
             <Image src={person2Img} height={500} alt="" />
           </div>
-          <div className="absolute  translate-x-[-10rem] lg:translate-x-[-18rem] translate-y-[-7rem]">
+          <div className="hidden md:block absolute  translate-x-[-10rem] lg:translate-x-[-18rem] translate-y-[-7rem]">
             <Image src={personImg} height={500} alt="" />
           </div>
           <h1 className="font-roboto relative z-1 text-6xl text-blueLight font-bold">
