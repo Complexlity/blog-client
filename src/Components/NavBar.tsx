@@ -132,9 +132,6 @@ export default function Navbar() {
                       }}
                       className="w-full"
                     >
-                      {/* {loggingOut && (
-                        <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                      )} */}
                       LogOut
                     </Button>
                   </DropdownMenuItem>
