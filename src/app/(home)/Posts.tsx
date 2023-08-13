@@ -1,12 +1,10 @@
 'use client'
 
-import PostCard from "./PostCard";
+import { Post } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Post } from "@/lib/types";
-import { Button, buttonVariants } from "@/Components/ui/button";
-import Link from "next/link";
-
+import { Info } from 'lucide-react'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/Components/ui/hover-card";
 
 const Posts = () => {
   const { data: posts, isFetching, isFetched } = useQuery({
@@ -26,11 +24,25 @@ const Posts = () => {
           Posts
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {isFetched && (!posts || posts.length == 0) ? <p>NO POST FOUND IN THE DATABASE <Link href="/create" className={buttonVariants()}>Create One</Link></p> :
+          {/* {isFetched && (!posts || posts.length == 0) ? <p>NO POST FOUND IN THE DATABASE <Link href="/create" className={buttonVariants()}>Create One</Link></p> :
             posts?.map((post) => (
               <PostCard post={post} key={post._id} />
-              ))}
-              {isFetching ? <p>Loading....</p> : null}
+              ))} */}
+          {isFetching ? (
+            <p>Loading....</p>
+          ) : (
+              <p className="flex gap-1">
+                <HoverCard openDelay={1}>
+                  <HoverCardTrigger>
+              <Info className=" text-red-400 cursor-pointer" />
+                  </HoverCardTrigger>
+                  <HoverCardContent className="p-4">
+              Due to the current hosting conditions, this may take a while. Please hold on
+                  </HoverCardContent>
+                </HoverCard>
+              Loading...{" "}
+            </p>
+          )}
         </div>
       </div>
     </div>
