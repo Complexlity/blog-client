@@ -4,6 +4,8 @@ import PostCard from "./PostCard";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Post } from "@/lib/types";
+import { Button, buttonVariants } from "@/Components/ui/button";
+import Link from "next/link";
 
 
 const Posts = () => {
@@ -25,8 +27,8 @@ const Posts = () => {
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {isFetching ? <p>Loading....</p> : null}
-          {isFetched && !posts ? <p>NO POST FOUND IN THE DATABASE</p> : null}
-            {posts?.map((post) => (
+          {isFetched && (!posts || posts.length == 0) ? <p>NO POST FOUND IN THE DATABASE <Link href="/create" className={buttonVariants()}>Create One</Link></p> :
+            posts?.map((post) => (
               <PostCard post={post} key={post._id} />
               ))}
         </div>

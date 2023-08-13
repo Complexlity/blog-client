@@ -62,6 +62,7 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isUploadingImage, setIsUploadingImage]  = useState<boolean>(false)
   const router = useRouter();
   const [registerError, setRegisterError] = useState(
     "Bad things have happened"
@@ -90,7 +91,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     }
     try {
       setIsLoading(true);
+      setIsUploadingImage(true)
       const res = await startUpload([imageFile]);
+      setIsUploadingImage(false)
       const fileUrl = res![0].fileUrl;
       const response = await fetcher(createUser, {}, "POST", {
         ...values,
@@ -131,6 +134,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   }
 
   function removeProfileImage() {
+    if(isLoading) return
     setImageUrl("");
     setImageFile(null);
   }
@@ -291,7 +295,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             className={"w-full"}
             disabled={isLoading}
           >
-            Sign up
+          {isLoading ? isUploadingImage ?  "Uploading profile image..." : "Creating account..." : "Sign up" }
           </Button>
         </form>
       </Form>

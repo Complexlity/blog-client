@@ -127,7 +127,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             className={"w-full"}
             disabled={isLoading}
           >
-            Log In
+            {isLoading ? "Logging In..." : "Log In"}
           </Button>
         </form>
       </Form>
