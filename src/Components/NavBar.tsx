@@ -83,7 +83,9 @@ export default function Navbar() {
                 <NavigationMenuLink
                   className={`${navigationMenuTriggerStyle()} flex gap-1 items-center  bg-transparent text-white hover:bg-blueLight hover:text-blueDarkest`}
                 >
-                  <span className="flex gap-1 items-center">Create Post <PencilLine className="w-4 h-4"/></span>
+                  <span className="flex gap-1 items-center">
+                    Create Post <PencilLine className="w-4 h-4" />
+                  </span>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
