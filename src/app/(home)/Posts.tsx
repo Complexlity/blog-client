@@ -5,6 +5,9 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Info } from 'lucide-react'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/Components/ui/hover-card";
+import Link from "next/link";
+import { buttonVariants } from "@/Components/ui/button";
+import PostCard from "./PostCard";
 
 const Posts = () => {
   const { data: posts, isFetching, isFetched } = useQuery({
@@ -24,14 +27,12 @@ const Posts = () => {
           Posts
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* {isFetched && (!posts || posts.length == 0) ? <p>NO POST FOUND IN THE DATABASE <Link href="/create" className={buttonVariants()}>Create One</Link></p> :
+          {isFetched && (!posts || posts.length == 0) ? <p>NO POST FOUND IN THE DATABASE <Link href="/create" className={buttonVariants()}>Create One</Link></p> :
             posts?.map((post) => (
               <PostCard post={post} key={post._id} />
-              ))} */}
+              ))}
           {isFetching ? (
-            <p>Loading....</p>
-          ) : (
-              <p className="flex gap-1">
+            <p className="flex gap-1">
                 <HoverCard openDelay={1}>
                   <HoverCardTrigger>
               <Info className=" text-red-400 cursor-pointer" />
@@ -42,7 +43,7 @@ const Posts = () => {
                 </HoverCard>
               Loading...{" "}
             </p>
-          )}
+          ) : null}
         </div>
       </div>
     </div>
