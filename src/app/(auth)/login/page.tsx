@@ -9,7 +9,7 @@ import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { UserAuthForm } from "./LoginForm";
 
 export const metadata: Metadata = {
-  title: "Login",
+  title: "Login | Complex Blog",
   description: "Access full blogging rights by logging in",
 };
 
@@ -45,8 +45,8 @@ export default function AuthenticationPage() {
         </div>
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-blueDarkest" />
-          <div className="relative z-20 flex items-center text-lg font-medium">
-            <Icons.logo className="mr-2 h-6 w-6 text-blue-500" />
+          <div className="relative z-20 flex items-center text-3xl font-medium">
+            <Icons.logo className="mr-2 h-12 w-12 text-blue-500" />
             Complex Blog
           </div>
           <div className="relative z-20 mt-auto">

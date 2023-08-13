@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/Components/ui/navigation-menu";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, PencilLine } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.png";
@@ -62,7 +62,7 @@ export default function Navbar() {
   });
 
   return (
-    <div className="bg-blueDarkest  ">
+    <div className="bg-blueDarkest">
       <div className="container flex items-center justify-between py-3 border-b-2 border-b-blueLight max-w-[1200px]">
         <NavigationMenu className="">
           <NavigationMenuList className="flex gap-8">
@@ -83,7 +83,7 @@ export default function Navbar() {
                 <NavigationMenuLink
                   className={`${navigationMenuTriggerStyle()} flex gap-1 items-center  bg-transparent text-white hover:bg-blueLight hover:text-blueDarkest`}
                 >
-                  <span>Create</span>
+                  <span className="flex gap-1 items-center">Create Post <PencilLine className="w-4 h-4"/></span>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
