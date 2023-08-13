@@ -93,7 +93,7 @@ export default function CreateForm() {
           variant: "destructive",
         });
       }
-      toast({
+    return  toast({
         title: "Something went wrong",
         description: "Please try again later",
         variant: "destructive",
