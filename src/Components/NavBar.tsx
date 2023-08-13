@@ -28,14 +28,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
+import useStore from "@/store";
 
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
 
 export default function Navbar() {
   const user = useSession();
-  const store = useUserContext();
-  const router = useRouter();
+  const store = useStore();
+  const router = useRouter()
 
   const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
   const { mutate: logOut, isLoading: loggingOut } = useMutation({
@@ -49,7 +50,7 @@ export default function Navbar() {
       toast({
         title: "Successfully logged Out",
       });
-      store.setCurrentUser(null);
+      store.reset()
       router.refresh();
     },
     onError: (error) => {
