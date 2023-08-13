@@ -28,7 +28,7 @@ const SinglePost = ({ post }: { post: Post }) => {
             <h1 className="font-roboto font-extrabold text-3xl md:text-4xl mb-4">
               {post.title}
             </h1>
-            <p className="mx-auto flex items-center gap-2 md:text-lg mb-4">
+            <p className=" mx-auto flex items-center gap-2 md:text-lg mb-4">
               <Image
                 src={post.author.imageSrc}
                 width={24}
@@ -47,7 +47,7 @@ const SinglePost = ({ post }: { post: Post }) => {
                 {calculateTimeToReadPost(post.content)} min read
               </span>
             </p>
-            <div className="flex mx-auto gap-6 items-center justify-center">
+            <div className=" flex mx-auto gap-6 items-center justify-center">
               <p
                 style={{ backgroundColor: getCategoryColor(post.category) }}
                 className="px-6 py-2 rounded-full text-blueDarkest font-bold hover:shadow-xl hover:shadow-gray-200"
@@ -93,7 +93,7 @@ const SinglePost = ({ post }: { post: Post }) => {
             </HoverCard> */}
             </div>
             {post.coverImageSource ? (
-              <div className="h-[500px] mx-auto w-full m-10">
+              <div className="h-[300px] md:h-[400px] lg:h-[500px] mx-auto w-full m-10">
                 <Image
                   src={post.coverImageSource}
                   width={24}
