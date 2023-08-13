@@ -29,7 +29,7 @@ const readingTime = Math.ceil(wordCount / wordsPerMinute);
   return readingTime;
 }
 
-export function getCategoryColor(category: PostCategory) {
+export function getCategoryColor(category: PostCategory | null) {
   switch (category) {
     case "technology":
       return "#2196F3"; // Red color for technology category

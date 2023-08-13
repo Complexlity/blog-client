@@ -30,6 +30,7 @@ import { Image } from "lucide-react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useSession from "@/hooks/useSession";
+import { getCategoryColor } from "@/lib/utils";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
 
@@ -344,15 +345,16 @@ export default function CreateForm() {
               onValueChange={(value: PostCategory) => {
                 setCategory(value);
               }}
+
             >
-              <SelectTrigger className="w-[180px] rounded-full">
+              <SelectTrigger className="w-[180px] rounded-full border-2 " style={{borderColor: getCategoryColor(category)}}>
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="technology">Technology</SelectItem>
-                <SelectItem value="advice">Advice</SelectItem>
-                <SelectItem value="stackies">Stackies</SelectItem>
-                <SelectItem value="general">General</SelectItem>
+              <SelectContent >
+                <SelectItem   value="technology">Technology</SelectItem>
+                <SelectItem  value="advice">Advice</SelectItem>
+                <SelectItem  value="stackies">Stackies</SelectItem>
+                <SelectItem  value="general">General</SelectItem>
               </SelectContent>
             </Select>
           </div>
