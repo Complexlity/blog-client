@@ -24,7 +24,7 @@ import { Button } from "@/Components/ui/button";
 import { toast } from "@/Components/ui/use-toast";
 import { PostCategory } from "@/lib/types";
 import { useUploadThing } from "@/lib/uploadthing";
-import { useMutation } from "@tanstack/react-query";
+import {  useMutation, useQueryClient } from "@tanstack/react-query";
 import axios, { isAxiosError } from "axios";
 import { Image } from "lucide-react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
@@ -46,6 +46,7 @@ const postSchema = z.object({
 type CreatePostInput = z.infer<typeof postSchema>;
 
 export default function CreateForm() {
+  const queryClient = useQueryClient()
   const user = useSession();
   const router = useRouter();
   const [coverImage, setCoverImage] = useState<File | null>(null);
@@ -100,8 +101,7 @@ export default function CreateForm() {
     onSuccess: () => {
       router.refresh();
       router.push("/");
-
-
+      queryClient.invalidateQueries({ queryKey: ['posts']})
       return toast({
         description: "Your post has been published.",
       });

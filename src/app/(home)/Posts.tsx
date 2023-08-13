@@ -1,11 +1,21 @@
-import { getPosts } from "@/lib/serverFunctions";
+'use client'
+
 import PostCard from "./PostCard";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { Post } from "@/lib/types";
 
-export const dynamic = "force-dynamic";
-export const fetchCache = "force-no-store";
 
-const Posts = async () => {
-  const posts = await getPosts();
+const Posts = () => {
+  const { data: posts, isFetching, isFetched } = useQuery({
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts?published=true`
+      );
+      return data as Post[]
+    },
+    queryKey: ['posts']
+})
 
   return (
     <div className="bg-slate-400 pb-8 pt-6 ">
@@ -14,9 +24,11 @@ const Posts = async () => {
           Posts
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {posts?.map((post) => (
-            <PostCard post={post} key={post._id} />
-          ))}
+          {isFetching ? <p>Loading....</p> : null}
+          {isFetched && !posts ? <p>NO POST FOUND IN THE DATABASE</p> : null}
+            {posts?.map((post) => (
+              <PostCard post={post} key={post._id} />
+              ))}
         </div>
       </div>
     </div>
