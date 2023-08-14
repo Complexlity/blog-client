@@ -10,7 +10,7 @@ import { buttonVariants } from "@/Components/ui/button";
 import PostCard from "./PostCard";
 
 const Posts = () => {
-  const { data: posts, isFetching, isFetched } = useQuery({
+  const { data: posts, isFetching, isFetched, isRefetching } = useQuery({
     queryFn: async () => {
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts?published=true`
@@ -31,7 +31,7 @@ const Posts = () => {
             posts?.map((post) => (
               <PostCard post={post} key={post._id} />
               ))}
-          {isFetching ? (
+          {isFetching && !isRefetching ? (
             <p className="flex gap-1">
                 <HoverCard openDelay={1}>
                   <HoverCardTrigger>
