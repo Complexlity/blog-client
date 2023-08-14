@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import SingleComment from "./SingleComment";
+import Link from "next/link";
 
 function CommentSection({
   postId,
@@ -119,7 +120,17 @@ function CommentSection({
               </Button>
             </form>
           </div>
-        ) : null}
+        ) : (
+          <p className="italic my-2">
+            <Link
+              href="/login"
+              className="underline hover:no-underline font-bold"
+            >
+              Login
+            </Link>{" "}
+            to create comments
+          </p>
+        )}
         <div className="comments py-2">
           <div className="divide-y-2">
             {postComments.length !== 0 ? (
@@ -129,9 +140,11 @@ function CommentSection({
                 </>
               ))
             ) : (
-              <h3 className="m-2 text-xl sm:text-2xl text-blueDarkest font-bold">
-                No Comments Added Yet
-              </h3>
+              <div className="m-2 grid gap-2">
+                <h3 className="text-xl sm:text-2xl text-blueDarkest font-bold">
+                  No Comments Added Yet
+                </h3>
+              </div>
             )}
           </div>
         </div>
