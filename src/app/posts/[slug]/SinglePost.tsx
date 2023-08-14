@@ -28,21 +28,21 @@ const SinglePost = ({ post }: { post: Post }) => {
             <h1 className="font-roboto font-extrabold text-3xl md:text-4xl mb-4">
               {post.title}
             </h1>
-            <p className=" mx-auto flex items-center gap-2 md:text-lg mb-4">
+            <p className=" mx-auto flex items-center gap-2 md:text-lg mb-4 ">
               <Image
                 src={post.author.imageSrc}
                 width={24}
                 height={24}
-                className="rounded-full object-cover h-10 w-10 object-top"
+                className="rounded-full object-cover h-6 w-6 sm:h-10 sm:w-10 object-top"
                 unoptimized
                 alt=""
               />
-              <span className="font-bold">{post.author.name}</span>
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
-              <span>{formatDate(post.createdAt, "full")}</span>
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-gray-600 align-middle"></span>
+              <span className="font-bold text-sm sm:text-base">{post.author.name}</span>
+              <span className="inline-block w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gray-600 align-middle"></span>
+              <span className="text-sm sm:text-base">{formatDate(post.createdAt, "full")}</span>
+              <span className="inline-block w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gray-600 align-middle"></span>
 
-              <span className="flex gap-1">
+              <span className="flex sm:gap-1 text-sm sm:text-base">
                 <BookOpen />
                 {calculateTimeToReadPost(post.content)} min read
               </span>
@@ -50,7 +50,7 @@ const SinglePost = ({ post }: { post: Post }) => {
             <div className=" flex mx-auto gap-6 items-center justify-center">
               <p
                 style={{ backgroundColor: getCategoryColor(post.category) }}
-                className="px-6 py-2 rounded-full text-blueDarkest font-bold hover:shadow-xl hover:shadow-gray-200"
+                className="px-2 py-1 sm:px-6 sm:py-2 rounded-full text-blueDarkest font-bold hover:shadow-xl hover:shadow-gray-200 text-sm sm:text-base"
               >
                 {post.category}
               </p>

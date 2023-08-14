@@ -65,7 +65,7 @@ export default function Navbar() {
   return (
     <div className="bg-blueDarkest">
       <div className="sm:container flex items-center justify-between py-3 border-b-2 border-b-blueLight max-w-[1200px]">
-        <NavigationMenu className="">
+        <NavigationMenu className="px-2">
           <NavigationMenuList className="flex gap-1 md:gap-8">
             <Link href="/" className="hidden sm:block">
               <Image src={logo} alt="logo" height={48} width={48} />
@@ -73,7 +73,7 @@ export default function Navbar() {
             <NavigationMenuItem className="">
               <Link href="/" legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`${navigationMenuTriggerStyle()} bg-transparent text-white hover:bg-blueLight hover:text-blueDarkest`}
+                  className={`${navigationMenuTriggerStyle()} bg-transparent text-white hover:bg-blueLight hover:text-blueDarkest px-0 sm:px-4`}
                 >
                   Home
                 </NavigationMenuLink>
