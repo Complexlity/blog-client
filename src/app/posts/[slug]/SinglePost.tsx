@@ -144,7 +144,7 @@ const SinglePost = ({ post }: { post: Post }) => {
                       htmlFor="my-drawer-4"
                       className="drawer-overlay"
                     ></label>
-                    <div className="p-4 z-[40] fixed right-0 overflow-y-auto max-w-[400px] w-1/2 h-full bg-white text-base-content ">
+                    <div className="p-4 z-[40] fixed right-0 overflow-y-auto max-w-[400px] w-[75%] h-full bg-white text-base-content ">
                       <CommentSection
                         postId={post._id}
                         comments={post.comments}

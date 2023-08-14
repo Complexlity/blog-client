@@ -129,7 +129,7 @@ function CommentSection({
                 </>
               ))
             ) : (
-              <h3 className="m-2 text-2xl text-blueDarkest font-bold">
+              <h3 className="m-2 text-xl sm:text-2xl text-blueDarkest font-bold">
                 No Comments Added Yet
               </h3>
             )}

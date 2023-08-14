@@ -65,7 +65,7 @@ const DeleteButton = ({ id }: { id: string }) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction className="p-0">
+          <AlertDialogAction className="p-0 bg-red-500">
             <Button
               isLoading={deleting}
               variant={"destructive"}
