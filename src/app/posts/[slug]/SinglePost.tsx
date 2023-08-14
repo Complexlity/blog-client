@@ -93,7 +93,7 @@ const SinglePost = ({ post }: { post: Post }) => {
             </HoverCard> */}
             </div>
             {post.coverImageSource ? (
-              <div className="h-[300px] md:h-[500px] mx-auto w-full m-10">
+              <div className="h-[300px] sm:h-[500px] mx-auto w-full m-10">
                 <Image
                   src={post.coverImageSource}
                   width={24}
@@ -105,7 +105,7 @@ const SinglePost = ({ post }: { post: Post }) => {
               </div>
             ) : null}
           </header>
-          <main className="prose text-black mx-auto relative space-y-6 p-4 md:p-0">
+          <main className="prose text-black sm:text-gray-900 mx-auto relative space-y-6 p-4 md:p-0">
             <EditorOutput content={JSON.parse(post.content)} />
             {/* Sticky Buttons */}
             <div className="not-prose bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
