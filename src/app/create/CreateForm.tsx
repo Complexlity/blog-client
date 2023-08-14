@@ -137,7 +137,9 @@ export default function CreateForm() {
         },
         placeholder: "Type here to write your post...",
         inlineToolbar: true,
-        data: { blocks: [] },
+        data: {
+          blocks: [],
+        },
         tools: {
           header: Header,
           linkTool: {

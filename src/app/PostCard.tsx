@@ -10,7 +10,7 @@ const PostCard = ({ post }: { post: Post }) => {
   return (
     <div className="rounded-2xl p-4 bg-blueDark grid gap-2 hover:scale-[101%] transition-all duration-150 ease-in-out">
       {post.coverImageSource ? (
-        <div className="h-full aspect-square overflow-hidden rounded-lg">
+        <div className="h-full w-full aspect-square overflow-hidden rounded-lg">
           <Image
             className="object-cover w-full object-top "
             unoptimized
