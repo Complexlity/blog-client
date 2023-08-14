@@ -1,6 +1,6 @@
 import { Button } from "@/Components/ui/button";
 import Image from "next/image";
-import scribble from "../../../public/scribble.png";
+import scribble from "../../public/scribble.png";
 
 const WriteForUs = () => {
   return (

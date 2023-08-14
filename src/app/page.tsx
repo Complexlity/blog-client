@@ -1,4 +1,4 @@
-import Header from "@/app/(home)/Header";
+import Header from "@/app/Header";
 import Footer from "@/Components/Footer";
 import Posts from "./Posts";
 import WriteForUs from "./WriteForUs";

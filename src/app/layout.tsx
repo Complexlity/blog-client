@@ -1,21 +1,20 @@
-import Providers from "@/Contexts/Providers";
-import { Inter } from "next/font/google";
-import "@/styles/globals.css";
-
 import { Toaster } from "@/Components/ui/toaster";
-import { getUser } from "@/lib/serverFunctions";
-import { redirect } from "next/navigation";
+import Providers from "@/Contexts/Providers";
+import "@/styles/globals.css";
+import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
-
+export const metadata = {
+  title: "Home | Complex Blog",
+  description: "Write you own story for free on our blog",
+};
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
-
+  }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <Providers >
