@@ -93,7 +93,7 @@ const SinglePost = ({ post }: { post: Post }) => {
             </HoverCard> */}
             </div>
             {post.coverImageSource ? (
-              <div className="h-[300px] md:h-[400px] lg:h-[500px] mx-auto w-full m-10">
+              <div className="h-[300px] md:h-[500px] mx-auto w-full m-10">
                 <Image
                   src={post.coverImageSource}
                   width={24}
@@ -105,10 +105,10 @@ const SinglePost = ({ post }: { post: Post }) => {
               </div>
             ) : null}
           </header>
-          <main className="prose mx-auto relative space-y-6">
+          <main className="prose text-black mx-auto relative space-y-6 p-4 md:p-0">
             <EditorOutput content={JSON.parse(post.content)} />
             {/* Sticky Buttons */}
-            <div className="not-prose sticky bottom-10 bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
+            <div className="not-prose bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
               <div className="flex gap-1 items-center">
                 <LikeButton
                   id={post._id}

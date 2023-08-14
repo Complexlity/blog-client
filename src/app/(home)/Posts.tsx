@@ -41,7 +41,7 @@ const Posts = () => {
               Due to the current hosting conditions, this may take a while. Please hold on
                   </HoverCardContent>
                 </HoverCard>
-              Loading...{" "}
+              Loading...(this might take a while){" "}
             </p>
           ) : null}
         </div>
