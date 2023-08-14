@@ -12,7 +12,7 @@ const PostCard = ({ post }: { post: Post }) => {
       {post.coverImageSource ? (
         <div className="h-full w-full aspect-square overflow-hidden rounded-lg">
           <Image
-            className="object-cover w-full object-top "
+            className="object-cover w-full object-top h-full"
             unoptimized
             src={post.coverImageSource}
             alt="image"
