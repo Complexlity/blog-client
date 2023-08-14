@@ -64,10 +64,10 @@ export default function Navbar() {
 
   return (
     <div className="bg-blueDarkest">
-      <div className="container flex items-center justify-between py-3 border-b-2 border-b-blueLight max-w-[1200px]">
+      <div className="sm:container flex items-center justify-between py-3 border-b-2 border-b-blueLight max-w-[1200px]">
         <NavigationMenu className="">
           <NavigationMenuList className="flex gap-1 md:gap-8">
-            <Link href="/">
+            <Link href="/" className="hidden sm:block">
               <Image src={logo} alt="logo" height={48} width={48} />
             </Link>
             <NavigationMenuItem className="">
@@ -96,7 +96,7 @@ export default function Navbar() {
           <div className="flex gap-1 md:gap-6">
             <Link
               href="/login"
-              className={buttonVariants({ variant: "outline" })}
+              className={`${buttonVariants({ variant: "outline" })}`}
             >
               Login
             </Link>
