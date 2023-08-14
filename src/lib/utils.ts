@@ -40,6 +40,6 @@ export function getCategoryColor(category: PostCategory | null) {
     case "stackies":
       return "#FFEB3B"; // Yellow color for stackies category
     default:
-      return "#000000"; // Black color for unknown category
+      return "none"; // Black color for unknown category
   }
 }

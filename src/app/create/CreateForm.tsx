@@ -93,7 +93,7 @@ export default function CreateForm() {
           variant: "destructive",
         });
       }
-    return  toast({
+      return toast({
         title: "Something went wrong",
         description: "Please try again later",
         variant: "destructive",
@@ -312,7 +312,7 @@ export default function CreateForm() {
             <div>
               <label
                 htmlFor="cover-image"
-                className="hover:bg-slate-200 cursor-pointer rounded-full p-2 flex content-start max-w-fit gap-2 items-center"
+                className="hover:bg-slate-200 cursor-pointer rounded-full p-2 flex content-start max-w-fit gap-2 items-center text-sm md:text-base"
               >
                 <Image />
                 <span>{previewImageUrl ? "Change" : "Add"} Cover Image</span>
@@ -328,6 +328,7 @@ export default function CreateForm() {
                   let clientFileUrl = URL.createObjectURL(file);
                   setPreviewImageUrl(clientFileUrl);
                   setCoverImage(file);
+                  e.target.value = "";
                 }}
               />
             </div>
@@ -337,7 +338,7 @@ export default function CreateForm() {
                   setPreviewImageUrl("");
                   setCoverImage(null);
                 }}
-                className="hover:bg-rose-100 text-red-400 cursor-pointer rounded-full p-2 flex content-start max-w-fit gap-2 items-center"
+                className="hover:bg-rose-100 text-red-400 text-sm md:text-base cursor-pointer rounded-full p-2 flex content-start max-w-fit gap-2 items-center"
               >
                 <MinusCircle />
                 <span>Remove Cover Image</span>
@@ -347,16 +348,18 @@ export default function CreateForm() {
               onValueChange={(value: PostCategory) => {
                 setCategory(value);
               }}
-
             >
-              <SelectTrigger className="w-[180px] rounded-full border-2 " style={{borderColor: getCategoryColor(category)}}>
+              <SelectTrigger
+                className="w-[180px] rounded-full border-2 "
+                style={{ borderColor: getCategoryColor(category) }}
+              >
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
-              <SelectContent >
-                <SelectItem   value="technology">Technology</SelectItem>
-                <SelectItem  value="advice">Advice</SelectItem>
-                <SelectItem  value="stackies">Stackies</SelectItem>
-                <SelectItem  value="general">General</SelectItem>
+              <SelectContent>
+                <SelectItem value="technology">Technology</SelectItem>
+                <SelectItem value="advice">Advice</SelectItem>
+                <SelectItem value="stackies">Stackies</SelectItem>
+                <SelectItem value="general">General</SelectItem>
               </SelectContent>
             </Select>
           </div>
