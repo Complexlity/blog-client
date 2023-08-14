@@ -31,6 +31,7 @@ import fetcher from "@/lib/fetcher";
 import { useUploadThing } from "@/lib/uploadthing";
 import "@uploadthing/react/styles.css";
 import { XCircle } from "lucide-react";
+import PasswordInput from "@/Components/ui/password-input";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
 
@@ -204,13 +205,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               <FormItem>
                 <FormLabel>Password *</FormLabel>
                 <FormControl>
-                  <Input
+                  <PasswordInput
                     placeholder="choose a strong password"
                     {...field}
                     autoCapitalize="none"
                     autoComplete="email"
                     autoCorrect="off"
                     disabled={isLoading}
+                    checkboxId="signup-password"
                   />
                 </FormControl>
                 <FormMessage />
@@ -225,13 +227,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               <FormItem>
                 <FormLabel>Confirm Password *</FormLabel>
                 <FormControl>
-                  <Input
+                  <PasswordInput
                     placeholder="re-enter password"
                     {...field}
                     autoCapitalize="none"
                     autoComplete="email"
                     autoCorrect="off"
                     disabled={isLoading}
+                    checkboxId="signup-password"
                   />
                 </FormControl>
                 <FormMessage />
@@ -295,7 +298,11 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             className={"w-full"}
             disabled={isLoading}
           >
-          {isLoading ? isUploadingImage ?  "Uploading profile image..." : "Creating account..." : "Sign up" }
+            {isLoading
+              ? isUploadingImage
+                ? "Uploading profile image..."
+                : "Creating account..."
+              : "Sign up"}
           </Button>
         </form>
       </Form>

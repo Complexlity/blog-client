@@ -2,41 +2,38 @@
 
 import { useToggle } from "@mantine/hooks"
 import { Eye, EyeOff } from "lucide-react"
-import { Checkbox } from "./ui/checkbox"
-import { Input } from "./ui/input"
+import { Checkbox } from "./checkbox"
+import { Input, InputProps } from "./input"
 
-type PasswordInputProps = {
-  field: any,
-  handleInput: any
+type PasswordInputProps = InputProps & {
+  checkboxId: string
 }
 
 
-export default function PassordInput({ field, handleInput }: PasswordInputProps) {
-  const [passwordType, togglePasswordType] = useToggle < "password"|"text">(['password', 'text'])
-
+export default function PassordInput({ checkboxId, ...props }: PasswordInputProps) {
+  const [passwordType, togglePasswordType] = useToggle<"password" | "text">(['password', 'text'])
 
   return (
     <>
       <div className="relative">
         <Input
           type={passwordType}
-          placeholder="enter your password"
-          {...field}
-          onInput={handleInput}
+          {...props}
         />
         <Checkbox
-          id="toggle-password"
+          id={checkboxId}
           className="hidden"
+          // @ts-expect-error
           onCheckedChange={togglePasswordType}
         />
         <label
           onKeyDown={(event) => {
             if (event.key === "Enter") {
-              document.getElementById("toggle-password")?.click();
+              document.getElementById(checkboxId)?.click();
             }
           }}
           tabIndex={0}
-          htmlFor="toggle-password"
+          htmlFor={checkboxId}
           className="absolute top-0 right-0 bottom-0  flex items-center px-2 focus:outline-none
           focus:bg-gray-300
           rounded-full

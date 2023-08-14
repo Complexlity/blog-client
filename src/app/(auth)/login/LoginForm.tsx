@@ -22,7 +22,7 @@ import * as z from "zod";
 
 import { Alert, AlertDescription, AlertTitle } from "@/Components/ui/alert";
 import fetcher from "@/lib/fetcher";
-import PasswordInput from "@/Components/PasswordInput";
+import PasswordInput from "@/Components/ui/password-input";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN as unknown as URL;
 
@@ -113,13 +113,11 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               <FormItem>
                 <FormLabel>Password *</FormLabel>
                 <FormControl>
-                  {/* <Input
-                    type="password"
-                    placeholder="enter your password"
+                  <PasswordInput
                     {...field}
                     onInput={handleInput}
-                  /> */}
-                  <PasswordInput field={field} handleInput={handleInput}/>
+                    checkboxId={"login-password"}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
