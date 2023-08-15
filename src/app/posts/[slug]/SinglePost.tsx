@@ -24,7 +24,7 @@ const SinglePost = ({ post }: { post: Post }) => {
       </Helmet>
       <div className="bg-white pb-8">
         <div className=" MinusCircle ">
-          <header className=" grid max-w-[800px] mx-auto px-8 text-center py-8">
+          <header className=" grid max-w-[800px] mx-auto px-8 text-center pt-8">
             <h1 className="font-roboto font-extrabold text-3xl md:text-4xl mb-4">
               {post.title}
             </h1>
@@ -105,7 +105,7 @@ const SinglePost = ({ post }: { post: Post }) => {
               </div>
             ) : null}
           </header>
-          <main className="prose text-black sm:text-gray-900 mx-auto relative space-y-6 p-4 md:p-0">
+          <main className="pt-0 prose text-black sm:text-gray-900 mx-auto relative space-y-6 p-4 md:p-0">
             <EditorOutput content={JSON.parse(post.content)} />
             {/* Sticky Buttons */}
             <div className="not-prose bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
