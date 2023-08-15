@@ -3,7 +3,7 @@
 import EditorOutput from "@/app/create/EditorOutput";
 import { useToast } from "@/Components/ui/use-toast";
 import useSession from "@/hooks/useSession";
-import { Post } from "@/lib/types";
+import { Post, User } from "@/lib/types";
 import {
   calculateTimeToReadPost,
   formatDate,
@@ -16,7 +16,13 @@ import LikeButton from "./LikeButton";
 // @ts-ignore
 import { Helmet } from "react-helmet";
 
-const SinglePost = ({ post }: { post: Post }) => {
+type SinglePostProps = {
+  post: Post
+  user: User | null
+}
+
+
+const SinglePost = ({ post, user }: SinglePostProps) => {
   return (
     <>
       {/* <Helmet>
@@ -111,6 +117,7 @@ const SinglePost = ({ post }: { post: Post }) => {
             <div className="not-prose bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
               <div className="flex gap-1 items-center">
                 <LikeButton
+                  user={user}
                   id={post._id}
                   likes={post.likes}
                   likeCount={post.likeCount}
@@ -148,6 +155,7 @@ const SinglePost = ({ post }: { post: Post }) => {
                       <CommentSection
                         postId={post._id}
                         comments={post.comments}
+                        user={user}
                       />
                     </div>
                   </div>

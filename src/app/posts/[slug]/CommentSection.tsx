@@ -3,7 +3,7 @@
 import { Button } from "@/Components/ui/button";
 import { useToast } from "@/Components/ui/use-toast";
 import useSession from "@/hooks/useSession";
-import { Comment, OmittedComment } from "@/lib/types";
+import { Comment, OmittedComment, User } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import axios, { isAxiosError } from "axios";
@@ -13,13 +13,17 @@ import TextareaAutosize from "react-textarea-autosize";
 import SingleComment from "./SingleComment";
 import Link from "next/link";
 
+type CommentSectionProps = {
+  postId: string;
+  comments: OmittedComment[];
+  user: User | null
+}
+
+
 function CommentSection({
   postId,
   comments,
-}: {
-  postId: string;
-  comments: OmittedComment[];
-}) {
+}: CommentSectionProps) {
   const MAXIMUM_COMMENT_LENGTH = 100;
   const { toast } = useToast();
   const user = useSession();
@@ -136,7 +140,7 @@ function CommentSection({
             {postComments.length !== 0 ? (
               postComments.map((comment) => (
                 <>
-                  <SingleComment comment={comment} key={comment._id} />
+                  <SingleComment user={user}  comment={comment} key={comment._id} />
                 </>
               ))
             ) : (
