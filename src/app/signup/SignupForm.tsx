@@ -132,6 +132,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     let clientFileUrl = URL.createObjectURL(file);
     setImageUrl(clientFileUrl);
     setImageFile(file);
+    e.target.value=""
   }
 
   function removeProfileImage() {
