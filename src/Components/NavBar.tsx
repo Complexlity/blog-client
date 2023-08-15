@@ -105,7 +105,7 @@ export default function Navbar() {
             </Link>
           </div>
         ) : (
-          <div className="flex gap-4 mr-4 sm:mr-0 bg-blue-800">
+          <div className="flex gap-4 mr-4 sm:mr-0">
             <div className="flex items-center justify-center text-white capitalize">
               <Image
                 src={user.imageSrc}
