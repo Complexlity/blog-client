@@ -19,9 +19,9 @@ import { Helmet } from "react-helmet";
 const SinglePost = ({ post }: { post: Post }) => {
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <title>{post.title}</title>
-      </Helmet>
+      </Helmet> */}
       <div className="bg-white pb-8">
         <div className=" MinusCircle ">
           <header className=" grid max-w-[800px] mx-auto px-8 text-center pt-8">
