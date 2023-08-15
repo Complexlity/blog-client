@@ -11,7 +11,7 @@ const Hero = () => {
       <Navbar />
       {/* font type: fascinate */}
       <div className="container grid justify-center ">
-        <div className="py-32 max-w-[70ch] grid gap-8 mx-auto  text-center ml-0">
+        <div className="py-12 sm:py-32 max-w-[70ch] grid gap-8 mx-auto  text-center ml-0">
           <div className="hidden lg:block absolute right-0  scale-x-[-1]  translate-x-[10rem] lg:translate-x-[0] translate-y-[-7rem]">
             <Image src={person2Img} height={500} alt="" />
           </div>
