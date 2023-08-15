@@ -64,7 +64,7 @@ export default function Navbar() {
 
   return (
     <div className="bg-blueDarkest">
-      <div className="sm:container flex items-center justify-between py-3 border-b-2 border-b-blueLight max-w-[1200px]">
+      <div className="sm:container flex items-center justify-between py-3 border-b-2 border-b-blueLight max-w-[1200px] px-2">
         <NavigationMenu className="px-2">
           <NavigationMenuList className="flex gap-1 md:gap-8">
             <Link href="/" className="hidden sm:block">
@@ -73,7 +73,7 @@ export default function Navbar() {
             <NavigationMenuItem className="">
               <Link href="/" legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`${navigationMenuTriggerStyle()} bg-transparent text-white hover:bg-blueLight hover:text-blueDarkest px-0 sm:px-4`}
+                  className={`${navigationMenuTriggerStyle()} bg-transparent text-white hover:bg-blueLight hover:text-blueDarkest px-1 sm:px-4`}
                 >
                   Home
                 </NavigationMenuLink>
@@ -82,7 +82,7 @@ export default function Navbar() {
             <NavigationMenuItem className="">
               <Link href="/create" legacyBehavior passHref>
                 <NavigationMenuLink
-                  className={`${navigationMenuTriggerStyle()} flex gap-1 items-center  bg-transparent text-white hover:bg-blueLight hover:text-blueDarkest`}
+                  className={`${navigationMenuTriggerStyle()} flex gap-1 items-center  bg-transparent text-white px-1 sm:px-4 hover:bg-blueLight hover:text-blueDarkest`}
                 >
                   <span className="flex gap-1 items-center">
                     Create Post <PencilLine className="w-4 h-4" />
@@ -93,7 +93,7 @@ export default function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
         {!user ? (
-          <div className="flex gap-1 md:gap-6">
+          <div className="flex gap-1 md:gap-6 mr-4 sm:mr-0">
             <Link
               href="/login"
               className={`${buttonVariants({ variant: "outline" })}`}
@@ -105,7 +105,7 @@ export default function Navbar() {
             </Link>
           </div>
         ) : (
-          <div className="flex gap-4 mr-2">
+          <div className="flex gap-4 mr-4 sm:mr-0 bg-blue-800">
             <div className="flex items-center justify-center text-white capitalize">
               <Image
                 src={user.imageSrc}
