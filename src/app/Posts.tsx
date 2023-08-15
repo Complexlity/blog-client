@@ -9,16 +9,16 @@ import Link from "next/link";
 import { buttonVariants } from "@/Components/ui/button";
 import PostCard from "./PostCard";
 
-const Posts = () => {
-  const { data: posts, isFetching, isFetched, isRefetching } = useQuery({
-    queryFn: async () => {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts?published=true`
-      );
-      return data as Post[]
-    },
-    queryKey: ['posts']
-})
+const Posts = ({posts}: {posts: Post[]}) => {
+//   const { data: posts, isFetching, isFetched, isRefetching } = useQuery({
+//     queryFn: async () => {
+//       const { data } = await axios.get(
+//         `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/posts?published=true`
+//       );
+//       return data as Post[]
+//     },
+//     queryKey: ['posts']
+// })
 
   return (
     <div className="bg-slate-400 pb-8 pt-6 ">
@@ -27,7 +27,11 @@ const Posts = () => {
           Posts
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {isFetched && (!posts || posts.length == 0) ? <p>NO POST FOUND IN THE DATABASE <Link href="/create" className={buttonVariants()}>Create One</Link></p> :
+          {
+          posts?.map((post) => (
+            <PostCard post={post} key={post._id} />
+            ))}
+          {/* {isFetched && (!posts || posts.length == 0) ? <p>NO POST FOUND IN THE DATABASE <Link href="/create" className={buttonVariants()}>Create One</Link></p> :
             posts?.map((post) => (
               <PostCard post={post} key={post._id} />
               ))}
@@ -43,7 +47,7 @@ const Posts = () => {
                 </HoverCard>
               Loading Posts...(this might take a while){" "}
             </p>
-          ) : null}
+          ) : null} */}
         </div>
       </div>
     </div>
