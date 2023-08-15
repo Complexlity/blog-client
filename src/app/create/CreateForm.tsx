@@ -192,7 +192,7 @@ export default function CreateForm() {
       for (const [_key, value] of Object.entries(errors)) {
         value;
         toast({
-          title: "Something went wrong.",
+          title: "Missing Required Fields",
           description: "Title or Content is not provided",
           variant: "destructive",
         });
