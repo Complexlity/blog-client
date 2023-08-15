@@ -51,6 +51,6 @@ export default function PassordInput({ checkboxId, ...props }: PasswordInputProp
 }
 
 const PasswordIcon = ({ type }: { type: "password" | "text" }) => {
-  if (type === 'password') return <Eye />
+  if (type === 'text') return <Eye />
   return <EyeOff/>
 }
