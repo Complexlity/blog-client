@@ -2,7 +2,7 @@ import Header from "@/app/Header";
 import Footer from "@/Components/Footer";
 import Posts from "./Posts";
 import WriteForUs from "./WriteForUs";
-import { getPosts } from "@/lib/serverFunctions";
+import { getPosts, getUser } from "@/lib/serverFunctions";
 
 export default async function Home() {
   let posts = await getPosts()

@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/Components/ui/navigation-menu";
-import { ChevronDown, PencilLine } from "lucide-react";
+import { ChevronDown, PencilLine,  } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.png";
@@ -29,12 +29,13 @@ import {
   DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
 import useStore from "@/store";
+import { User } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
 
-export default function Navbar() {
-  const user = useSession();
+export default function Navbar({user}: {user: User | null}) {
+  // const user = useSession();
   const store = useStore();
   const router = useRouter()
 
@@ -50,7 +51,7 @@ export default function Navbar() {
       toast({
         title: "Successfully logged Out",
       });
-      store.reset()
+      // store.reset()
       router.refresh();
     },
     onError: (error) => {
