@@ -1,7 +1,7 @@
 import { getSinglePost, getUser } from "@/lib/serverFunctions";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import SinglePost from "./SinglePost";
-import type { Metadata, ResolvingMetadata } from "next";
 
 
 export const dynamic = "force-dynamic";
@@ -16,7 +16,7 @@ type Props = {
 
 export async function generateMetadata(
   { params,  }: Props,
-  parent?: ResolvingMetadata
+
 ): Promise<Metadata> {
   // read route params
   const slug = params.slug;
