@@ -319,6 +319,7 @@ export default function CreateForm() {
               </label>
               <input
                 type="file"
+                accept="image/*"
                 id="cover-image"
                 name="cover-image"
                 className="hidden"
