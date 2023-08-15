@@ -69,7 +69,7 @@ export default function CreateForm() {
   const _titleRef = useRef<HTMLTextAreaElement>(null);
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
-  const pathname = usePathname();
+
 
   const { mutate: createPost, isLoading: isCreating } = useMutation({
     mutationFn: async (payload: CreatePostInput) => {
@@ -277,7 +277,7 @@ export default function CreateForm() {
               <Skeleton width={`150px`} height={24} />
 
               <Skeleton
-                width={`180px`}
+                width={"120px"}
                 height={32}
                 className="rounded-full"
                 borderRadius={`9999vw`}
@@ -308,54 +308,56 @@ export default function CreateForm() {
           className="w-full grid"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="flex gap-2 my-2 items-center">
-            <div>
-              <label
-                htmlFor="cover-image"
-                className="hover:bg-slate-200 cursor-pointer rounded-full p-2 flex content-start max-w-fit gap-2 items-center text-sm md:text-base"
-              >
-                <Image />
-                <span>{previewImageUrl ? "Change" : "Add"} Cover Image</span>
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                id="cover-image"
-                name="cover-image"
-                className="hidden"
-                onChange={(e) => {
-                  // @ts-ignore
-                  let file = e.target.files[0];
-                  let clientFileUrl = URL.createObjectURL(file);
-                  setPreviewImageUrl(clientFileUrl);
-                  setCoverImage(file);
-                  e.target.value = "";
-                }}
-              />
-            </div>
-            {previewImageUrl ? (
-              <div
-                onClick={() => {
-                  setPreviewImageUrl("");
-                  setCoverImage(null);
-                }}
-                className="hover:bg-rose-100 text-red-400 text-sm md:text-base cursor-pointer rounded-full p-2 flex content-start max-w-fit gap-2 items-center"
-              >
-                <MinusCircle />
-                <span>Remove Cover Image</span>
+          <div className="flex my-2 items-center justify-between">
+            <div className="flex">
+              <div>
+                <label
+                  htmlFor="cover-image"
+                  className="hover:bg-slate-200 cursor-pointer rounded-full p-2 flex content-start max-w-fit gap-2 items-center text-sm md:text-base"
+                >
+                  <Image />
+                  <span>{previewImageUrl ? "Change" : "Add Cover"} Image</span>
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="cover-image"
+                  name="cover-image"
+                  className="hidden"
+                  onChange={(e) => {
+                    // @ts-ignore
+                    let file = e.target.files[0];
+                    let clientFileUrl = URL.createObjectURL(file);
+                    setPreviewImageUrl(clientFileUrl);
+                    setCoverImage(file);
+                    e.target.value = "";
+                  }}
+                />
               </div>
-            ) : null}
+              {previewImageUrl ? (
+                <div
+                  onClick={() => {
+                    setPreviewImageUrl("");
+                    setCoverImage(null);
+                  }}
+                  className="hover:bg-rose-100 text-red-400 text-sm md:text-base cursor-pointer rounded-full flex content-start max-w-fit gap-2 items-center"
+                >
+                  <MinusCircle />
+                </div>
+              ) : null}
+            </div>
             <Select
               onValueChange={(value: PostCategory) => {
                 setCategory(value);
               }}
             >
               <SelectTrigger
-                className="w-[180px] rounded-full border-2 "
+                className="w-[120px] sm:w-[180px] rounded-full border-2 "
                 style={{ borderColor: getCategoryColor(category) }}
               >
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
+
               <SelectContent>
                 <SelectItem value="technology">Technology</SelectItem>
                 <SelectItem value="advice">Advice</SelectItem>
