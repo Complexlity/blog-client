@@ -10,7 +10,7 @@ import LikeButton from "./LikeButton";
 function SingleComment({ comment }: { comment: OmittedComment }) {
   const user = useSession();
   return (
-    <div className="space-y-4  py-4">
+    <div className="space-y-4 py-4">
       <div className="profile flex items-center gap-1">
         <Image
           unoptimized
@@ -25,7 +25,7 @@ function SingleComment({ comment }: { comment: OmittedComment }) {
           <span>{formatDate(comment.createdAt)}</span>
         </div>
       </div>
-      <div className="prose">{comment.comment}</div>
+      <p className="prose break-all">{comment.comment}</p>
 
       <div className="flex items-center justify-between">
         <LikeButton
