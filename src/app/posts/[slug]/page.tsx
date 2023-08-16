@@ -22,7 +22,7 @@ export async function generateMetadata(
   const slug = params.slug;
   const post = await getSinglePost(slug)
   return {
-    title: `${post?.title} | Complexlity's Blog `,
+    title: `${post?.title} | Complexlity's Blog`,
     openGraph: {
       images: [post?.coverImageSource!],
     },
