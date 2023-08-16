@@ -1,4 +1,4 @@
-import { getSinglePost, getUser } from "@/lib/serverFunctions";
+import { getSinglePost } from "@/lib/serverFunctions";
 import { redirect } from "next/navigation";
 import SinglePost from "./SinglePost";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -33,13 +33,12 @@ export async function generateMetadata(
 
 export default async function Post({ params }: { params: { slug: string } }) {
   const post = await getSinglePost(params.slug);
-  const user = await getUser()
   if (!post) redirect("/");
   return (
 
     <>
 
-  <SinglePost post={post} user={user}
+  <SinglePost post={post}
   />;
   </>
   )

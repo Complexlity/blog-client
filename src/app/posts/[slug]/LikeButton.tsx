@@ -7,7 +7,6 @@ import {
 } from "@/Components/ui/hover-card";
 import { toast } from "@/Components/ui/use-toast";
 import useSession from "@/hooks/useSession";
-import { User } from "@/lib/types";
 import { usePrevious } from "@mantine/hooks";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -20,10 +19,10 @@ interface Props {
   likes: string[];
   likeCount: number;
   type: "posts" | "comments";
-  user: User | null
 }
 
-const LikeButton = ({ id, likes, likeCount, type, user }: Props) => {
+const LikeButton = ({ id, likes, likeCount, type }: Props) => {
+  let user = useSession();
   const [likedByMe, setLikedByMe] = useState<boolean>(
     user ? likes.includes(user?._id) : false
   );

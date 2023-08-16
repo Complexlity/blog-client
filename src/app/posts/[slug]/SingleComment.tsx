@@ -1,20 +1,14 @@
 "use client";
 
 import useSession from "@/hooks/useSession";
-import { OmittedComment, User } from "@/lib/types";
+import { OmittedComment } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
 import Image from "next/image";
 import DeleteButton from "./DeleteButton";
 import LikeButton from "./LikeButton";
 
-type Props = {
-  comment: OmittedComment
-  user: User | null
-}
-
-
-function SingleComment({ comment, user }: Props) {
-
+function SingleComment({ comment }: { comment: OmittedComment }) {
+  const user = useSession();
   return (
     <div className="space-y-4 py-4">
       <div className="profile flex items-center gap-1">
@@ -39,7 +33,6 @@ function SingleComment({ comment, user }: Props) {
           likes={comment.likes}
           likeCount={comment.likeCount}
           type="comments"
-          user={user}
         />
         {user?._id === comment.user._id ? (
           <DeleteButton id={comment._id} />
