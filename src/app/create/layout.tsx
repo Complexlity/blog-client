@@ -5,6 +5,7 @@ import Providers from "@/Contexts/Providers";
 import { getUser } from "@/lib/serverFunctions";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,15 +17,16 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <Providers >
+      <Providers>
         <body className={inter.className}>
           <div>
             <Navbar />
             {children}
             <Footer />
           </div>
-        </body>
         <Toaster />
+        <Analytics />
+        </body>
       </Providers>
     </html>
   );

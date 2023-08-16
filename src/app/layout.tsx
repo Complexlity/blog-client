@@ -2,6 +2,7 @@ import { Toaster } from "@/Components/ui/toaster";
 import Providers from "@/Contexts/Providers";
 import "@/styles/globals.css";
 import { Inter } from "next/font/google";
+import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +21,9 @@ export default async function RootLayout({
       <Providers >
         <body className={`${inter.className} overflow-x-hidden`}>
           {children}
-        </body>
         <Toaster />
+        <Analytics />
+        </body>
       </Providers>
     </html>
   );
