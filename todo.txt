@@ -1,0 +1,4 @@
+1. Complete the CMS functions
+-  Editing blog posts
+-  Publishing and unpublishing blog posts
+-  Deleting blog posts
