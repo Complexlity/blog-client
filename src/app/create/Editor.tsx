@@ -31,6 +31,7 @@ import axios, { isAxiosError } from "axios";
 import { Image } from "lucide-react";
 import "react-loading-skeleton/dist/skeleton.css";
 import EditorSkeleton from "./EditorSkeleton";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/Components/ui/hover-card";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
 
@@ -267,7 +268,7 @@ export default function Editor() {
 
   if (!isMounted) {
     return (
-      <EditorSkeleton /> 
+      <EditorSkeleton />
     );
   }
 
@@ -281,8 +282,8 @@ export default function Editor() {
           className="w-full grid"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="flex my-2 items-center justify-between">
-            <div className="flex">
+          <div className="flex my-2 items-center gap-4">
+            <div className="flex items-center">
               <div>
                 <label
                   htmlFor="cover-image"
@@ -308,15 +309,22 @@ export default function Editor() {
                 />
               </div>
               {previewImageUrl ? (
+                <HoverCard openDelay={1} closeDelay={0}>
+                  <HoverCardTrigger>
                 <div
                   onClick={() => {
                     setPreviewImageUrl("");
                     setCoverImage(null);
                   }}
-                  className="hover:bg-rose-100 text-red-400 text-sm md:text-base cursor-pointer rounded-full flex content-start max-w-fit gap-2 items-center"
+                  className="aspect-square h-10 w-10 rounded-full  hover:bg-rose-100 text-red-400 text-sm md:text-base cursor-pointer  flex justify-center items-center"
                 >
                   <MinusCircle />
-                </div>
+                    </div>
+                    <HoverCardContent className="px-2 py-1">
+                      Remove cover image
+                    </HoverCardContent>
+                  </HoverCardTrigger>
+                </HoverCard>
               ) : null}
             </div>
             <Select
@@ -325,7 +333,7 @@ export default function Editor() {
               }}
             >
               <SelectTrigger
-                className="w-[120px] sm:w-[180px] rounded-full border-2 "
+                className="w-[120px] sm:w-[180px] rounded-full border-2  focus-visible:outline-none "
                 style={{ borderColor: getCategoryColor(category) }}
               >
                 <SelectValue placeholder="Category" />
