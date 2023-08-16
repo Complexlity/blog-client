@@ -19,13 +19,10 @@ const Hero = () => {
             <Image src={personImg} height={500} alt="" />
           </div>
           <h1 className="font-roboto relative z-1 text-6xl text-blueLight font-bold">
-            Welcome to Our Complex Blog Platform
+            Hi! I'm Complexlity. Welcome To My Blog
           </h1>
           <p className="text-white relative z-1">
-            Get ready for an adventure into the captivating world of words and
-            wisdom in our simple, yet mesmerizing blog. Let&apos;s dive deep
-            into the minds of amazing authors and explore various topics
-            together. Are you excited? We sure are!
+            I built this platform to share my ideas and findings. Ranging through topics from development to hardware technology, to even more general things like `how to solve the 4x4 rubiks cube`.
           </p>
         </div>
       </div>

@@ -1,6 +1,7 @@
-import { Button } from "@/Components/ui/button";
+import { Button, buttonVariants } from "@/Components/ui/button";
 import Image from "next/image";
 import scribble from "../../public/scribble.png";
+import Link from "next/link";
 
 const WriteForUs = () => {
   return (
@@ -15,15 +16,12 @@ const WriteForUs = () => {
           />
         </div>
         <h2 className="font-roboto text-5xl font-bold text-blueDarkest">
-          Unlock Your Writing Potential!
+          You Can Write Too!
         </h2>
         <p className="max-w-[50ch] mx-auto">
-          Do you have a flair for words and a talent for storytelling? Want to
-          inspire others and share your thoughts on our platform? Embrace your
-          inner wordsmith and become an author for our simple blog today! Trust
-          us, it&apos;s a game-changer.
+          It is not restricted to only myself. Anyone can write too. Simply create an account, and start sharing your stories! The world can't wait to read from you
         </p>
-        <Button size={"lg"}>Join Us Now</Button>
+        <Link href="/signup" className={buttonVariants({size: 'lg'})}>Join Me!</Link>
       </div>
     </div>
   );

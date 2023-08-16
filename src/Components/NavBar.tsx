@@ -49,7 +49,6 @@ export default function Navbar() {
         title: "Successfully logged Out",
       });
       store.reset();
-      router.refresh();
     },
     onError: (error) => {
       toast({
