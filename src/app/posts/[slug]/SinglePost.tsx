@@ -13,15 +13,12 @@ import { BookOpen, MessagesSquare } from "lucide-react";
 import Image from "next/image";
 import CommentSection from "./CommentSection";
 import LikeButton from "./LikeButton";
-// @ts-ignore
-import { Helmet } from "react-helmet";
+
 
 const SinglePost = ({ post }: { post: Post }) => {
   return (
     <>
-      <Helmet>
-        <title>{post.title}</title>
-      </Helmet>
+      
       <div className="bg-white pb-8">
         <div className=" MinusCircle ">
           <header className=" grid max-w-[800px] mx-auto px-8 text-center pt-8">
