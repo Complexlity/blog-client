@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 import CreateForm from "./CreateForm";
 
 export const metadata: Metadata = {
-  title: "Create New Post | Complexlity's blog",
-  description: "Write your own story for the whole world to be a part of",
+  title: "Create New Post | Complex blog",
+  description: "The best create a new post for you blog",
 };
 
 export default async function createPost() {
