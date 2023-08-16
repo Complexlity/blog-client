@@ -16,7 +16,7 @@ const Footer = () => {
         <Link href={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}>
           <Twitch className=" text-blueDarkest w-8 h-8 cursor-pointer" />
         </Link>
-        <Link href={"https://github.com/Complexlity"}>
+        <Link href={"https://github.com/Complexlity/blog-client"}>
           <Github className=" text-blueDarkest w-8 h-8 cursor-pointer" />
         </Link>
         <Link href={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}>
