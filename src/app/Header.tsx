@@ -19,12 +19,15 @@ const Hero = () => {
             <Image src={personImg} height={500} alt="" />
           </div>
           <h1 className="font-roboto relative z-1 text-6xl text-blueLight font-bold">
-            Hi! I'm Complexlity. Welcome To My Blog
+            Hi! I&apos;m Complexlity. Welcome To My Blog
           </h1>
           <p className="text-white relative z-1">
-            I built this platform to share things I know and things I learn. Ranging through topics from development to hardware technology, to even more general things like <i><b>
-            how to solve the 4x4 rubiks cube.
-            </b></i>
+            I built this platform to share things I know and things I learn.
+            Ranging through topics from development to hardware technology, to
+            even more general things like{" "}
+            <i>
+              <b>how to solve the 4x4 rubiks cube.</b>
+            </i>
           </p>
         </div>
       </div>
