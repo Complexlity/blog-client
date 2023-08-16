@@ -7,11 +7,13 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/Components/ui/navigation-menu";
-import { ChevronDown, PencilLine, } from "lucide-react";
+import { ChevronDown, PencilLine,  } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.png";
 
+import { useUserContext } from "@/Contexts/SessionProvider";
+import useSession from "@/hooks/useSession";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -26,8 +28,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
-import { User } from "@/lib/types";
 import useStore from "@/store";
+import { User } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
