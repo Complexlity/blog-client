@@ -1,14 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import personImg from "../../public/person.svg";
 import person2Img from "../../public/person2.svg";
 import Navbar from '@/Components/NavBar'
-import { getUser } from "@/lib/serverFunctions";
 
-const Hero = async () => {
-  const user = await getUser()
+const Hero = () => {
   return (
     <div className="bg-blueDarkest">
-      <Navbar user={user} />
+      <Navbar />
       {/* font type: fascinate */}
       <div className="container grid justify-center ">
         <div className="py-12 sm:py-32 max-w-[70ch] grid gap-8 mx-auto  text-center ml-0">

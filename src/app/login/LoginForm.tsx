@@ -69,7 +69,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       form.reset();
       setIsLoading(false);
       router.push("/");
-      router.refresh()
     } catch (error: any) {
       setLoginError(error.message);
       setIsLoading(false);
