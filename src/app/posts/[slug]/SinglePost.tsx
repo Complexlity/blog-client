@@ -1,8 +1,6 @@
 "use client";
 
-import EditorOutput from "@/app/create/EditorOutput";
-import { useToast } from "@/Components/ui/use-toast";
-import useSession from "@/hooks/useSession";
+import EditorOutput from "@/app/posts/[slug]/Main";
 import { Post } from "@/lib/types";
 import {
   calculateTimeToReadPost,
@@ -18,7 +16,7 @@ import LikeButton from "./LikeButton";
 const SinglePost = ({ post }: { post: Post }) => {
   return (
     <>
-      
+
       <div className="bg-white pb-8">
         <div className=" MinusCircle ">
           <header className=" grid max-w-[800px] mx-auto px-8 text-center pt-8">

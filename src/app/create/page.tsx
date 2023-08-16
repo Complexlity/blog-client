@@ -1,7 +1,5 @@
-import { getUser } from "@/lib/serverFunctions";
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
-import CreateForm from "./CreateForm";
+import Editor from "./Editor";
 
 export const metadata: Metadata = {
   title: "Create New Post | Complex blog",
@@ -11,7 +9,7 @@ export const metadata: Metadata = {
 export default async function createPost() {
   return (
     <div className="max-w-[1000px] mx-auto p-4">
-      <CreateForm />
+      <Editor />
     </div>
   );
 }

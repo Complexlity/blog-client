@@ -32,7 +32,7 @@
 // };
 
 // export default useSession;
-'use client'
+"use client";
 
 import { useEffect } from "react";
 import useStore from "@/store";
@@ -43,14 +43,14 @@ export default function useSession() {
 
   async function fetchUser() {
     try {
-            const response = await fetch(
-              `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/me`,
-              {
-                credentials: "include",
-              }
-            );
-            const user = (await response.json()) as unknown as User;
-            if (!response.ok) throw new Error("user not found");
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/me`,
+        {
+          credentials: "include",
+        }
+      );
+      const user = (await response.json()) as unknown as User;
+      if (!response.ok) throw new Error("user not found");
       store.setAuthUser(user);
     } catch (error: any) {
       store.reset();

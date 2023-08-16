@@ -11,7 +11,7 @@ import { uploadFiles } from "@/lib/uploadthing";
 import "@/styles/editor.css";
 import EditorJS from "@editorjs/editorjs";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
@@ -22,15 +22,15 @@ import { MinusCircle } from "lucide-react";
 
 import { Button } from "@/Components/ui/button";
 import { toast } from "@/Components/ui/use-toast";
+import useSession from "@/hooks/useSession";
 import { PostCategory } from "@/lib/types";
 import { useUploadThing } from "@/lib/uploadthing";
+import { getCategoryColor } from "@/lib/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios, { isAxiosError } from "axios";
 import { Image } from "lucide-react";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import useSession from "@/hooks/useSession";
-import { getCategoryColor } from "@/lib/utils";
+import EditorSkeleton from "./EditorSkeleton";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
 
@@ -44,9 +44,9 @@ const postSchema = z.object({
   content: z.any(),
 });
 
-type CreatePostInput = z.infer<typeof postSchema>;
+type EditorInput = z.infer<typeof postSchema>;
 
-export default function CreateForm() {
+export default function Editor() {
   const queryClient = useQueryClient();
   const user = useSession();
   const router = useRouter();
@@ -69,17 +69,15 @@ export default function CreateForm() {
   const _titleRef = useRef<HTMLTextAreaElement>(null);
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
-
-
   const { mutate: createPost, isLoading: isCreating } = useMutation({
-    mutationFn: async (payload: CreatePostInput) => {
+    mutationFn: async (payload: EditorInput) => {
       const res = await startUpload([coverImage!]);
       const fileUrl = res![0].fileUrl;
       // @ts-ignore
       payload.coverImageSource = fileUrl;
       postData(payload);
 
-      async function postData(payload: CreatePostInput) {
+      async function postData(payload: EditorInput) {
         const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
           withCredentials: true,
         });
@@ -269,32 +267,7 @@ export default function CreateForm() {
 
   if (!isMounted) {
     return (
-      <SkeletonTheme baseColor="#e5e7eb" highlightColor="#d1d5db">
-        <div className="max-w-[65ch] mb-0 w-full mx-auto">
-          <form id="subreddit-post-form" className="w-full grid">
-            <div className="flex gap-2 items-center my-2">
-              <Skeleton circle={true} height={32} width={32} />
-              <Skeleton width={`150px`} height={24} />
-
-              <Skeleton
-                width={"120px"}
-                height={32}
-                className="rounded-full"
-                borderRadius={`9999vw`}
-              />
-            </div>
-
-            <div className="">
-              <div id="" className="min-h-[45vh] mb-2">
-                <Skeleton height={`100%`} className="h-full  min-h-[45ch]" />
-              </div>
-              <p className="text-sm text-gray-500 w-full max-w-[500px] mx-auto">
-                <Skeleton height={`35px`} />
-              </p>
-            </div>
-          </form>
-        </div>
-      </SkeletonTheme>
+      <EditorSkeleton /> 
     );
   }
 

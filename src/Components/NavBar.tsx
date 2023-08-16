@@ -11,8 +11,6 @@ import { ChevronDown, PencilLine } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/logo.png";
-
-import { useUserContext } from "@/Contexts/SessionProvider";
 import useSession from "@/hooks/useSession";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -36,7 +34,7 @@ export const fetchCache = "force-no-store";
 export default function Navbar() {
   const user = useSession();
   const store = useStore();
-  const router = useRouter()
+  const router = useRouter();
 
   const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
   const { mutate: logOut, isLoading: loggingOut } = useMutation({
@@ -50,7 +48,7 @@ export default function Navbar() {
       toast({
         title: "Successfully logged Out",
       });
-      store.reset()
+      store.reset();
       router.refresh();
     },
     onError: (error) => {

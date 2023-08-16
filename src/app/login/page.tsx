@@ -9,7 +9,7 @@ import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { UserAuthForm } from "./LoginForm";
 
 export const metadata: Metadata = {
-  title: "Login | Complex Blog",
+  title: "Login | Complexlity's Blog",
   description: "Access full blogging rights by logging in",
 };
 

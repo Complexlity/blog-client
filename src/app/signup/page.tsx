@@ -9,7 +9,7 @@ import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { UserAuthForm } from "./SignupForm";
 
 export const metadata: Metadata = {
-  title: "Sign Up",
+  title: "Sign Up | Complexlity's Blog",
   description: "Join the largest blog in the universe for free!!",
 };
 
