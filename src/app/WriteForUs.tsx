@@ -19,7 +19,7 @@ const WriteForUs = () => {
           You Can Write Too!
         </h2>
         <p className="max-w-[50ch] mx-auto">
-          It is not restricted to only myself. Anyone can write too. Simply create an account, and start sharing your stories! The world can't wait to read from you
+          It is not restricted to only myself. Anyone can write too. Simply create an account, and start sharing your stories! The world can&apos;t wait to read from you
         </p>
         <Link href="/signup" className={buttonVariants({size: 'lg'})}>Join Me!</Link>
       </div>
