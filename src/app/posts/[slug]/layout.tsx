@@ -26,9 +26,9 @@ export default async function RootLayout({
             {children}
             <Footer />
           </div>
+        </body>
         <Toaster />
         <Analytics />
-        </body>
       </Providers>
     </html>
   );

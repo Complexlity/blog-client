@@ -21,9 +21,9 @@ export default async function RootLayout({
       <Providers >
         <body className={`${inter.className} overflow-x-hidden`}>
           {children}
+        </body>
         <Toaster />
         <Analytics />
-        </body>
       </Providers>
     </html>
   );
