@@ -1,9 +1,9 @@
 import { clsx, type ClassValue } from "clsx";
 import dayjs from 'dayjs';
+dayjs.extend(relativeTime);
 import relativeTime from "dayjs/plugin/relativeTime";
 import { twMerge } from "tailwind-merge";
 import { PostCategory } from "./types";
-dayjs.extend(relativeTime);
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
