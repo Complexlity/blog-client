@@ -31,22 +31,16 @@ import axios, { isAxiosError } from "axios";
 import { Image } from "lucide-react";
 import "react-loading-skeleton/dist/skeleton.css";
 import EditorSkeleton from "./EditorSkeleton";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/Components/ui/hover-card";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/Components/ui/hover-card";
+import MarkdownUploader from "./MarkdownUploader";
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
 
-const postSchema = z.object({
-  title: z
-    .string({
-      required_error: "Post title cannot be empty",
-    })
-    .min(1)
-    .max(100, "Title must be at most 100 characters"),
-  content: z.any(),
-});
-
-type EditorInput = z.infer<typeof postSchema>;
-
+type EditorInput = any
 export default function Editor() {
   const queryClient = useQueryClient();
   const user = useSession();
@@ -54,16 +48,21 @@ export default function Editor() {
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [category, setCategory] = useState<PostCategory | null>(null);
+  const [mode, setMode] = useState<"plain" | "markdown">("markdown");
+  const [markdownDetails, setMarkdownDetails] = useState({
+    title: "",
+    file: null,
+  });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(postSchema),
+    
     defaultValues: {
       title: "",
-      content: null,
+    
     },
   });
   const ref = useRef<EditorJS>();
@@ -72,18 +71,46 @@ export default function Editor() {
 
   const { mutate: createPost, isLoading: isCreating } = useMutation({
     mutationFn: async (payload: EditorInput) => {
+      console.log("Creating post...")
+      // @ts-ignore
+      payload.coverImageSource = 'coverimage';
+      console.log({payload})
+      await postData(payload);
+      return
       const res = await startUpload([coverImage!]);
       const fileUrl = res![0].fileUrl;
       // @ts-ignore
       payload.coverImageSource = fileUrl;
-      postData(payload);
-
+      
       async function postData(payload: EditorInput) {
-        const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
-          withCredentials: true,
-        });
-        return data;
+        console.log({type: payload.type})
+        if (payload.type === "plain") {
+          const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
+            withCredentials: true,
+          });
+          return data;
+        }
+
+        else {
+          const formData = new FormData();
+  formData.append('title', payload.title);
+  formData.append('file', payload.file);
+  formData.append('published', payload.published);
+  formData.append('category', payload.category);
+          formData.append('type', payload.type);
+          formData.append("coverImageSource", payload.coverImageSource)
+
+          console.log("I am in markdown")
+  const { data } = await axios.post(`${SERVER_DOMAIN}/posts/md`, formData, {
+    withCredentials: true,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+  return data;
+        }
       }
+      postData(payload);
     },
     onError: (error) => {
       if (isAxiosError(error)) {
@@ -99,6 +126,7 @@ export default function Editor() {
       });
     },
     onSuccess: () => {
+      return
       router.refresh();
       router.push("/");
       queryClient.invalidateQueries({ queryKey: ["posts"] });
@@ -234,6 +262,8 @@ export default function Editor() {
   });
 
   async function onSubmit(data: any) {
+    console.log({ data })
+    console.log("I am here")
     if (!user) {
       return toast({
         title: "Not logged in",
@@ -254,22 +284,41 @@ export default function Editor() {
         variant: "destructive",
       });
     }
-
-    const blocks = await ref.current?.save();
-    const payload = {
-      title: data.title,
-      content: JSON.stringify(blocks),
-      published: true,
-      category,
+    let payload: {
+      title: string;
+      content?: string;
+      published: boolean;
+      category: string;
+      file?: any;
+      type: "plain" | "markdown"
     };
 
-    createPost(payload);
+    if (mode === "plain") {
+      const blocks = await ref.current?.save();
+      payload = {
+        title: data.title,
+        content: JSON.stringify(blocks),
+        published: true,
+        category,
+        type: "plain"
+      };
+    }
+
+    if (mode === "markdown") {
+      console.log({markdownDetails})
+      payload = {
+        title: markdownDetails.title,
+        file: markdownDetails.file,
+        published: true,
+        category,
+        type: "markdown"
+      };
+    }
+    createPost(payload!)
   }
 
   if (!isMounted) {
-    return (
-      <EditorSkeleton />
-    );
+    return <EditorSkeleton />;
   }
 
   const { ref: titleRef, ...rest } = register("title");
@@ -311,14 +360,14 @@ export default function Editor() {
               {previewImageUrl ? (
                 <HoverCard openDelay={1} closeDelay={0}>
                   <HoverCardTrigger>
-                <div
-                  onClick={() => {
-                    setPreviewImageUrl("");
-                    setCoverImage(null);
-                  }}
-                  className="aspect-square h-10 w-10 rounded-full  hover:bg-rose-100 text-red-400 text-sm md:text-base cursor-pointer  flex justify-center items-center"
-                >
-                  <MinusCircle />
+                    <div
+                      onClick={() => {
+                        setPreviewImageUrl("");
+                        setCoverImage(null);
+                      }}
+                      className="aspect-square h-10 w-10 rounded-full  hover:bg-rose-100 text-red-400 text-sm md:text-base cursor-pointer  flex justify-center items-center"
+                    >
+                      <MinusCircle />
                     </div>
                     <HoverCardContent className="px-2 py-1">
                       Remove cover image
@@ -356,26 +405,31 @@ export default function Editor() {
               />
             </div>
           ) : null}
-          <div className="">
-            <TextareaAutosize
-              ref={(e) => {
-                titleRef(e);
-                // @ts-ignore
-                _titleRef.current = e;
-              }}
-              {...rest}
-              placeholder="Title"
-              className="text-black w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none"
-            />
-            <div id="editor" className="min-h-[45vh]" />
-            <p className="text-sm text-gray-500">
-              Use{" "}
-              <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
-                Tab
-              </kbd>{" "}
-              to open the command menu.
-            </p>
-          </div>
+          {mode === "plain" && (
+            <div className="hidden">
+              <TextareaAutosize
+                ref={(e) => {
+                  titleRef(e);
+                  // @ts-ignore
+                  _titleRef.current = e;
+                }}
+                {...rest}
+                placeholder="Title"
+                className="text-black w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none"
+              />
+              <div id="editor" className="min-h-[45vh]" />
+              <p className="text-sm text-gray-500">
+                Use{" "}
+                <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
+                  Tab
+                </kbd>{" "}
+                to open the command menu.
+              </p>
+            </div>
+          )}
+          {mode === "markdown" && (
+            <MarkdownUploader setMarkdownDetails={setMarkdownDetails} />
+          )}
           <Button
             isLoading={isCreating}
             disabled={isCreating}
@@ -384,6 +438,7 @@ export default function Editor() {
           >
             {isCreating ? "Creating..." : "Create Post"}
           </Button>
+          
         </form>
       </div>
     </>
