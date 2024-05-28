@@ -51,12 +51,15 @@ export default function Editor() {
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [category, setCategory] = useState<PostCategory | null>(null);
-  const [mode, setMode] = useState<"plain" | "raw">("raw");
+  const [mode, setMode] = useState<"plain" | "raw">("plain");
   const [markdownDetails, setMarkdownDetails] = useState<MarkdownDetails>({
     title: "",
     file: null,
     rawHtml: ""
   });
+  const [editorBlocks, setEditorBlocks] = useState < { time?: number, blocks: any[], version?: string }>({
+   blocks: [] 
+  })
 
   type MarkdownDetails = {
     title: string,
@@ -78,51 +81,6 @@ export default function Editor() {
   const ref = useRef<EditorJS>();
   const _titleRef = useRef<HTMLTextAreaElement>(null);
   const [isMounted, setIsMounted] = useState<boolean>(false);
-
-  async function postData(payload: EditorInput) {
-    // console.log({type: payload.type})
-    if (!payload.content) {
-      throw new Error("No content provided")
-    }
-    console.log("Uploading post...")
-    const res = await startImageUpload([coverImage!]);
-    const fileUrl = res![0].fileUrl;
-    // @ts-ignore
-    payload.coverImageSource = fileUrl;
-    const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
-      withCredentials: true,
-    });
-    return data;
-    
-    // else {
-    //   if (!payload.content) {
-    //     throw new Error("No File found")
-    //   }
-    //     // const [banner, markdown] = await Promises.all([ startImageUpload([coverImage!]), startMarkdownUpload([markdownDetails.file])]);
-    //   // const fileUrl = res![0].fileUrl;
-    //   // console.log({coverImage})
-    //   // console.log("Uploading cover image...")
-    //   // const res = await startImageUpload([coverImage!]);
-      
-    //   //   const fileUrl = res![0].fileUrl;
-    //   console.log("Uploading file....")
-    //   payload.coverImageSource = "coverImage"
-    //   console.log({ coverImage })
-    //   console.log({markdown: payload.file})
-    //   const res = await startMarkdownUpload([payload.file]).catch(err => {
-    //     console.log({ err })
-    //     throw err
-    //   })
-    //   console.log({res})
-      
-    //   const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
-    //     withCredentials: true,
-    //   });
-    //   return data;
-
-
-    // }
-  }
 
   const { mutate: createPost, isLoading: isCreating } = useMutation({
     mutationFn: async (payload: EditorInput) => {
@@ -191,7 +149,7 @@ export default function Editor() {
         placeholder: "Type here to write your post...",
         inlineToolbar: true,
         data: {
-          blocks: [],
+          blocks: editorBlocks.blocks,
         },
         tools: {
           header: Header,
@@ -238,7 +196,7 @@ export default function Editor() {
         },
       });
     }
-  }, []);
+  }, [mode]);
 
   useEffect(() => {
     if (Object.keys(errors).length) {
@@ -331,6 +289,7 @@ export default function Editor() {
     
     if (mode === "plain") {
       const blocks = await ref.current?.save();
+      console.log({blocks})
       payload = {
         title: data.title,
         content: JSON.stringify(blocks),
@@ -449,10 +408,18 @@ export default function Editor() {
               />
             </div>
           ) : null}
-          <Tabs defaultValue="plain" className="grid w-full">
+          <Tabs defaultValue={mode} className="grid w-full">
   <TabsList>
-    <TabsTrigger value="plain" className="w-full">Inline Editor</TabsTrigger>
-    <TabsTrigger value="raw" className="w-full">Upload Markdown (readonly)</TabsTrigger>
+              <TabsTrigger value="plain" onClick={async () => {
+                const blocks = await ref.current?.save();
+                if (blocks) setEditorBlocks(blocks)
+                setMode("plain")
+              }} className="w-full">Inline Editor</TabsTrigger>
+              <TabsTrigger value="raw" onClick={async () => {
+                const blocks = await ref.current?.save();
+                if(blocks) setEditorBlocks(blocks)
+                setMode("raw")
+              }} className="w-full">Upload Markdown (readonly)</TabsTrigger>
   </TabsList>
             <TabsContent value="plain">
               
