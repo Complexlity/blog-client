@@ -180,25 +180,35 @@ export default function Editor() {
                   }
                   
                   if (!user) {
-                    return toast({
+                    
+                    throw toast({
                       title: "Not logged in",
                       description: "Please login to be able to create a post",
                       variant: "destructive",
                     });
+                    
+                  return  toast({
+                      title: "Not logged in",
+                      description: "Please login to be able to create a post",
+                      variant: "destructive",
+                    });
+                    
                   }
-                  console.log({user})
-                  // upload to uploadthing
-                  const [res] = await uploadFiles({
-                    files: [file],
-                    endpoint: "imageUploader",
-                  });
+                  else {
 
-                  return {
-                    success: 1,
-                    file: {
-                      url: res.fileUrl,
-                    },
-                  };
+                    // upload to uploadthing
+                    const [res] = await uploadFiles({
+                      files: [file],
+                      endpoint: "imageUploader",
+                    });
+                    
+                    return {
+                      success: 1,
+                      file: {
+                        url: res.fileUrl,
+                      },
+                    };
+                  }
                 },
               },
             },
