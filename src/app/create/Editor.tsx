@@ -37,6 +37,8 @@ import {
   HoverCardTrigger,
 } from "@/Components/ui/hover-card";
 import MarkdownUploader from "./MarkdownUploader";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/Components/ui/tabs"
+
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
 
@@ -447,7 +449,13 @@ export default function Editor() {
               />
             </div>
           ) : null}
-          {mode === "plain" && (
+          <Tabs defaultValue="plain" className="w-[400px]">
+  <TabsList>
+    <TabsTrigger value="plain">Inline Editor</TabsTrigger>
+    <TabsTrigger value="raw">Upload Markdown</TabsTrigger>
+  </TabsList>
+            <TabsContent value="plain">
+              
             <div>
               <TextareaAutosize
                 ref={(e) => {
@@ -468,10 +476,13 @@ export default function Editor() {
                 to open the command menu.
               </p>
             </div>
-          )}
-          {mode === "raw" && (
+  </TabsContent>
+            <TabsContent value="raw">
+              
             <MarkdownUploader setMarkdownDetails={setMarkdownDetails} />
-          )}
+  </TabsContent>
+</Tabs>
+
           <Button
             isLoading={isCreating}
             disabled={isCreating}
