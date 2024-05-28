@@ -8,6 +8,74 @@ import rehypeStringify from 'rehype-stringify'
 import { MinusCircle } from "lucide-react";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/Components/ui/hover-card";
  
+function lineIsHeaderOne(str: string) {
+  const startsWithHash = (str.startsWith("# ")) 
+  const startsWithMultiHash =  str.startsWith("#") && !str.startsWith("##")
+  return startsWithHash && startsWithMultiHash
+}
+
+const extractTitle = (content: string) => {
+  let [firstLine, ...rest] = content.trim().split("\n");
+
+  firstLine = firstLine.trim()
+  let others: string = rest.join("\n")
+  let title = "";
+  let newContent = "";
+
+  //It starts with a heading1 (# and not ## or ###....)
+  if (lineIsHeaderOne(firstLine)) {
+      let heading1 = firstLine.replace(/^#+\s*/, '')
+      // The heading one is short and coincise
+      if (heading1.length < 50) {
+          title = heading1;
+          
+          newContent = `# ${title}\n${newContent}`
+      } else {
+          let longTitle = heading1.split(/\s+/)
+          title = longTitle.slice(0, 2).join(" ");
+          newContent = `# ${title}\n##${longTitle}\n${others.replace(/^# /, '## ')}`;
+      }
+  } else {
+      if (firstLine.length > 50) {
+          let longTitle = firstLine.split(/\s+/)
+          title = longTitle.slice(0, 2).join(" ");
+          newContent = `# ${title}\n##${longTitle}\n${others.replace(/^# /, '## ')}`;
+      } else {
+          title = title = firstLine.replace(/^#+\s*/, '')
+          newContent = others.replace(/(^# .+\n?)/, '## ');
+          newContent = `# ${title}\n${newContent}`;
+      }
+  }
+
+  return { title, content: newContent };
+};
+
+function replaceH1WithH2(htmlString: string): string {
+  // Use a regex to match all <h1> tags
+  const h1Regex = /<h1\b[^>]*>(.*?)<\/h1>/gi;
+
+  // Find all <h1> tags in the HTML string
+  let match: RegExpExecArray | null;
+  const matches: RegExpExecArray[] = [];
+  while ((match = h1Regex.exec(htmlString)) !== null) {
+      matches.push(match);
+  }
+
+  // Keep the first two <h1> tags as is and replace the rest with <h2>
+  let replacementCount = 0;
+  const result = htmlString.replace(h1Regex, (match, content) => {
+      replacementCount++;
+      if (replacementCount <= 1) {
+          return match; // Keep the first two <h1> tags
+      } else {
+          return `<h2>${content}</h2>`; // Replace with <h2>
+      }
+  });
+
+  return result;
+}
+
+
 
 const MarkdownUploader = ({
   setMarkdownDetails: setMarkdownDetails,
@@ -21,23 +89,22 @@ const MarkdownUploader = ({
   const [file, setFile] = useState(null);
   const [previewContent, setPreviewContent] = useState("");
   // const [title, setTitle] = useState("");
-  // console.log({markdownTitle: title})
-  const extractTitle = (content: string) => {
-    const lines = content.split("\n");
+  // const extractTitle = (content: string) => {
+  //   const lines = content.split("\n");
 
-    for (const line of lines) {
-      if (line.trim() === '') continue; 
-      if (line.startsWith("# ")) {
-        return line.replace("# ", "").trim();
-      }
-      else {
-        const firstTwoWords = content.split(/\s+/).slice(0, 2).join(" ");
-        return firstTwoWords;    
-      }
+  //   for (const line of lines) {
+  //     if (line.trim() === '') continue; 
+  //     if (line.startsWith("# ")) {
+  //       return line.replace("# ", "").trim();
+  //     }
+  //     else {
+  //       const firstTwoWords = content.split(/\s+/).slice(0, 2).join(" ");
+  //       return firstTwoWords;    
+  //     }
 
-    }
+  //   }
     
-  };
+  // };
 
   const handleFileChange = (event: any) => {
     setMarkdownDetails({
@@ -53,12 +120,11 @@ const MarkdownUploader = ({
     ) {
 
       setFile(selectedFile);
-      console.log({file})
       const reader = new FileReader();
+      
       reader.onload = async (e) => {
         //@ts-expect-error
-        
-        const content = e.target.result as string;
+        const { title, content } = extractTitle(e.target.result)
         const markdown = await unified()
         .use(remarkParse) // Convert into markdown AST
         .use(remarkRehype) // Transform to HTML AST
@@ -66,13 +132,12 @@ const MarkdownUploader = ({
         .use(rehypeStringify) // Convert AST into serialized HTML
         .process(content)
         
-        console.log({markdown})
-        const html = String(markdown)
+        let html = String(markdown)
+        html = replaceH1WithH2(html)
         setPreviewContent(html);
 
         setMarkdownDetails({
-          //@ts-expect-error
-          title: extractTitle(content),
+          title,
           file: file,
           rawHtml: html
         });
