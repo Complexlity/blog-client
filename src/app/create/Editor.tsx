@@ -10,20 +10,24 @@ import {
 import { uploadFiles } from "@/lib/uploadthing";
 import "@/styles/editor.css";
 import EditorJS from "@editorjs/editorjs";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
-import { z } from "zod";
 
 import "@/styles/editor.css";
 import { MinusCircle } from "lucide-react";
 
 import { Button } from "@/Components/ui/button";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/Components/ui/hover-card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/Components/ui/tabs";
 import { toast } from "@/Components/ui/use-toast";
 import useSession from "@/hooks/useSession";
-import { PostCategory } from "@/lib/types";
+import { PostCategory, User } from "@/lib/types";
 import { useUploadThing } from "@/lib/uploadthing";
 import { getCategoryColor } from "@/lib/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -31,13 +35,7 @@ import axios, { isAxiosError } from "axios";
 import { Image } from "lucide-react";
 import "react-loading-skeleton/dist/skeleton.css";
 import EditorSkeleton from "./EditorSkeleton";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/Components/ui/hover-card";
 import MarkdownUploader from "./MarkdownUploader";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/Components/ui/tabs"
 
 
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
@@ -47,6 +45,7 @@ type EditorInput = any
 export default function Editor() {
   const queryClient = useQueryClient();
   const user = useSession();
+  console.log({user})
   const router = useRouter();
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
@@ -164,6 +163,21 @@ export default function Editor() {
             config: {
               uploader: {
                 async uploadByFile(file: File) {
+                  let user: User | null = null;
+                  try {
+                    
+                    const response = await fetch(
+                      `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/me`,
+                      {
+                        credentials: "include",
+                      }
+                    );
+                    user = (await response.json()) as unknown as User;
+                    if(!response.ok) throw new Error("User not found")
+                  } catch (error) {
+                    
+                  }
+                  
                   if (!user) {
                     return toast({
                       title: "Not logged in",
@@ -171,6 +185,7 @@ export default function Editor() {
                       variant: "destructive",
                     });
                   }
+                  console.log({user})
                   // upload to uploadthing
                   const [res] = await uploadFiles({
                     files: [file],
