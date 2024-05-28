@@ -5,6 +5,7 @@ export async function getUser() {
   const Headers = headers();
   const authorization = Headers.get("authorization");
   const cookie = Headers.get("cookie");
+  //@ts-expect-error`
   const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/me`, {
     credentials: "include",
     //@ts-ignore
