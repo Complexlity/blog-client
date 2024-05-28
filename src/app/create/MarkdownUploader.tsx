@@ -1,3 +1,5 @@
+"use client"
+
 // components/MarkdownUploader.js
 import React, { useState, Dispatch, SetStateAction } from "react";
 import { unified } from "unified";
