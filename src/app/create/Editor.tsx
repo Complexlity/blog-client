@@ -59,6 +59,7 @@ export default function Editor() {
   const [editorBlocks, setEditorBlocks] = useState < { time?: number, blocks: any[], version?: string }>({
    blocks: [] 
   })
+  const [tempImages, setTempImages] = useState<Array<string>>([])
 
   type MarkdownDetails = {
     title: string,
