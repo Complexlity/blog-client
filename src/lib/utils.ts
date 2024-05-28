@@ -24,8 +24,8 @@ export function formatDate(date: Date | string, type = 'relative') {
 
 export function calculateTimeToReadPost(content: string) {
   const wordsPerMinute = 200;
-const wordCount = content.split(" ").length;
-const readingTime = Math.ceil(wordCount / wordsPerMinute);
+  const wordCount = content.split(" ").length;
+  const readingTime = Math.ceil(wordCount / wordsPerMinute);
   return readingTime;
 }
 

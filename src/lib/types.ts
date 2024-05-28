@@ -25,6 +25,7 @@ export interface Post {
   likeCount: number;
   createdAt: Date;
   updatedAt: Date;
+  type: "plain" | "raw"
 }
 
 
