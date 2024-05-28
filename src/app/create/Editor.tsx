@@ -48,7 +48,7 @@ export default function Editor() {
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [category, setCategory] = useState<PostCategory | null>(null);
-  const [mode, setMode] = useState<"plain" | "markdown">("markdown");
+  const [mode, setMode] = useState<"plain" | "markdown">("plain");
   const [markdownDetails, setMarkdownDetails] = useState({
     title: "",
     file: null,
@@ -69,48 +69,54 @@ export default function Editor() {
   const _titleRef = useRef<HTMLTextAreaElement>(null);
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
-  const { mutate: createPost, isLoading: isCreating } = useMutation({
-    mutationFn: async (payload: EditorInput) => {
-      console.log("Creating post...")
-      // @ts-ignore
-      payload.coverImageSource = 'coverimage';
-      console.log({payload})
-      await postData(payload);
-      return
-      const res = await startUpload([coverImage!]);
+  async function postData(payload: EditorInput) {
+    // console.log({type: payload.type})
+    if (payload.type === "plain") {
+      console.log("Uploading post...")
+      const res = await startImageUpload([coverImage!]);
       const fileUrl = res![0].fileUrl;
       // @ts-ignore
       payload.coverImageSource = fileUrl;
-      
-      async function postData(payload: EditorInput) {
-        console.log({type: payload.type})
-        if (payload.type === "plain") {
-          const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
-            withCredentials: true,
-          });
-          return data;
-        }
-
-        else {
-          const formData = new FormData();
-  formData.append('title', payload.title);
-  formData.append('file', payload.file);
-  formData.append('published', payload.published);
-  formData.append('category', payload.category);
-          formData.append('type', payload.type);
-          formData.append("coverImageSource", payload.coverImageSource)
-
-          console.log("I am in markdown")
-  const { data } = await axios.post(`${SERVER_DOMAIN}/posts/md`, formData, {
-    withCredentials: true,
-    headers: {
-      'Content-Type': 'multipart/form-data'
+      const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
+        withCredentials: true,
+      });
+      return data;
     }
-  });
-  return data;
-        }
+    
+    else {
+      throw new Error("No File found")
+      if (!payload.file) {
+        throw new Error("No File found")
       }
-      postData(payload);
+        // const [banner, markdown] = await Promises.all([ startImageUpload([coverImage!]), startMarkdownUpload([markdownDetails.file])]);
+      // const fileUrl = res![0].fileUrl;
+      console.log({coverImage})
+      console.log("Uploading cover image...")
+      const res = await startImageUpload([coverImage!]);
+      
+        const fileUrl = res![0].fileUrl;
+            payload.coverImageSource = fileUrl
+      const res2 = await startMarkdownUpload([payload.file]).catch(err => {
+        console.log({ err })
+        throw err
+      })
+      console.log({res})
+      
+      const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
+        withCredentials: true,
+      });
+      return data;
+
+
+    }
+  }
+
+  const { mutate: createPost, isLoading: isCreating } = useMutation({
+    mutationFn: async (payload: EditorInput) => {
+          
+      await postData(payload);
+    
+     
     },
     onError: (error) => {
       if (isAxiosError(error)) {
@@ -252,7 +258,7 @@ export default function Editor() {
     }
   }, [isMounted, initializeEditor]);
 
-  const { startUpload } = useUploadThing("imageUploader", {
+  const { startUpload: startImageUpload } = useUploadThing("imageUploader", {
     onClientUploadComplete: () => {
       // console.log("uploadSuccessful");
     },
@@ -260,10 +266,19 @@ export default function Editor() {
       throw new Error("Something went wrong while uploading image");
     },
   });
+  // const { startUpload: startMarkdownUpload } = useUploadThing("markdownUploader", {
+  //   onClientUploadComplete: () => {
+  //     // console.log("uploadSuccessful");
+  //   },
+  //   onUploadError: (e) => {
+  //     console.log(e)
+  //     throw new Error("Something went wrong while uploading image");
+  //   },
+  // });
 
   async function onSubmit(data: any) {
-    console.log({ data })
-    console.log("I am here")
+    // console.log({ data })
+    // console.log("I am here")
     if (!user) {
       return toast({
         title: "Not logged in",
@@ -305,7 +320,7 @@ export default function Editor() {
     }
 
     if (mode === "markdown") {
-      console.log({markdownDetails})
+      
       payload = {
         title: markdownDetails.title,
         file: markdownDetails.file,
@@ -406,7 +421,7 @@ export default function Editor() {
             </div>
           ) : null}
           {mode === "plain" && (
-            <div className="hidden">
+            <div>
               <TextareaAutosize
                 ref={(e) => {
                   titleRef(e);

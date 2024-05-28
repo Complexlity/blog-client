@@ -93,6 +93,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     try {
       setIsLoading(true);
       setIsUploadingImage(true)
+      console.log({imageFile})
       const res = await startUpload([imageFile]);
       setIsUploadingImage(false)
       const fileUrl = res![0].fileUrl;
