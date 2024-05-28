@@ -48,11 +48,16 @@ export default function Editor() {
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [category, setCategory] = useState<PostCategory | null>(null);
-  const [mode, setMode] = useState<"plain" | "markdown">("plain");
-  const [markdownDetails, setMarkdownDetails] = useState({
+  const [mode, setMode] = useState<"plain" | "markdown">("markdown");
+  const [markdownDetails, setMarkdownDetails] = useState<MarkdownDetails>({
     title: "",
     file: null,
   });
+
+  type MarkdownDetails = {
+    title: string, 
+    file: File | null
+}
 
   const {
     register,
@@ -84,19 +89,21 @@ export default function Editor() {
     }
     
     else {
-      throw new Error("No File found")
       if (!payload.file) {
         throw new Error("No File found")
       }
         // const [banner, markdown] = await Promises.all([ startImageUpload([coverImage!]), startMarkdownUpload([markdownDetails.file])]);
       // const fileUrl = res![0].fileUrl;
-      console.log({coverImage})
-      console.log("Uploading cover image...")
-      const res = await startImageUpload([coverImage!]);
+      // console.log({coverImage})
+      // console.log("Uploading cover image...")
+      // const res = await startImageUpload([coverImage!]);
       
-        const fileUrl = res![0].fileUrl;
-            payload.coverImageSource = fileUrl
-      const res2 = await startMarkdownUpload([payload.file]).catch(err => {
+      //   const fileUrl = res![0].fileUrl;
+      console.log("Uploading file....")
+      payload.coverImageSource = "coverImage"
+      console.log({ coverImage })
+      console.log({markdown: payload.file})
+      const res = await startMarkdownUpload([payload.file]).catch(err => {
         console.log({ err })
         throw err
       })
@@ -266,15 +273,16 @@ export default function Editor() {
       throw new Error("Something went wrong while uploading image");
     },
   });
-  // const { startUpload: startMarkdownUpload } = useUploadThing("markdownUploader", {
-  //   onClientUploadComplete: () => {
-  //     // console.log("uploadSuccessful");
-  //   },
-  //   onUploadError: (e) => {
-  //     console.log(e)
-  //     throw new Error("Something went wrong while uploading image");
-  //   },
-  // });
+  const { startUpload: startMarkdownUpload } = useUploadThing("markdownUploader", {
+    onClientUploadComplete: () => {
+      // console.log("uploadSuccessful");
+    },
+    onUploadError: (e) => {
+      console.log(e)
+      throw new Error("Something went wrong while uploading image");
+    },
+  });
+
 
   async function onSubmit(data: any) {
     // console.log({ data })

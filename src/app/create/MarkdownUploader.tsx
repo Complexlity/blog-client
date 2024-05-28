@@ -6,7 +6,7 @@ const MarkdownUploader = ({
 }: {
   setMarkdownDetails: Dispatch<SetStateAction<{
     title: string;
-    file: null;
+    file: File | null;
 }>>
 }) => {
   const [file, setFile] = useState(null);
@@ -35,13 +35,14 @@ const MarkdownUploader = ({
       file: null
     })
     const selectedFile = event.target.files[0];
+    
     if (
       (selectedFile && selectedFile.name.endsWith(".md")) ||
       selectedFile.name.endsWith(".MD")
     ) {
 
-      const newData = 
       setFile(selectedFile);
+      console.log({file})
       const reader = new FileReader();
       reader.onload = (e) => {
         //@ts-expect-error
@@ -50,7 +51,7 @@ const MarkdownUploader = ({
         setMarkdownDetails({
           //@ts-expect-error
           title: extractTitle(content),
-          file: selectedFile
+          file: file
         });
       };
       reader.readAsText(selectedFile);
@@ -59,35 +60,7 @@ const MarkdownUploader = ({
     }
   };
 
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
-    if (!file) {
-      alert("No file selected.");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-      const response = await fetch("/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        alert("File uploaded successfully!");
-        // Clear the state
-        setFile(null);
-        setPreviewContent("");
-      } else {
-        alert("Failed to upload file.");
-      }
-    } catch (error) {
-      console.error("Error uploading file:", error);
-      alert("Error uploading file.");
-    }
-  };
+  
 
   return (
     <div>
@@ -96,10 +69,9 @@ const MarkdownUploader = ({
           <h3>Preview:</h3>
           <pre>{previewContent}</pre>
         </div>
-      )}
-      <form onSubmit={handleSubmit}>
+      )}     
+      <form>
         <input type="file" accept=".md" onChange={handleFileChange} />
-        <button type="submit">Upload</button>
       </form>
     </div>
   );
