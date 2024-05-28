@@ -49,7 +49,7 @@ const SinglePost = ({ post }: { post: Post }) => {
 
               <span className="flex sm:gap-1 text-sm sm:text-base">
                 <BookOpen />
-                {calculateTimeToReadPost(post.type == "plain" ? post.content: removeHtmlTags(post.content))} min read
+                {calculateTimeToReadPost(post.type == "raw"  ? removeHtmlTags(post.content) :post.content)} min read
               </span>
             </p>
             <div className=" flex mx-auto gap-6 items-center justify-center">
@@ -111,11 +111,12 @@ const SinglePost = ({ post }: { post: Post }) => {
             ) : null}
           </header>
           <main className="pt-0 prose text-black sm:text-gray-900 mx-auto relative space-y-6 p-4 md:p-0">
-            {post.type == "plain"
+            {post.type == "raw"
             ?
+            <div className="prose" dangerouslySetInnerHTML={{ __html: post.content }} />
+              :
               < EditorOutput content={JSON.parse(post.content)} />
-              : 
-              <div className="prose" dangerouslySetInnerHTML={{ __html: post.content }} />
+               
             }
             {/* Sticky Buttons */}
             <div className="not-prose bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
