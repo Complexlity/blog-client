@@ -5,6 +5,8 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeSanitize from 'rehype-sanitize'
 import rehypeStringify from 'rehype-stringify'
+import { MinusCircle } from "lucide-react";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/Components/ui/hover-card";
  
 
 const MarkdownUploader = ({
@@ -85,19 +87,46 @@ const MarkdownUploader = ({
   
 
   return (
-    <div>
+    <div className="grid py-4 px-2 gap-4 ">
+      <form className="flex ">
+        <input id="markdownFile" type="file" accept=".md" onChange={handleFileChange} />
+        {
+          (previewContent || file) &&
+          
+          <HoverCard openDelay={1} closeDelay={0}>
+          <HoverCardTrigger>
+          <div
+            onClick={() => {
+              setPreviewContent("")
+            setMarkdownDetails({
+              title: "",
+              file: null,
+              rawHtml: ""
+            })
+                    setFile(null)
+            //@ts-expect-error
+            document.querySelector('#markdownFile')!.value = ""
+          }}
+          className="aspect-square h-10 w-10 rounded-full  hover:bg-rose-100 text-red-400 text-sm md:text-base cursor-pointer  flex justify-center items-center"
+        >
+          <MinusCircle />
+        </div>
+                <HoverCardContent className="px-2 py-1">
+                {/* @ts-expect-error */}
+              Remove {file ? file.name : "file"}
+            </HoverCardContent>
+          </HoverCardTrigger>
+        </HoverCard>
+          
+        }
+      </form>
       {previewContent && (
         <div>
-          <h3>Preview (readonly)</h3>
-          <div>
             <div className="prose" dangerouslySetInnerHTML={{ __html: previewContent }} />
-  );
-            </div>
+
         </div>
       )}     
-      <form>
-        <input type="file" accept=".md" onChange={handleFileChange} />
-      </form>
+      
     </div>
   );
 };

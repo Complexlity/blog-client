@@ -449,10 +449,10 @@ export default function Editor() {
               />
             </div>
           ) : null}
-          <Tabs defaultValue="plain" className="w-[400px]">
+          <Tabs defaultValue="plain" className="grid w-full">
   <TabsList>
-    <TabsTrigger value="plain">Inline Editor</TabsTrigger>
-    <TabsTrigger value="raw">Upload Markdown</TabsTrigger>
+    <TabsTrigger value="plain" className="w-full">Inline Editor</TabsTrigger>
+    <TabsTrigger value="raw" className="w-full">Upload Markdown (readonly)</TabsTrigger>
   </TabsList>
             <TabsContent value="plain">
               
@@ -478,8 +478,10 @@ export default function Editor() {
             </div>
   </TabsContent>
             <TabsContent value="raw">
-              
+              <div className="min-h-[45vh] flex items-center justify-center w-full ">
+
             <MarkdownUploader setMarkdownDetails={setMarkdownDetails} />
+              </div>
   </TabsContent>
 </Tabs>
 
