@@ -1,5 +1,11 @@
 // components/MarkdownUploader.js
 import React, { useState, Dispatch, SetStateAction } from "react";
+import { unified } from 'unified'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import rehypeSanitize from 'rehype-sanitize'
+import rehypeStringify from 'rehype-stringify'
+ 
 
 const MarkdownUploader = ({
   setMarkdownDetails: setMarkdownDetails,
@@ -7,6 +13,7 @@ const MarkdownUploader = ({
   setMarkdownDetails: Dispatch<SetStateAction<{
     title: string;
     file: File | null;
+    rawHtml: string
 }>>
 }) => {
   const [file, setFile] = useState(null);
@@ -25,6 +32,7 @@ const MarkdownUploader = ({
         const firstTwoWords = content.split(/\s+/).slice(0, 2).join(" ");
         return firstTwoWords;    
       }
+
     }
     
   };
@@ -32,7 +40,8 @@ const MarkdownUploader = ({
   const handleFileChange = (event: any) => {
     setMarkdownDetails({
       title: "", 
-      file: null
+      file: null,
+      rawHtml: ""
     })
     const selectedFile = event.target.files[0];
     
@@ -44,17 +53,30 @@ const MarkdownUploader = ({
       setFile(selectedFile);
       console.log({file})
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = async (e) => {
         //@ts-expect-error
+        
         const content = e.target.result as string;
-        setPreviewContent(content);
+        const markdown = await unified()
+        .use(remarkParse) // Convert into markdown AST
+        .use(remarkRehype) // Transform to HTML AST
+        .use(rehypeSanitize) // Sanitize HTML input
+        .use(rehypeStringify) // Convert AST into serialized HTML
+        .process(content)
+        
+        console.log({markdown})
+        const html = String(markdown)
+        setPreviewContent(html);
+
         setMarkdownDetails({
           //@ts-expect-error
           title: extractTitle(content),
-          file: file
+          file: file,
+          rawHtml: html
         });
       };
       reader.readAsText(selectedFile);
+
     } else {
       alert("Please upload a valid Markdown file (.md)");
     }
@@ -66,8 +88,11 @@ const MarkdownUploader = ({
     <div>
       {previewContent && (
         <div>
-          <h3>Preview:</h3>
-          <pre>{previewContent}</pre>
+          <h3>Preview (readonly)</h3>
+          <div>
+            <div className="prose" dangerouslySetInnerHTML={{ __html: previewContent }} />
+  );
+            </div>
         </div>
       )}     
       <form>

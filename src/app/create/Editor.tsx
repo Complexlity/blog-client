@@ -41,6 +41,7 @@ import MarkdownUploader from "./MarkdownUploader";
 const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
 
 type EditorInput = any
+
 export default function Editor() {
   const queryClient = useQueryClient();
   const user = useSession();
@@ -48,16 +49,18 @@ export default function Editor() {
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const [category, setCategory] = useState<PostCategory | null>(null);
-  const [mode, setMode] = useState<"plain" | "markdown">("markdown");
+  const [mode, setMode] = useState<"plain" | "raw">("raw");
   const [markdownDetails, setMarkdownDetails] = useState<MarkdownDetails>({
     title: "",
     file: null,
+    rawHtml: ""
   });
 
   type MarkdownDetails = {
-    title: string, 
+    title: string,
     file: File | null
-}
+    rawHtml: string
+  }
 
   const {
     register,
@@ -76,53 +79,62 @@ export default function Editor() {
 
   async function postData(payload: EditorInput) {
     // console.log({type: payload.type})
-    if (payload.type === "plain") {
-      console.log("Uploading post...")
-      const res = await startImageUpload([coverImage!]);
-      const fileUrl = res![0].fileUrl;
-      // @ts-ignore
-      payload.coverImageSource = fileUrl;
-      const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
-        withCredentials: true,
-      });
-      return data;
+    if (!payload.content) {
+      throw new Error("No content provided")
     }
+    console.log("Uploading post...")
+    const res = await startImageUpload([coverImage!]);
+    const fileUrl = res![0].fileUrl;
+    // @ts-ignore
+    payload.coverImageSource = fileUrl;
+    const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
+      withCredentials: true,
+    });
+    return data;
     
-    else {
-      if (!payload.file) {
-        throw new Error("No File found")
-      }
-        // const [banner, markdown] = await Promises.all([ startImageUpload([coverImage!]), startMarkdownUpload([markdownDetails.file])]);
-      // const fileUrl = res![0].fileUrl;
-      // console.log({coverImage})
-      // console.log("Uploading cover image...")
-      // const res = await startImageUpload([coverImage!]);
+    // else {
+    //   if (!payload.content) {
+    //     throw new Error("No File found")
+    //   }
+    //     // const [banner, markdown] = await Promises.all([ startImageUpload([coverImage!]), startMarkdownUpload([markdownDetails.file])]);
+    //   // const fileUrl = res![0].fileUrl;
+    //   // console.log({coverImage})
+    //   // console.log("Uploading cover image...")
+    //   // const res = await startImageUpload([coverImage!]);
       
-      //   const fileUrl = res![0].fileUrl;
-      console.log("Uploading file....")
-      payload.coverImageSource = "coverImage"
-      console.log({ coverImage })
-      console.log({markdown: payload.file})
-      const res = await startMarkdownUpload([payload.file]).catch(err => {
-        console.log({ err })
-        throw err
-      })
-      console.log({res})
+    //   //   const fileUrl = res![0].fileUrl;
+    //   console.log("Uploading file....")
+    //   payload.coverImageSource = "coverImage"
+    //   console.log({ coverImage })
+    //   console.log({markdown: payload.file})
+    //   const res = await startMarkdownUpload([payload.file]).catch(err => {
+    //     console.log({ err })
+    //     throw err
+    //   })
+    //   console.log({res})
       
-      const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
-        withCredentials: true,
-      });
-      return data;
+    //   const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
+    //     withCredentials: true,
+    //   });
+    //   return data;
 
 
-    }
+    // }
   }
 
   const { mutate: createPost, isLoading: isCreating } = useMutation({
     mutationFn: async (payload: EditorInput) => {
-          
-      await postData(payload);
-    
+      console.log("Uploading post...")
+      // const res = await startImageUpload([coverImage!]);
+      // const fileUrl = res![0].fileUrl;
+      // // @ts-ignore
+      // payload.coverImageSource = fileUrl
+      payload.coverImageSource = "coverImage"
+      const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
+        withCredentials: true,
+      });
+      return data;
+      
      
     },
     onError: (error) => {
@@ -139,7 +151,6 @@ export default function Editor() {
       });
     },
     onSuccess: () => {
-      return
       router.refresh();
       router.push("/");
       queryClient.invalidateQueries({ queryKey: ["posts"] });
@@ -309,13 +320,13 @@ export default function Editor() {
     }
     let payload: {
       title: string;
-      content?: string;
+      content: string;
       published: boolean;
       category: string;
       file?: any;
-      type: "plain" | "markdown"
+      type: "plain" | "raw"
     };
-
+    
     if (mode === "plain") {
       const blocks = await ref.current?.save();
       payload = {
@@ -326,16 +337,24 @@ export default function Editor() {
         type: "plain"
       };
     }
-
-    if (mode === "markdown") {
+    
+    if (mode === "raw") {
       
       payload = {
         title: markdownDetails.title,
-        file: markdownDetails.file,
+        content: markdownDetails.rawHtml,
         published: true,
         category,
-        type: "markdown"
+        type: "raw"
       };
+    }
+    
+    //@ts-expect-error
+    if (!payload.content || payload.content.length === 0) {
+      return toast({
+        title: "Post content not provided",
+        variant: "destructive",
+      });
     }
     createPost(payload!)
   }
@@ -450,7 +469,7 @@ export default function Editor() {
               </p>
             </div>
           )}
-          {mode === "markdown" && (
+          {mode === "raw" && (
             <MarkdownUploader setMarkdownDetails={setMarkdownDetails} />
           )}
           <Button
