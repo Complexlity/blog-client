@@ -174,29 +174,30 @@ export default function Editor() {
                       }
                     );
                     user = (await response.json()) as unknown as User;
-                    if(!response.ok) throw new Error("User not found")
+                    console.log({user})
+                    if (!response.ok) throw new Error("User not found")
                   } catch (error) {
-                    
+                    console.log({ error })
+                    user = null
                   }
                   
-                  if (!user) {
-                    
-                    throw toast({
+                  
+
+                  if (!user) {                    
+                     toast({
                       title: "Not logged in",
-                      description: "Please login to be able to create a post",
                       variant: "destructive",
                     });
                     
-                  return  toast({
-                      title: "Not logged in",
-                      description: "Please login to be able to create a post",
-                      variant: "destructive",
-                    });
+                    return {
+                    success: 0
+                  }
                     
                   }
                   else {
 
                     // upload to uploadthing
+                    
                     const [res] = await uploadFiles({
                       files: [file],
                       endpoint: "imageUploader",
