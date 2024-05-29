@@ -60,7 +60,7 @@ export default function Navbar() {
   });
 
   return (
-    <div className="bg-blueDarkest">
+    <div className="bg-blueDarkest print:hidden">
       <div className="sm:container flex items-center justify-between py-3 border-b-2 border-b-blueLight max-w-[1200px] px-2">
         <NavigationMenu className="px-2">
           <NavigationMenuList className="flex gap-1 md:gap-8">
