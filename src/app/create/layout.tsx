@@ -2,7 +2,7 @@ import Footer from "@/Components/Footer";
 import Navbar from "@/Components/NavBar";
 import { Toaster } from "@/Components/ui/toaster";
 import Providers from "@/Contexts/Providers";
-import { getUser } from "@/lib/serverFunctions";
+import { server_getUser } from "@/lib/serverFunctions";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
@@ -14,7 +14,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <Providers>

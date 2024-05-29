@@ -1,7 +1,7 @@
 import { Post, User } from "@/lib/types";
 import { headers } from "next/headers";
 
-export async function getUser() {
+export async function server_getUser() {
   const Headers = headers();
   const authorization = Headers.get("authorization");
   const cookie = Headers.get("cookie");

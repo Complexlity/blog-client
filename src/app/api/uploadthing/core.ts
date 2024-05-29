@@ -1,4 +1,4 @@
-import { getUser } from "@/lib/serverFunctions";
+import { server_getUser } from "@/lib/serverFunctions";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 
 const f = createUploadthing();
