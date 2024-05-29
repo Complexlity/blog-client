@@ -1,5 +1,13 @@
 "use client";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/Components/ui/dropdown-menu";
 import EditorOutput from "@/app/posts/[slug]/Main";
 import { Post } from "@/lib/types";
 import {
@@ -7,14 +15,15 @@ import {
   formatDate,
   getCategoryColor,
 } from "@/lib/utils";
-import { BookOpen, MessagesSquare } from "lucide-react";
+import { BookOpen, ChevronDown, MessagesSquare, HardDriveDownload } from "lucide-react";
 import Image from "next/image";
-import CommentSection from "./CommentSection";
-import LikeButton from "./LikeButton";
-import { unified } from "unified";
 import rehypeParse from "rehype-parse";
 import rehypeRemark from "rehype-remark";
 import remarkStringify from "remark-stringify";
+import { unified } from "unified";
+import CommentSection from "./CommentSection";
+import LikeButton from "./LikeButton";
+import { Button } from "@/Components/ui/button";
 
 function removeHtmlTags(str: string) {
   // Remove HTML tags
@@ -44,15 +53,15 @@ function getPostHtmlAsString(post: Post) {
 
 async function convertHtmlStringToMarkdown(htmlString: string) {
   const fullPostMarkdown = await unified()
-  .use(rehypeParse) // Parse HTML to a syntax tree
-  .use(rehypeRemark) // Turn HTML syntax tree to markdown syntax tree
-  .use(remarkStringify) // Serialize HTML syntax tree
-  .process(htmlString);
-const markDownString = String(fullPostMarkdown);
-return markDownString
+    .use(rehypeParse) // Parse HTML to a syntax tree
+    .use(rehypeRemark) // Turn HTML syntax tree to markdown syntax tree
+    .use(remarkStringify) // Serialize HTML syntax tree
+    .process(htmlString);
+  const markDownString = String(fullPostMarkdown);
+  return markDownString;
 }
 
-function saveMarkdown(markdownString: string, slug:string) {
+function saveMarkdown(markdownString: string, slug: string) {
   // Create a Blob from the markdown string
   let blob = new Blob([markdownString], { type: "text/markdown" });
   // Create a URL for the Blob
@@ -71,29 +80,64 @@ function saveMarkdown(markdownString: string, slug:string) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-async function downloadMarkdown(post: Post, slug:string) {
+async function downloadMarkdown(post: Post, slug: string) {
   const fullPostHtml = getPostHtmlAsString(post);
-  const markDownString = await convertHtmlStringToMarkdown(fullPostHtml)
+  const markDownString = await convertHtmlStringToMarkdown(fullPostHtml);
   saveMarkdown(markDownString, slug);
 }
 
 function downloadPdf() {
-  window.print()
+  window.print();
 }
 
-const SinglePost = ({ post, slug }: { post: Post, slug: string }) => {
+const SinglePost = ({ post, slug }: { post: Post; slug: string }) => {
   return (
     <>
       <div className="bg-white pb-8 relative">
-        <button
+        {/* <button
           onClick={async () => {
-            downloadPdf()
+            downloadPdf();
             // await downloadMarkdown(post, slug);
           }}
           className="absolute right-20 bg-orange-400"
         >
           Check Here
-        </button>
+        </button> */}
+        <div className="absolute right-20 top-5">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild className="flex print:hidden">
+              <Button variant={"outline"} className="flex gap-2 items-center   md:w-32 lg:w-48">
+                <span className="hidden md:inline">
+                <span>Download</span>
+                <span className="md:hidden lg:inline" > Article</span>
+                </span>
+                <HardDriveDownload/>
+              </Button>  
+            </DropdownMenuTrigger>{" "}
+            <DropdownMenuContent className="w-32 lg:w-48 print:hidden">
+              <DropdownMenuItem
+                  onClick={() => {
+                    downloadMarkdown(post, slug);
+                  }}
+                  className="flex justify-between cursor-pointer">
+                <span>
+                Markdown
+                </span>
+              <svg className="w-4 lg:w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M593.8 59.1H46.2C20.7 59.1 0 79.8 0 105.2v301.5c0 25.5 20.7 46.2 46.2 46.2h547.7c25.5 0 46.2-20.7 46.1-46.1V105.2c0-25.4-20.7-46.1-46.2-46.1zM338.5 360.6H277v-120l-61.5 76.9-61.5-76.9v120H92.3V151.4h61.5l61.5 76.9 61.5-76.9h61.5v209.2zm135.3 3.1L381.5 256H443V151.4h61.5V256H566z"/></svg>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                  onClick={() => {
+                    downloadPdf();
+                  }}
+                className="flex justify-between cursor-pointer"><span>
+                PDF
+              </span>
+              <svg className="w-4 lg:w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M64 464l48 0 0 48-48 0c-35.3 0-64-28.7-64-64L0 64C0 28.7 28.7 0 64 0L229.5 0c17 0 33.3 6.7 45.3 18.7l90.5 90.5c12 12 18.7 28.3 18.7 45.3L384 304l-48 0 0-144-80 0c-17.7 0-32-14.3-32-32l0-80L64 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16zM176 352l32 0c30.9 0 56 25.1 56 56s-25.1 56-56 56l-16 0 0 32c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-48 0-80c0-8.8 7.2-16 16-16zm32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24l-16 0 0 48 16 0zm96-80l32 0c26.5 0 48 21.5 48 48l0 64c0 26.5-21.5 48-48 48l-32 0c-8.8 0-16-7.2-16-16l0-128c0-8.8 7.2-16 16-16zm32 128c8.8 0 16-7.2 16-16l0-64c0-8.8-7.2-16-16-16l-16 0 0 96 16 0zm80-112c0-8.8 7.2-16 16-16l48 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 32 32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 48c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-64 0-64z"/></svg>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
         <div className="whole_post">
           <header className="post-header grid max-w-[800px] mx-auto px-8 text-center pt-8">
             <h1 className="font-roboto font-extrabold text-3xl md:text-4xl mb-4">
@@ -130,7 +174,7 @@ const SinglePost = ({ post, slug }: { post: Post, slug: string }) => {
             <div className=" flex mx-auto gap-6 items-center justify-center">
               <p
                 style={{ backgroundColor: getCategoryColor(post.category) }}
-                className="px-2 py-1 sm:px-6 sm:py-2 rounded-full text-blueDarkest font-bold hover:shadow-xl hover:shadow-gray-200 text-sm sm:text-base"
+                className="px-2 py-1 sm:px-6 sm:py-2 rounded-full text-blueDarkest font-bold hover:shadow-xl hover:shadow-gray-200 text-sm sm:text-base print:hidden"
               >
                 {post.category}
               </p>
@@ -161,7 +205,7 @@ const SinglePost = ({ post, slug }: { post: Post, slug: string }) => {
             </div>
 
             {/* Sticky Buttons */}
-            <div className="not-prose bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
+            <div className="print:hidden not-prose bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
               <div className="flex gap-1 items-center">
                 <LikeButton
                   id={post._id}
