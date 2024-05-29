@@ -1,12 +1,11 @@
 "use client";
 
+import { Button } from "@/Components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from "@/Components/ui/dropdown-menu";
 import EditorOutput from "@/app/posts/[slug]/Main";
 import { Post } from "@/lib/types";
@@ -15,7 +14,7 @@ import {
   formatDate,
   getCategoryColor,
 } from "@/lib/utils";
-import { BookOpen, ChevronDown, MessagesSquare, HardDriveDownload } from "lucide-react";
+import { BookOpen, HardDriveDownload, MessagesSquare } from "lucide-react";
 import Image from "next/image";
 import rehypeParse from "rehype-parse";
 import rehypeRemark from "rehype-remark";
@@ -23,7 +22,6 @@ import remarkStringify from "remark-stringify";
 import { unified } from "unified";
 import CommentSection from "./CommentSection";
 import LikeButton from "./LikeButton";
-import { Button } from "@/Components/ui/button";
 
 function removeHtmlTags(str: string) {
   // Remove HTML tags
@@ -94,15 +92,7 @@ const SinglePost = ({ post, slug }: { post: Post; slug: string }) => {
   return (
     <>
       <div className="bg-white pb-8 relative">
-        {/* <button
-          onClick={async () => {
-            downloadPdf();
-            // await downloadMarkdown(post, slug);
-          }}
-          className="absolute right-20 bg-orange-400"
-        >
-          Check Here
-        </button> */}
+        
         <div className="absolute right-20 top-5">
           <DropdownMenu>
             <DropdownMenuTrigger asChild className="flex print:hidden">
