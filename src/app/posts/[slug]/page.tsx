@@ -28,7 +28,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
   if (!post) redirect("/");
   return (
     <>
-      <SinglePost post={post}  />;
+      <SinglePost post={post} slug={params.slug}  />;
     </>
   );
 }

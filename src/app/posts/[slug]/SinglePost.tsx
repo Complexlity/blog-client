@@ -11,25 +11,86 @@ import { BookOpen, MessagesSquare } from "lucide-react";
 import Image from "next/image";
 import CommentSection from "./CommentSection";
 import LikeButton from "./LikeButton";
+import { unified } from "unified";
+import rehypeParse from "rehype-parse";
+import rehypeRemark from "rehype-remark";
+import remarkStringify from "remark-stringify";
 
 function removeHtmlTags(str: string) {
   // Remove HTML tags
-  const cleanedFromHtml = str.replace(/<[^>]*>/g, '');
+  const cleanedFromHtml = str.replace(/<[^>]*>/g, "");
 
   // Remove newline characters
-  const finalCleaned = cleanedFromHtml.replace(/\s+/g, ' ');
+  const finalCleaned = cleanedFromHtml.replace(/\s+/g, " ");
 
-  return finalCleaned.trim(); // Trim spaces around the text 
+  return finalCleaned.trim(); // Trim spaces around the text
 }
 
+function getPostHtmlAsString(post: Post) {
+  const title = `<h1>${post.title}</h1>`;
+  const postBanner = `<img src=${post.coverImageSource} alt="Banner"/>`;
+  const postContent = document.querySelector(".post-content")?.outerHTML;
+  const breakLine = ``;
+  const info = `<p>by <strong>${post.author.name}</strong> - ${formatDate(
+    post.createdAt,
+    "full"
+  )} - ${calculateTimeToReadPost(
+    post.type == "raw" ? removeHtmlTags(post.content) : post.content
+  )} </p>`;
+  const fullPost =
+    title + breakLine + postBanner + breakLine + postContent + breakLine + info;
+  return fullPost;
+}
 
-const SinglePost = ({ post }: { post: Post }) => {
+async function convertHtmlStringToMarkdown(htmlString: string) {
+  const fullPostMarkdown = await unified()
+  .use(rehypeParse) // Parse HTML to a syntax tree
+  .use(rehypeRemark) // Turn HTML syntax tree to markdown syntax tree
+  .use(remarkStringify) // Serialize HTML syntax tree
+  .process(htmlString);
+const markDownString = String(fullPostMarkdown);
+return markDownString
+}
+
+function saveMarkdown(markdownString: string, slug:string) {
+  // Create a Blob from the markdown string
+  let blob = new Blob([markdownString], { type: "text/markdown" });
+  // Create a URL for the Blob
+  let url = URL.createObjectURL(blob);
+  // Create a link element
+  let link = document.createElement("a");
+  link.href = url;
+  link.download = `${slug}.md`;
+  // Append the link to the body (required for Firefox)
+  document.body.appendChild(link);
+  // Programmatically click the link to trigger the download
+  link.click();
+  // Remove the link from the document
+  document.body.removeChild(link);
+  // Revoke the object URL after a short delay
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+async function downloadMarkdown(post: Post, slug:string) {
+  const fullPostHtml = getPostHtmlAsString(post).replace(/[\n+]/g, "");
+  const markDownString = await convertHtmlStringToMarkdown(fullPostHtml)
+  saveMarkdown(markDownString, slug);
+}
+
+const SinglePost = ({ post, slug }: { post: Post, slug: string }) => {
   return (
     <>
-
-      <div className="bg-white pb-8">
+      <div className="bg-white pb-8 relative">
+        <button
+          onClick={async () => {
+            await downloadMarkdown(post, slug);
+          }}
+          className="absolute right-20 bg-orange-400"
+        >
+          Check Here
+        </button>
         <div className=" MinusCircle ">
-          <header className=" grid max-w-[800px] mx-auto px-8 text-center pt-8">
+          <header className="post-header grid max-w-[800px] mx-auto px-8 text-center pt-8">
             <h1 className="font-roboto font-extrabold text-3xl md:text-4xl mb-4">
               {post.title}
             </h1>
@@ -42,14 +103,23 @@ const SinglePost = ({ post }: { post: Post }) => {
                 unoptimized
                 alt=""
               />
-              <span className="font-bold text-sm sm:text-base">{post.author.name}</span>
+              <span className="font-bold text-sm sm:text-base">
+                {post.author.name}
+              </span>
               <span className="inline-block w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gray-600 align-middle"></span>
-              <span className="text-sm sm:text-base">{formatDate(post.createdAt, "full")}</span>
+              <span className="text-sm sm:text-base">
+                {formatDate(post.createdAt, "full")}
+              </span>
               <span className="inline-block w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gray-600 align-middle"></span>
 
               <span className="flex sm:gap-1 text-sm sm:text-base">
                 <BookOpen />
-                {calculateTimeToReadPost(post.type == "raw"  ? removeHtmlTags(post.content) :post.content)} min read
+                {calculateTimeToReadPost(
+                  post.type == "raw"
+                    ? removeHtmlTags(post.content)
+                    : post.content
+                )}{" "}
+                min read
               </span>
             </p>
             <div className=" flex mx-auto gap-6 items-center justify-center">
@@ -59,43 +129,6 @@ const SinglePost = ({ post }: { post: Post }) => {
               >
                 {post.category}
               </p>
-              {/* <HoverCard openDelay={5}>
-              <HoverCardTrigger>
-                <div className="flex gap-2 items-center bg-gray-100 hover:bg-gray-200 rounded-full px-2 py-2 text-sm">
-                  <Icons.loveIcon className="h-6 w-6 fill-gray-300 text-slate-600 stroke-current" />
-                  <div className="flex max-w-10 items-center">
-                    <Image
-                      src={defaultImg}
-                      width={24}
-                      height={24}
-                      className="cursor-pointer rounded-full object-cover h-8 w-8"
-                      alt=""
-                    />
-                    <Image
-                      src={defaultImg}
-                      width={24}
-                      height={24}
-                      className="cursor-pointer rounded-full object-cover h-8 w-8"
-                      alt=""
-                    />
-                    <Image
-                      src={defaultImg}
-                      width={24}
-                      height={24}
-                      className="cursor-pointer rounded-full object-cover h-8 w-8"
-                      alt=""
-                    />
-                    {post.likeCount}
-                  </div>
-                </div>
-              </HoverCardTrigger>
-              <HoverCardContent
-                className="rounded-lg px-4 py-2 bg-black text-white"
-                side="top"
-              >
-                {post.likeCount} people liked the post
-              </HoverCardContent>
-            </HoverCard> */}
             </div>
             {post.coverImageSource ? (
               <div className="h-[300px] sm:h-[500px] mx-auto w-full m-10">
@@ -111,13 +144,17 @@ const SinglePost = ({ post }: { post: Post }) => {
             ) : null}
           </header>
           <main className="pt-0 prose text-black sm:text-gray-900 mx-auto relative space-y-6 p-4 md:p-0">
-            {post.type == "raw"
-            ?
-            <div className="prose" dangerouslySetInnerHTML={{ __html: post.content }} />
-              :
-              < EditorOutput content={JSON.parse(post.content)} />
-               
-            }
+            <div className="post-content">
+              {post.type == "raw" ? (
+                <div
+                  className="prose"
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                />
+              ) : (
+                <EditorOutput content={JSON.parse(post.content)} />
+              )}
+            </div>
+
             {/* Sticky Buttons */}
             <div className="not-prose bg-white rounded-full items-center flex max-w-fit px-5 py-1 text-sm border-2 border-slate-200 mx-auto">
               <div className="flex gap-1 items-center">
