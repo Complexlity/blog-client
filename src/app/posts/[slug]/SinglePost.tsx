@@ -149,6 +149,7 @@ const SinglePost = ({ post, slug }: { post: Post; slug: string }) => {
                 width={24}
                 height={24}
                 className="rounded-full object-cover h-6 w-6 sm:h-10 sm:w-10 object-top"
+                
                 unoptimized
                 alt=""
               />
