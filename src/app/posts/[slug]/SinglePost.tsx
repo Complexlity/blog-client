@@ -39,7 +39,7 @@ function getPostHtmlAsString(post: Post) {
   )} </p>`;
   const fullPost =
     title + breakLine + postBanner + breakLine + postContent + breakLine + info;
-  return fullPost;
+  return fullPost.replace(/[\n+]/g, "");
 }
 
 async function convertHtmlStringToMarkdown(htmlString: string) {
@@ -72,9 +72,13 @@ function saveMarkdown(markdownString: string, slug:string) {
 }
 
 async function downloadMarkdown(post: Post, slug:string) {
-  const fullPostHtml = getPostHtmlAsString(post).replace(/[\n+]/g, "");
+  const fullPostHtml = getPostHtmlAsString(post);
   const markDownString = await convertHtmlStringToMarkdown(fullPostHtml)
   saveMarkdown(markDownString, slug);
+}
+
+function downloadPdf() {
+  window.print()
 }
 
 const SinglePost = ({ post, slug }: { post: Post, slug: string }) => {
@@ -83,13 +87,14 @@ const SinglePost = ({ post, slug }: { post: Post, slug: string }) => {
       <div className="bg-white pb-8 relative">
         <button
           onClick={async () => {
-            await downloadMarkdown(post, slug);
+            downloadPdf()
+            // await downloadMarkdown(post, slug);
           }}
           className="absolute right-20 bg-orange-400"
         >
           Check Here
         </button>
-        <div className=" MinusCircle ">
+        <div className="whole_post">
           <header className="post-header grid max-w-[800px] mx-auto px-8 text-center pt-8">
             <h1 className="font-roboto font-extrabold text-3xl md:text-4xl mb-4">
               {post.title}
