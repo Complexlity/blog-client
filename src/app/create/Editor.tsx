@@ -85,11 +85,16 @@ export default function Editor() {
   const { mutate: createPost, isLoading: isCreating } = useMutation({
     mutationFn: async (payload: EditorInput) => {
       console.log("Uploading post...")
-      // const res = await startImageUpload([coverImage!]);
-      // const fileUrl = res![0].fileUrl;
-      // // @ts-ignore
-      // payload.coverImageSource = fileUrl
-      payload.coverImageSource = "coverImage"
+      let res; 
+      try {
+        res = await startImageUpload([coverImage!]);
+        
+      } catch (error) {
+        throw new Error("Something went wrong uploading image")
+      }
+      const fileUrl = res![0].fileUrl;
+      // @ts-ignore
+      payload.coverImageSource = fileUrl
       const { data } = await axios.post(`${SERVER_DOMAIN}/posts`, payload, {
         withCredentials: true,
       });
