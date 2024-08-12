@@ -5,12 +5,10 @@ import WriteForUs from "./WriteForUs";
 import { getPosts } from "@/lib/serverFunctions";
 
 export default async function Home() {
-  let posts = await getPosts()
-  if(!posts) posts = []
   return (
     <>
       <Header />
-      <Posts posts={posts} />
+      <Posts />
       <WriteForUs />
       <div className="bg-blueLight">
         <Footer />
