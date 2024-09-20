@@ -9,7 +9,7 @@ const Footer = () => {
         <Link href={"https://x.com/Complexlity"}>
           <Twitter className=" text-blueDarkest w-8 h-8 cursor-pointer" />
         </Link>
-        <Link href={"https://github.com/Complexlity/blog-client"}>
+        <Link href={"https://github.com/Complexlity"}>
           <Github className=" text-blueDarkest w-8 h-8 cursor-pointer" />
         </Link>
         <Link href={"https://warpcast.com/complexlity"}>
