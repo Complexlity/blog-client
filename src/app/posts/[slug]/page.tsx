@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${post?.title} | Complexlity's Blog`,
-
+    description: post?.content.slice(0, 120) + "...",
     openGraph: {
       images: [post?.coverImageSource!],
     },
