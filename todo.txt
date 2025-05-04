@@ -2,3 +2,5 @@
 -  Editing blog posts
 -  Publishing and unpublishing blog posts
 -  Deleting blog posts
+-  Show vies for every page visit
+-  Anonymous likes and comments
